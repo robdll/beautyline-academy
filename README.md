@@ -1,1 +1,1 @@
-# beautylineprofessional
+# beautylineAcademy
