@@ -13,6 +13,17 @@ body {
 
 
 :root {
+  /* =========================
+     main colors
+
+     4 primary colors, the primary color suggested in the requirements document
+     --color-primary: Color suggested in the documentation
+     --color-primary-light: Lighter color suggested in the documentation
+     --color-primary-dark: Darker color
+     --color-secondary: Second primary color
+     --color-accent: Accent color, warm color
+
+  ========================== */
 
   --color-primary: #8D62AA;
   --color-primary-light: #B48FD1;
@@ -22,6 +33,8 @@ body {
 
   /* =========================
      neutral colors
+
+     Neutral colors will be implemented in the project, ranging from shades of gray and black to white, with the main color being close to gray.
   ========================== */
   --color-white: #FFFFFF;
   --color-black: #0F0F0F;
@@ -35,6 +48,8 @@ body {
 
   /* =========================
      BACKGROUNDS
+
+     Backgrounds will be implemented in the project, ranging from light to dark, with the main color being close to gray.
   ========================== */
   --bg-light: #FAF7FB;
   --bg-section: #FDFBFF;
@@ -53,6 +68,8 @@ body {
 
   /* =========================
      TIPOGRAFY
+
+    Definition of the font used, text size, letter spacing.
   ========================== */
   --font-primary: 'Playfair Display', serif;
   --font-secondary: 'Inter', sans-serif;
@@ -70,19 +87,13 @@ body {
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* =========================
-      SPACING
-  ========================== */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 2rem;
-  --spacing-xl: 4rem;
-  --spacing-2xl: 6rem;
 
   /* =========================
       BORDERS and SHADOWS
+      
+      definition of borders used, and leftovers
   ========================== */
+
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
@@ -94,6 +105,8 @@ body {
 
   /* =========================
       Transitions
+
+      Types of transitions for smoothness and speed patterns.
   ========================== */
   --transition-fast: 0.2s ease;
   --transition-base: 0.3s ease;
