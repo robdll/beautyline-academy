@@ -58,7 +58,7 @@ export default function Hero() {
 
       <div className="relative z-20 h-full flex items-center justify-center px-6">
         <div className="text-center max-w-4xl animate-fade-in">
-          <p className="text-purple-200 font-medium tracking-widest uppercase mb-4 drop-shadow-md">Bem-vindo 💜</p>
+          <p className="text-purple-200 font-medium tracking-widest uppercase mb-4 drop-shadow-md">Bem-vindo</p>
           <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg">Beauty Line Academy</h1>
           <p className="text-xl md:text-2xl text-stone-100 mb-8 font-light drop-shadow-md">Transformando paixão em profissão através da excelência em estética</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
