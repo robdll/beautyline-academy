@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+
+:root {
+  /* =========================
+     main colors
+
+     4 primary colors, the primary color suggested in the requirements document
+     --color-primary: Color suggested in the documentation
+     --color-primary-light: Lighter color suggested in the documentation
+     --color-primary-dark: Darker color
+     --color-secondary: Second primary color
+     --color-accent: Accent color, warm color
+
+  ========================== */
+
+  --color-primary: #8D62AA;
+  --color-primary-light: #B48FD1;
+  --color-primary-dark: #6F4C8E;
+  --color-secondary: #F5C1D9;
+  --color-accent: #FFB703;
+
+  /* =========================
+     neutral colors
+
+     Neutral colors will be implemented in the project, ranging from shades of gray and black to white, with the main color being close to gray.
+  ========================== */
+  --color-white: #FFFFFF;
+  --color-black: #0F0F0F;
+
+  --color-gray-100: #F9F9FB;
+  --color-gray-200: #EEEEF2;
+  --color-gray-300: #D1D1D8;
+  --color-gray-400: #A1A1AA;
+  --color-gray-500: #71717A;
+  --color-gray-600: #3F3F46;
+
+  /* =========================
+     BACKGROUNDS
+
+     Backgrounds will be implemented in the project, ranging from light to dark, with the main color being close to gray.
+  ========================== */
+  --bg-light: #FAF7FB;
+  --bg-section: #FDFBFF;
+  --bg-dark: #121212;
+  --bg-gradient-dark: linear-gradient(135deg,
+      #1A1A1A,
+      #0F0F0F);
+
+  --bg-gradient-primary: linear-gradient(90deg,
+      #8D62AA,
+      #B48FD1);
+
+  --bg-gradient-cta: linear-gradient(90deg,
+      #FF6A88,
+      #FFB703);
+
+  /* =========================
+     TIPOGRAFY
+
+    Definition of the font used, text size, letter spacing.
+  ========================== */
+  --font-primary: 'Playfair Display', serif;
+  --font-secondary: 'Inter', sans-serif;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2.25rem;
+  --font-size-3xl: 3rem;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+
+  /* =========================
+      BORDERS and SHADOWS
+      
+      definition of borders used, and leftovers
+  ========================== */
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.18);
+
+  /* =========================
+      Transitions
+
+      Types of transitions for smoothness and speed patterns.
+  ========================== */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+}
+
