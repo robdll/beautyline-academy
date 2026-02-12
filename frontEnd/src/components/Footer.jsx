@@ -1,4 +1,5 @@
 import { FOOTER_LINKS } from "../constants/constants";
+import UploadImages from "./UploadImages";
 
 export default function Footer() {
   return (
@@ -15,16 +16,16 @@ export default function Footer() {
             </p>
             <div className="flex gap-4 mt-6">
               <a href="https://www.facebook.com/beautylineacademy/" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-400 transition-colors">
-                <img src="/facebookLogo.svg" alt="Facebook" className="w-6 h-6" />
+                <UploadImages publicId={"facebookLogo_dvbiam"} width={25} height={25}/>
               </a>
               <a href="https://www.instagram.com/beautylineacademymonza/" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] transition-colors">
-                <img src="/instagramLogo.svg" alt="Instagram" className="w-6 h-6" />
+                <UploadImages publicId={"instagramLogo_tjrjdt"} width={25} height={25}/>
               </a>
               <a href="https://www.tiktok.com/@beautylineacademymonza" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-colors">
-                <img src="/tiktokLogo.svg" alt="Tiktok" className="w-6 h-6" />
+                <UploadImages publicId={"tiktokLogo_akws8o"} width={25} height={25}/>
               </a>
               <a href="https://www.youtube.com/channel/UCvFeks3fQ1sFk9ZhxDcPDog" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-red-400 transition-colors">
-                <img src="/youtubeLogo.svg" alt="YouTube" className="w-7 h-7" />
+                <UploadImages publicId={"youtubeLogo_vg9i8g"} width={25} height={25}/>
               </a>
             </div>
           </div>
