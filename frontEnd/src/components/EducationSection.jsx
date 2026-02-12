@@ -1,6 +1,6 @@
 export default function EducationSection() {
   return (
-    <section id="educacao" className="py-24 bg-gradient-to-br from-purple-100 via-white to-pink-100">
+    <section id="istruzione" className="py-24 bg-gradient-to-br from-purple-100 via-white to-pink-100">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="order-2 lg:order-1">

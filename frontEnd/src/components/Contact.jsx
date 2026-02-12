@@ -31,7 +31,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-br from-stone-800 via-stone-900 to-stone-800 text-white">
+    <section id="contatti" className="py-24 bg-gradient-to-br from-stone-800 via-stone-900 to-stone-800 text-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16">
           <div>

@@ -1,3 +1,5 @@
+import { MACHINE_TYPES } from "../constants/constants";
+
 export default function TechnologySection() {
   return (
     <section id="tecnologia" className="py-24 bg-white">
@@ -24,9 +26,7 @@ export default function TechnologySection() {
             <div className="grid sm:grid-cols-2 gap-6 mb-8">
               <div className="bg-purple-50 rounded-2xl p-6 border border-purple-100">
                 <div className="w-12 h-12 rounded-xl bg-purple-600 flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
+                  <img src="shoppingcart.svg" alt="shoppingcart" className="w-7 h-7"/>
                 </div>
                 <h4 className="font-semibold text-stone-800 mb-2">Vendita</h4>
                 <p className="text-stone-600 text-sm">Acquista attrezzature con condizioni speciali e supporto tecnico completo.</p>
@@ -34,9 +34,7 @@ export default function TechnologySection() {
 
               <div className="bg-purple-50 rounded-2xl p-6 border border-purple-100">
                 <div className="w-12 h-12 rounded-xl bg-purple-600 flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
+                  <img src="refresh.svg" alt="refresh" className="w-6 h-6"/>
                 </div>
                 <h4 className="font-semibold text-stone-800 mb-2">Noleggio</h4>
                 <p className="text-stone-600 text-sm">Flessibilità per il tuo business con opzioni di noleggio macchinari.</p>
@@ -44,9 +42,9 @@ export default function TechnologySection() {
             </div>
 
             <div className="flex flex-wrap gap-3 mb-8">
-              {['Viso', 'Corpo', 'Depilazione', 'Multifunzione'].map(tag => (
-                <button key={tag} className="px-4 py-2 bg-stone-100 rounded-full text-sm text-stone-600 cursor-pointer hover:bg-purple-100 transition-colors">
-                  {tag}
+              {MACHINE_TYPES.map(tag => (
+                <button key={tag.id} className="px-4 py-2 bg-stone-100 rounded-full text-sm text-stone-600 cursor-pointer hover:bg-purple-100 transition-colors">
+                  {tag.name}
                 </button>
               ))}
             </div>

@@ -1,6 +1,6 @@
 export default function CosmeticsSection() {
   return (
-    <section id="cosmeticos" className="py-24 bg-gradient-to-br from-purple-50 via-white to-purple-50">
+    <section id="prodotti" className="py-24 bg-gradient-to-br from-purple-50 via-white to-purple-50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="order-2 lg:order-1">

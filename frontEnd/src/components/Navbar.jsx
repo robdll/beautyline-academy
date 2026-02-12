@@ -12,10 +12,10 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-8">
           <a href="#" className="text-stone-600 hover:text-purple-400 transition-colors font-medium">Chi Siamo</a>
-          <a href="#pilares" className="text-stone-600 hover:text-purple-400 transition-colors font-medium">Corsi</a>
+          <a href="#centroAssistenza" className="text-stone-600 hover:text-purple-400 transition-colors font-medium">Corsi</a>
           <a href="#tecnologia" className="text-stone-600 hover:text-purple-400 transition-colors font-medium">Noleggio</a>
-          <a href="#cosmeticos" className="text-stone-600 hover:text-purple-400 transition-colors font-medium">Prodotti</a>
-          <a href="#contato" className="text-stone-600 hover:text-purple-400 transition-colors font-medium">Contatti</a>
+          <a href="#prodotti" className="text-stone-600 hover:text-purple-400 transition-colors font-medium">Prodotti</a>
+          <a href="#contatti" className="text-stone-600 hover:text-purple-400 transition-colors font-medium">Contatti</a>
           <a href="#" className="px-6 py-2.5 bg-purple-600 text-white rounded-full font-medium hover:bg-purple-700 transition-colors">Registrazione</a>
         </div>
 
@@ -32,10 +32,10 @@ export default function Navbar() {
           {isOpen && (
           <div className="md:hidden bg-white border-t border-stone-100 shadow-lg absolute top-full left-0 right-0 py-4 px-6 flex flex-col gap-4">
             <a href="#" className="text-stone-600 hover:text-purple-600 font-medium">Chi Siamo</a>
-            <a href="#pilares" className="text-stone-600 hover:text-purple-600 font-medium">Corsi</a>
+            <a href="#centroAssistenza" className="text-stone-600 hover:text-purple-600 font-medium">Corsi</a>
             <a href="#tecnologia" className="text-stone-600 hover:text-purple-600 font-medium">Noleggio</a>
-            <a href="#cosmeticos" className="text-stone-600 hover:text-purple-600 font-medium">Prodotti</a>
-            <a href="#contato" className="text-stone-600 hover:text-purple-600 font-medium">Contatti</a>
+            <a href="#prodotti" className="text-stone-600 hover:text-purple-600 font-medium">Prodotti</a>
+            <a href="#contatti" className="text-stone-600 hover:text-purple-600 font-medium">Contatti</a>
             <a href="#" className="px-6 py-2.5 bg-purple-600 text-white rounded-full font-medium hover:bg-purple-700 transition-colors text-center w-full">Registrazione</a>
           </div>
         )}
