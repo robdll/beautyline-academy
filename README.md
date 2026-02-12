@@ -50,3 +50,94 @@ The stack reflects tools commonly used in modern full-stack bootcamps:
 
 - MongoDB
 - Mongoose
+
+---
+
+## 🚀 Running Locally
+
+Follow these steps to run the Beauty Line Academy application on your local machine.
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **Node.js** (v18 or higher recommended)
+- **npm** (comes with Node.js)
+
+You can verify your installations by running:
+
+```bash
+node --version
+npm --version
+```
+
+### Setup & Run Instructions
+
+#### 1. Clone the Repository
+
+```bash
+git clone https://github.com/robdll/beautyline-academy.git
+cd beautyline-academy
+```
+
+#### 2. Backend Setup
+
+Navigate to the backend directory and install dependencies:
+
+```bash
+cd backEnd
+npm install
+```
+
+**(Optional)** Create a `.env` file in the `backEnd` directory for environment variables:
+
+```bash
+PORT=3000
+# Add other environment variables as needed
+```
+
+Start the backend server:
+
+```bash
+npm run dev
+```
+
+The backend will be running at **http://localhost:3000**
+
+#### 3. Frontend Setup
+
+Open a new terminal window, navigate to the frontend directory, and install dependencies:
+
+```bash
+cd frontEnd
+npm install
+```
+
+Start the frontend development server:
+
+```bash
+npm run dev
+```
+
+The frontend will be running at **http://localhost:5173**
+
+### Accessing the Application
+
+- **Frontend**: Open your browser and go to [http://localhost:5173](http://localhost:5173)
+- **Backend API**: The API is available at [http://localhost:3000](http://localhost:3000)
+
+### Optional: MongoDB Setup
+
+The project uses MongoDB as its database. While the database integration is still in development, you can prepare for it by:
+
+1. Installing [MongoDB Community Edition](https://www.mongodb.com/try/download/community) locally, or
+2. Setting up a free cloud database with [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+
+When the database integration is complete, you'll need to add your MongoDB connection string to the backend's `.env` file:
+
+```bash
+MONGODB_URI=mongodb://localhost:27017/beautyline-academy
+# or use your MongoDB Atlas connection string
+```
+
+---
