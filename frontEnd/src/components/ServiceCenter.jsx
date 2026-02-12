@@ -1,33 +1,9 @@
+import { SERVICES } from "../constants/constants";
+
 export default function ServiceCenter() {
-  const services = [
-    {
-      id: 1,
-      title: "Corsi",
-      image: "/courseNails.jpg",
-      link: "#"
-    },
-    {
-      id: 2,
-      title: "Percorsi Master",
-      image: "/Paths.png",
-      link: "#"
-    },
-    {
-      id: 3,
-      title: "Prodotti",
-      image: "/products.jpg",
-      link: "#"
-    },
-    {
-      id: 4,
-      title: "Attrezzature",
-      image: "/equipment.png",
-      link: "#"
-    }
-  ];
 
   return (
-    <section id="pilares" className="py-12 md:py-24 bg-white">
+    <section id="centroAssistenza" className="py-12 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-4xl md:text-5xl text-purple-400 font-bold">I Nostri Pilastri</h2>
@@ -39,7 +15,7 @@ export default function ServiceCenter() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service) => (
+          {SERVICES.map((service) => (
             <a 
               key={service.id} 
               href={service.link}

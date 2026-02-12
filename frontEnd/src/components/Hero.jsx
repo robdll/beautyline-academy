@@ -1,45 +1,28 @@
 import { useState, useEffect } from 'react';
+import { HERO_SLIDES } from '../constants/constants';
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = [
-    {
-      id: 0,
-      image: "/eyelash.jpg",
-      alt: "Eyelash Extension",
-    },
-    {
-      id: 1,
-      image: "/facialTreatment.jpg",
-      alt: "Facial Treatment",
-    },
-    {
-      id: 2,
-      image: "/pictureNail.png",
-      alt: "Nail Art",
-    }
-  ];
-
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [slides.length]);
+  }, []);
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    setCurrentSlide((prev) => (prev === 0 ? HERO_SLIDES.length - 1 : prev - 1));
   };
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
   };
 
   return (
     <section className="relative h-screen min-h-[600px] pt-20 overflow-hidden group">
       <div id="carousel" className="absolute inset-0">
-        {slides.map((slide, index) => (
+        {HERO_SLIDES.map((slide, index) => (
           <div
             key={slide.id}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
@@ -65,7 +48,7 @@ export default function Hero() {
             <a href="#pilares" className="px-8 py-4 bg-purple-600 text-white rounded-full font-semibold text-lg hover:bg-purple-700 hover:scale-105 transition-all">
               Scopri i Nostri Pilastri
             </a>
-            <a href="#contato" className="px-8 py-4 border-2 border-white text-white rounded-full font-semibold text-lg hover:bg-white hover:text-stone-900 hover:scale-105 transition-all">
+            <a href="#contatti" className="px-8 py-4 border-2 border-white text-white rounded-full font-semibold text-lg hover:bg-white hover:text-stone-900 hover:scale-105 transition-all">
               Contattaci
             </a>
           </div>
@@ -77,9 +60,7 @@ export default function Hero() {
         className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all opacity-0 group-hover:opacity-100 duration-300 backdrop-blur-sm"
         aria-label="Previous slide"
       >
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-        </svg>
+        <img src="/leftArrow.svg" alt="Previous slide" className="w-8 h-8" />
       </button>
 
       <button 
@@ -87,13 +68,11 @@ export default function Hero() {
         className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all opacity-0 group-hover:opacity-100 duration-300 backdrop-blur-sm"
         aria-label="Next slide"
       >
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-        </svg>
+        <img src="/rightArrow.svg" alt="Next slide" className="w-8 h-8" />
       </button>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
-        {slides.map((_, index) => (
+        {HERO_SLIDES.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
