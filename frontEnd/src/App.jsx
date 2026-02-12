@@ -1,6 +1,6 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Pillars from './components/Pillars';
+import ServiceCenter from './components/ServiceCenter';
 import EducationSection from './components/EducationSection';
 import TechnologySection from './components/TechnologySection';
 import CosmeticsSection from './components/CosmeticsSection';
@@ -13,7 +13,7 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <Pillars />
+        <ServiceCenter />
         <EducationSection />
         <TechnologySection />
         <CosmeticsSection />

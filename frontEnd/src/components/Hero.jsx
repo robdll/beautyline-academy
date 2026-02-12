@@ -58,21 +58,20 @@ export default function Hero() {
 
       <div className="relative z-20 h-full flex items-center justify-center px-6">
         <div className="text-center max-w-4xl animate-fade-in">
-          <p className="text-purple-200 font-medium tracking-widest uppercase mb-4 drop-shadow-md">Bem-vindo</p>
+          <p className="text-purple-200 font-medium tracking-widest uppercase mb-4 drop-shadow-md">Benvenuto</p>
           <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg">Beauty Line Academy</h1>
-          <p className="text-xl md:text-2xl text-stone-100 mb-8 font-light drop-shadow-md">Transformando paixão em profissão através da excelência em estética</p>
+          <p className="text-xl md:text-2xl text-stone-100 mb-8 font-light drop-shadow-md">Trasformare la passione in professione attraverso l'eccellenza nell'estetica.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#pilares" className="px-8 py-4 bg-purple-600 text-white rounded-full font-semibold text-lg hover:bg-purple-700 hover:-translate-y-0.5 transition-all shadow-lg hover:shadow-purple-200/50">
-              Conheça Nossos Pilares
+            <a href="#pilares" className="px-8 py-4 bg-purple-600 text-white rounded-full font-semibold text-lg hover:bg-purple-700 hover:scale-105 transition-all">
+              Scopri i Nostri Pilastri
             </a>
-            <a href="#contato" className="px-8 py-4 border-2 border-white text-white rounded-full font-semibold text-lg hover:bg-white hover:text-stone-900 transition-all shadow-lg">
-              Fale Conosco
+            <a href="#contato" className="px-8 py-4 border-2 border-white text-white rounded-full font-semibold text-lg hover:bg-white hover:text-stone-900 hover:scale-105 transition-all">
+              Contattaci
             </a>
           </div>
         </div>
       </div>
-
-      {/* Navigation Arrows */}
+      
       <button 
         onClick={prevSlide}
         className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all opacity-0 group-hover:opacity-100 duration-300 backdrop-blur-sm"

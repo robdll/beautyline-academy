@@ -14,10 +14,8 @@ export default function Contact() {
     e.preventDefault();
     setStatus({ state: 'loading', message: '' });
 
-    // Simulate API call since we don't have the SDK connected in React context directly yet
-    // In a real scenario, this would call your backend endpoint
     setTimeout(() => {
-        setStatus({ state: 'success', message: '✓ Mensagem enviada com sucesso! Entraremos em contato em breve.' });
+        setStatus({ state: 'success', message: '✓ Messaggio inviato con successo! Ti contatteremo a breve.' });
         setFormData({
             first_name: '',
             last_name: '',
@@ -33,14 +31,14 @@ export default function Contact() {
   };
 
   return (
-    <section id="contato" className="py-24 bg-gradient-to-br from-stone-800 via-stone-900 to-stone-800 text-white">
+    <section id="contact" className="py-24 bg-gradient-to-br from-stone-800 via-stone-900 to-stone-800 text-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16">
           <div>
-            <span className="text-rose-300 font-medium tracking-widest uppercase">Fale Conosco</span>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">Entre em Contato</h2>
+            <span className="text-rose-300 font-medium tracking-widest uppercase">Contattaci</span>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">Mettiti in Contatto</h2>
             <p className="text-lg text-stone-300 mb-8 leading-relaxed">
-              Estamos prontos para ajudar você a transformar sua carreira na área da beleza. Entre em contato e descubra como podemos atender às suas necessidades.
+              Siamo pronti ad aiutarti a trasformare la tua carriera nel settore della bellezza. Contattaci e scopri come possiamo soddisfare le tue esigenze.
             </p>
 
             <div className="space-y-6 mb-8">
@@ -52,8 +50,8 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-semibold">Endereço</p>
-                  <p className="text-stone-400">Av. da Beleza, 1234 - Centro, São Paulo - SP</p>
+                  <p className="font-semibold">Indirizzo</p>
+                  <p className="text-stone-400">Via M. Buonarroti, 24, 20900 Monza MB</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -63,8 +61,8 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-semibold">Telefone</p>
-                  <p className="text-stone-400">(11) 98765-4321</p>
+                  <p className="font-semibold">Telefono</p>
+                  <p className="text-stone-400">+39 338 253 5226</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -75,7 +73,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="font-semibold">Email</p>
-                  <p className="text-stone-400">contato@beautylineacademy.com.br</p>
+                  <p className="text-stone-400">info@beautylineprofessional.com</p>
                 </div>
               </div>
             </div>
@@ -94,11 +92,11 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
-                    placeholder="Seu nome"
+                    placeholder="Il tuo nome"
                   />
                 </div>
                 <div>
-                  <label htmlFor="last_name" className="block text-sm font-medium text-stone-300 mb-2">Sobrenome</label>
+                  <label htmlFor="last_name" className="block text-sm font-medium text-stone-300 mb-2">Cognome</label>
                   <input
                     type="text"
                     id="last_name"
@@ -107,7 +105,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
-                    placeholder="Seu sobrenome"
+                    placeholder="Il tuo cognome"
                   />
                 </div>
               </div>
@@ -121,11 +119,11 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
-                  placeholder="seu@email.com"
+                  placeholder="tua@email.com"
                 />
               </div>
               <div className="mb-6">
-                <label htmlFor="phone" className="block text-sm font-medium text-stone-300 mb-2">Telefone</label>
+                <label htmlFor="phone" className="block text-sm font-medium text-stone-300 mb-2">Telefono</label>
                 <input
                   type="tel"
                   id="phone"
@@ -134,11 +132,11 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
-                  placeholder="(00) 00000-0000"
+                  placeholder="+39 000 000 0000"
                 />
               </div>
               <div className="mb-8">
-                <label htmlFor="message" className="block text-sm font-medium text-stone-300 mb-2">O que deseja?</label>
+                <label htmlFor="message" className="block text-sm font-medium text-stone-300 mb-2">Come possiamo aiutarti?</label>
                 <textarea
                   id="message"
                   name="message"
@@ -147,7 +145,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all resize-none"
-                  placeholder="Conte-nos sobre o que você precisa..."
+                  placeholder="Raccontaci di cosa hai bisogno..."
                 ></textarea>
               </div>
               
@@ -158,14 +156,14 @@ export default function Contact() {
               >
                 {status.state === 'loading' ? (
                    <>
-                    <span>Enviando...</span>
+                    <span>Invio in corso...</span>
                     <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                      </svg>
                    </>
                 ) : (
-                    <span>Enviar Mensagem</span>
+                    <span>Invia Messaggio</span>
                 )}
               </button>
               

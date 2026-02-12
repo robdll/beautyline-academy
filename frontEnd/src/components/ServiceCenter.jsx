@@ -1,0 +1,67 @@
+export default function ServiceCenter() {
+  const services = [
+    {
+      id: 1,
+      title: "Corsi",
+      image: "/courseNails.jpg",
+      link: "#"
+    },
+    {
+      id: 2,
+      title: "Percorsi Master",
+      image: "/Paths.png",
+      link: "#"
+    },
+    {
+      id: 3,
+      title: "Prodotti",
+      image: "/products.jpg",
+      link: "#"
+    },
+    {
+      id: 4,
+      title: "Attrezzature",
+      image: "/equipment.png",
+      link: "#"
+    }
+  ];
+
+  return (
+    <section id="pilares" className="py-12 md:py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="font-display text-4xl md:text-5xl text-purple-400 font-bold">I Nostri Pilastri</h2>
+          <p className="font-medium tracking-widest text-lg mt-6 text-stone-600 max-w-2xl mx-auto">
+            Che tu voglia iniziare da zero o migliorare ciò che già fai, qui trovi percorsi pratici e concreti.
+            Dalle basi dell'estetica ai master più avanzati, ti seguiamo passo dopo passo.
+          </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-purple-600 mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {services.map((service) => (
+            <a 
+              key={service.id} 
+              href={service.link}
+              className="group relative h-80 rounded-3xl overflow-hidden block shadow-lg transform transition-all duration-300 hover:scale-108"
+            >
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-purple-900/40 transition-colors duration-500 z-10"></div>
+              
+              <img 
+                src={service.image} 
+                alt={service.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              
+              <div className="absolute inset-0 flex items-center justify-center z-20 p-4">
+                <h3 className="font-display text-2xl md:text-3xl font-bold text-white text-center drop-shadow-md group-hover:scale-105 transition-transform duration-300">
+                  {service.title}
+                </h3>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
