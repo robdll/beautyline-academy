@@ -17,20 +17,20 @@ app.use(morgan("common"));
 app.use("/", Router);
 
 
-app.post('/users', async (req, res) => {
-  try {
+app.post('/usuarios', async (req, res) => {
+    try {
 
-    const newUser = await User.create(req.body);
-    res.status(201).json(newUser);
+      const novoUsuario = await User.create(req.body);
+      res.status(201).json(novoUsuario);
 
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
+    } catch (error) {
+      res.status(400).json({ erro: error.message });
+    }
 });
 
 
 
 app.listen(PORT, () => {
-  console.log("Server running in port ", PORT)
+    console.log("Server running in port ", PORT)
 })
 
