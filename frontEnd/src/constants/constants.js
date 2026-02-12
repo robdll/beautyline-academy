@@ -9,17 +9,17 @@ export const FOOTER_LINKS = [
 export const HERO_SLIDES = [
     {
         id: 0,
-        image: "/eyelash.jpg",
+        image: "eyelash_pps2f9",
         alt: "Eyelash Extension",
     },
     {
         id: 1,
-        image: "/facialTreatment.jpg",
+        image: "facialTreatment_i80zhy",
         alt: "Facial Treatment",
     },
     {
         id: 2,
-        image: "/pictureNail.png",
+        image: "pictureNail_rjeiue",
         alt: "Nail Art",
     }
 ];
@@ -28,25 +28,25 @@ export const SERVICES = [
     {
       id: 1,
       title: "Corsi",
-      image: "/courseNails.jpg",
+      image: "courseNails_vd4fgi",
       link: "#"
     },
     {
       id: 2,
       title: "Percorsi Master",
-      image: "/Paths.png",
+      image: "Paths_xmgp8c",
       link: "#"
     },
     {
       id: 3,
       title: "Prodotti",
-      image: "/products.jpg",
+      image: "products_yclkv1",
       link: "#"
     },
     {
       id: 4,
       title: "Attrezzature",
-      image: "/equipment.png",
+      image: "equipment_zowchz",
       link: "#"
     }
 ];
@@ -67,5 +67,16 @@ export const MACHINE_TYPES = [
     {
         id: 4,
         name: "Multifunzione"
+    }
+];
+
+export const COSMETICS = [
+    {
+        id: 1,
+        name: "Chris Nails"
+    },
+    {
+        id: 2,
+        name: "Skin Renew"
     }
 ];

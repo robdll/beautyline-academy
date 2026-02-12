@@ -1,8 +1,27 @@
 import { useState, useEffect } from 'react';
 import { HERO_SLIDES } from '../constants/constants';
+import UploadImages from './UploadImages';
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [dimensions, setDimensions] = useState({ width: 1920, height: 1080 });
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      const w = window.innerWidth;
+      if (w < 640) {
+        setDimensions({ width: 640, height: 960 });
+      } else if (w < 1024) {
+        setDimensions({ width: 1024, height: 1280 });
+      } else {
+        setDimensions({ width: 1920, height: 1080 });
+      }
+    };
+
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -30,11 +49,7 @@ export default function Hero() {
             }`}
           >
             <div className="absolute inset-0 bg-black/40 z-10"></div>
-            <img 
-                src={slide.image} 
-                alt={slide.alt} 
-                className="w-full h-full object-cover"
-            />
+            <UploadImages publicId={slide.image} width={dimensions.width} height={dimensions.height} className="w-full h-full object-cover"/>
           </div>
         ))}
       </div>

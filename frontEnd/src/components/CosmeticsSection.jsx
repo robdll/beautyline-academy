@@ -1,3 +1,6 @@
+import { COSMETICS } from "../constants/constants";
+import UploadImages from "./UploadImages";
+
 export default function CosmeticsSection() {
   return (
     <section id="prodotti" className="py-24 bg-gradient-to-br from-purple-50 via-white to-purple-50">
@@ -32,9 +35,9 @@ export default function CosmeticsSection() {
             </div>
 
             <div className="flex flex-wrap gap-3 mb-8">
-              {['Chris Nails', 'Skin Renew'].map(tag => (
-                <button key={tag} className="px-4 py-2 bg-stone-100 rounded-full text-sm text-stone-600 cursor-pointer hover:bg-purple-100 transition-colors">
-                  {tag}
+              {COSMETICS.map(tag => (
+                <button key={tag.id} className="px-4 py-2 bg-stone-100 rounded-full text-sm text-stone-600 cursor-pointer hover:bg-purple-100 transition-colors">
+                  {tag.name}
                 </button>
               ))}
             </div>
@@ -53,7 +56,7 @@ export default function CosmeticsSection() {
             <div className="relative">
               <div className="absolute -top-6 -right-6 w-72 h-72 bg-stone-300 rounded-full opacity-20 blur-3xl"></div>
               <div className="relative bg-white rounded-3xl p-8 shadow-2xl border border-stone-200">
-                <img src="cosmeticsPicture.jpg" alt="Immagine di donna che riceve trucco" />
+                <UploadImages publicId={"cosmeticsPicture_b1vclx"} width={500} height={500} className="mx-auto"/>
                 <div className="text-center mt-4">
                   <p className="text-stone-600 font-semibold">Qualità professionale per tutti</p>
                 </div>

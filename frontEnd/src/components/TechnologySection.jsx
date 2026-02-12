@@ -1,4 +1,5 @@
 import { MACHINE_TYPES } from "../constants/constants";
+import UploadImages from "./UploadImages";
 
 export default function TechnologySection() {
   return (
@@ -9,7 +10,7 @@ export default function TechnologySection() {
             <div className="relative">
               <div className="absolute -top-6 -left-6 w-72 h-72 bg-purple-300 rounded-full opacity-30 blur-3xl"></div>
               <div className="relative bg-gradient-to-br from-purple-50 to-white rounded-3xl p-8 shadow-2xl border border-purple-100">
-                <img src="equipmentPicture.png" alt="Immagine di donna che riceve trucco" />
+                <UploadImages publicId={"equipmentPicture_roziae"} width={550} height={550} className="mx-auto"/>
                 <div className="text-center mt-4">
                   <p className="text-amber-500 font-semibold">Attrezzature di ultima generazione</p>
                 </div>

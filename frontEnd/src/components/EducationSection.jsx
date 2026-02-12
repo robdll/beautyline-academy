@@ -1,3 +1,5 @@
+import UploadImages from "./UploadImages";
+
 export default function EducationSection() {
   return (
     <section id="istruzione" className="py-24 bg-gradient-to-br from-purple-100 via-white to-pink-100">
@@ -41,7 +43,7 @@ export default function EducationSection() {
             <div className="relative">
               <div className="absolute -top-6 -right-6 w-72 h-72 bg-purple-300 rounded-full opacity-30 blur-3xl"></div>
               <div className="relative bg-white rounded-3xl p-8 shadow-2xl border border-purple-100">
-                <img src="coursePicture.jpg" alt="Immagine di donna che riceve trucco" className="rounded-3xl" />
+                <UploadImages publicId={"coursePicture_zd7hnj"} width={600} height={390} className="mx-auto rounded-3xl"/>
                 <div className="text-center mt-4">
                   <p className="text-rose-400 font-semibold">Più di 500 professionisti formati</p>
                 </div>

@@ -1,4 +1,5 @@
 import { SERVICES } from "../constants/constants";
+import UploadImages from "./UploadImages";
 
 export default function ServiceCenter() {
 
@@ -23,11 +24,7 @@ export default function ServiceCenter() {
             >
               <div className="absolute inset-0 bg-black/40 group-hover:bg-purple-900/40 transition-colors duration-500 z-10"></div>
               
-              <img 
-                src={service.image} 
-                alt={service.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
+              <UploadImages publicId={service.image} width={700} height={780} className="mx-auto"/>
               
               <div className="absolute inset-0 flex items-center justify-center z-20 p-4">
                 <h3 className="font-display text-2xl md:text-3xl font-bold text-white text-center drop-shadow-md group-hover:scale-105 transition-transform duration-300">
