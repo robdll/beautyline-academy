@@ -1,12 +1,32 @@
-const mongoose = require('mongoose');
+const User = require("./userDB.model");
 
+const getUsers = () => {
+    return User.find();
+};
 
-const userSchema = new mongoose.Schema({
-  name: { type: string, required: true },
-  email: { type: string, required: true, unique: true },
-  password: { type: string, required: true },
-  Data: { type: Date, default: Date.now }
-});
+const getUserById = (id) => {
+    return User.findById(id);
+};
 
+const createUser = (userData) => {
 
-module.exports = mongoose.model('User', userSchema);
+    const newUser = new User(userData);
+    return newUser.save();
+};
+
+const updateUser = (id, userData) => {
+
+    return User.findByIdAndUpdate(id, userData, { new: true });
+};
+
+const deleteUser = (id) => {
+    return User.findByIdAndDelete(id);
+};
+
+module.exports = {
+    getUsers,
+    getUserById,
+    createUser,
+    updateUser,
+    deleteUser
+};

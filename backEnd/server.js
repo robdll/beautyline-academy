@@ -3,7 +3,7 @@ const cors = require("cors");
 const Router = require("./routes/user.router");
 const morgan = require("morgan");
 const connectDB = require("./config/DBmongo");
-const User = require("./model/user.model");
+const User = require("./model/userDB.model");
 require("dotenv").config();
 
 connectDB();
