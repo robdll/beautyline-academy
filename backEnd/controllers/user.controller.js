@@ -9,6 +9,7 @@ const getUsers = async (req, res) => {
         }
 
         res.status(200).json(users);
+
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Error fetching users" });
@@ -24,6 +25,7 @@ const getUserById = async (req, res) => {
         }
 
         res.status(200).json(user);
+
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Error fetching user" });
@@ -38,6 +40,7 @@ const createUser = async (req, res) => {
         const result = await newUser.save();
 
         res.status(201).send(result);
+
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: "Error creating user" });
@@ -59,6 +62,7 @@ const updateUser = async (req, res) => {
         }
 
         res.status(200).json(result);
+
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Error fetching user" });
@@ -74,6 +78,7 @@ const deleteUser = async (req, res) => {
         }
 
         res.status(204).send("User successfully deleted");
+
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Error fetching user" });
