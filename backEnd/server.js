@@ -2,8 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const Router = require("./routes/user.router");
 const morgan = require("morgan");
+const connectDB = require("./config/DBmongo");
 require("dotenv").config();
 
+connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
