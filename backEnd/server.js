@@ -19,7 +19,11 @@ app.use("/", Router);
 
 
 
-app.listen(PORT, () => {
-  console.log("Server running in port ", PORT)
-})
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log("Server running in port ", PORT)
+  })
+}
+
+module.exports = app;
 
