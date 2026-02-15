@@ -53,7 +53,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contatti" className="py-24 bg-gradient-to-br from-stone-800 via-stone-900 to-stone-800 text-white">
+    <section id="contatti" className="py-24 bg-purple-600 from-stone-800 via-stone-900 to-stone-800 text-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16">
           <div>
@@ -83,7 +83,7 @@ export default function Contact() {
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-xl bg-stone-400/20 flex items-center justify-center">
+                <div className="w-14 h-14 rounded-xl bg-stone-300/20 flex items-center justify-center">
                   <UploadImages publicId={"iconemail_htjndo"} width={40} height={40}/>
                 </div>
                 <div>
@@ -106,7 +106,7 @@ export default function Contact() {
                     value={formData.first_name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
                     placeholder="Il tuo nome"
                   />
                 </div>
@@ -119,7 +119,7 @@ export default function Contact() {
                     value={formData.last_name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
                     placeholder="Il tuo cognome"
                   />
                 </div>
@@ -133,7 +133,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
                   placeholder="tua@email.com"
                 />
               </div>
@@ -146,7 +146,7 @@ export default function Contact() {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
                   placeholder="+39 000 000 0000"
                 />
               </div>
@@ -159,7 +159,7 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all resize-none"
                   placeholder="Raccontaci di cosa hai bisogno..."
                 ></textarea>
               </div>
@@ -167,7 +167,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status.state === 'loading'}
-                className="w-full py-4 bg-gradient-to-r from-rose-400 to-purple-400 text-white font-semibold rounded-xl hover:from-rose-500 hover:to-purple-500 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 bg-gradient-to-r from-rose-400 to-rose-300 text-white font-semibold rounded-xl hover:from-rose-500 hover:to-rose-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {status.state === 'loading' ? (
                    <>
