@@ -60,7 +60,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-stone-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-stone-500 text-sm">© 2024 Beauty Line Academy. Tutti i diritti riservati.</p>
+          <p className="text-stone-500 text-sm">© {new Date().getFullYear()} Beauty Line Academy. Tutti i diritti riservati.</p>
           <div className="flex gap-6 text-sm">
             <a href="#" className="text-stone-500 hover:text-stone-300 transition-colors">Informativa sulla Privacy</a>
             <a href="#" className="text-stone-500 hover:text-stone-300 transition-colors">Termini di Utilizzo</a>
