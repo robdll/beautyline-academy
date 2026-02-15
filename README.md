@@ -89,12 +89,13 @@ cd backEnd
 npm install
 ```
 
-**(Optional)** Create a `.env` file in the `backEnd` directory for environment variables:
+Copy the example environment file and fill in your values:
 
 ```bash
-PORT=3000
-# Add other environment variables as needed
+cp .env.example .env
 ```
+
+Edit `.env` to set your MongoDB connection string and desired port (see `backEnd/.env.example` for details).
 
 Start the backend server:
 
@@ -112,6 +113,14 @@ Open a new terminal window, navigate to the frontend directory, and install depe
 cd frontEnd
 npm install
 ```
+
+Copy the example environment file and fill in your values:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` to set your Cloudinary cloud name (see `frontEnd/.env.example` for details).
 
 Start the frontend development server:
 
