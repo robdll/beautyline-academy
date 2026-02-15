@@ -53,7 +53,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contatti" className="py-24 bg-purple-600 from-stone-800 via-stone-900 to-stone-800 text-white">
+    <section id="contatti" className="py-24 bg-purple-600 text-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16">
           <div>
