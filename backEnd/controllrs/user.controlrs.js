@@ -60,8 +60,25 @@ const createUser = async (req, res) => {
 // Update user
 const updateUser = async (req, res) => {
   try {
+    // Authorization: Ensure user can only update their own account
+    if (req.user && req.user._id.toString() !== req.params.id) {
+      return res.status(403).json({ error: "You can only update your own account" });
+    }
+
     const { name, email, password } = req.body;
-    const updateData = { name, email };
+    const updateData = { name };
+
+    // Check for duplicate email if email is being changed
+    if (email) {
+      const existingUser = await User.findOne({ 
+        email: email.toLowerCase(),
+        _id: { $ne: req.params.id }
+      });
+      if (existingUser) {
+        return res.status(400).json({ error: "Email already in use" });
+      }
+      updateData.email = email;
+    }
 
     // Hash password if provided
     if (password) {
@@ -87,6 +104,11 @@ const updateUser = async (req, res) => {
 // Delete user
 const deleteUser = async (req, res) => {
   try {
+    // Authorization: Ensure user can only delete their own account
+    if (req.user && req.user._id.toString() !== req.params.id) {
+      return res.status(403).json({ error: "You can only delete your own account" });
+    }
+
     const user = await User.findByIdAndDelete(req.params.id);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
