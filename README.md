@@ -120,7 +120,14 @@ Copy the example environment file and fill in your values:
 cp .env.example .env
 ```
 
-Edit `.env` to set your Cloudinary cloud name (see `frontEnd/.env.example` for details).
+Edit `.env` to set your configuration:
+
+- **`VITE_CLOUDINARY_CLOUD_NAME`**: Your Cloudinary cloud name for image management
+- **`VITE_API_URL`**: (Optional) API base URL configuration
+  - **Development**: Leave empty to use the Vite proxy (forwards `/api` requests to `http://localhost:3000`)
+  - **Production**: Set to your deployed backend URL (e.g., `https://api.beautylineacademy.com`)
+
+See `frontEnd/.env.example` for details.
 
 Start the frontend development server:
 
@@ -134,6 +141,30 @@ The frontend will be running at **http://localhost:5173**
 
 - **Frontend**: Open your browser and go to [http://localhost:5173](http://localhost:5173)
 - **Backend API**: The API is available at [http://localhost:3000](http://localhost:3000)
+
+### API Configuration
+
+The application supports configurable API URLs to work across different deployment scenarios:
+
+#### Development Mode
+
+In development, the frontend uses a Vite proxy to forward API requests to the backend. Leave `VITE_API_URL` empty in your `.env` file:
+
+```bash
+VITE_API_URL=
+```
+
+The Vite dev server automatically proxies requests from `/api/*` to `http://localhost:3000/api/*`.
+
+#### Production Mode
+
+When deploying the frontend and backend separately, set `VITE_API_URL` to your deployed backend URL:
+
+```bash
+VITE_API_URL=https://api.beautylineacademy.com
+```
+
+This ensures the frontend can communicate with the backend regardless of their deployment locations.
 
 ### Optional: MongoDB Setup
 

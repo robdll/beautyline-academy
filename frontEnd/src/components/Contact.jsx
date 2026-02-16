@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import UploadImages from "./UploadImages";
 import { Icon } from "./Icons";
+import { apiUrl } from '../utils/api';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ export default function Contact() {
     setStatus({ state: 'loading', message: '' });
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(apiUrl('/api/contact'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
