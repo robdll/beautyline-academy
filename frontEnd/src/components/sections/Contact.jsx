@@ -1,56 +1,9 @@
-import { useState } from 'react';
-import UploadImages from "./UploadImages";
-import { Icon } from "./Icons";
+import { Icon } from "../common/Icons";
+import UploadImages from "../common/UploadImages";
+import useContactForm from "../../hooks/useContactForm";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
-  const [status, setStatus] = useState({ state: 'idle', message: '' });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus({ state: 'loading', message: '' });
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      if (!response.ok) {
-        const errorText = await response.text().catch(() => '');
-        throw new Error(errorText || 'Errore durante l\'invio del messaggio.');
-      }
-      setStatus({
-        state: 'success',
-        message: '✓ Messaggio inviato con successo! Ti contatteremo a breve.',
-      });
-      setFormData({
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone: '',
-        message: ''
-      });
-    } catch (error) {
-      console.error("Submission error:", error);
-      setStatus({
-        state: 'error',
-        message: 'Si è verificato un errore durante l\'invio del messaggio. Per favore riprova.',
-      });
-    }
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const { formData, status, handleChange, handleSubmit } = useContactForm();
 
   return (
     <section id="contatti" className="py-24 bg-gradient-to-br from-stone-800 via-stone-900 to-stone-800 text-white">
@@ -66,7 +19,7 @@ export default function Contact() {
             <div className="space-y-6 mb-8">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-xl bg-rose-400/20 flex items-center justify-center">
-                  <UploadImages publicId={"iconlocation_q2877n"} width={40} height={40}/>
+                  <UploadImages publicId={"iconlocation_q2877n"} width={40} height={40} />
                 </div>
                 <div>
                   <p className="font-semibold">Indirizzo</p>
@@ -75,7 +28,7 @@ export default function Contact() {
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-xl bg-amber-400/20 flex items-center justify-center">
-                  <UploadImages publicId={"iconphone_bttgkh"} width={40} height={40}/>
+                  <UploadImages publicId={"iconphone_bttgkh"} width={40} height={40} />
                 </div>
                 <div>
                   <p className="font-semibold">Telefono</p>
@@ -84,7 +37,7 @@ export default function Contact() {
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-xl bg-stone-400/20 flex items-center justify-center">
-                  <UploadImages publicId={"iconemail_htjndo"} width={40} height={40}/>
+                  <UploadImages publicId={"iconemail_htjndo"} width={40} height={40} />
                 </div>
                 <div>
                   <p className="font-semibold">Email</p>
@@ -163,25 +116,25 @@ export default function Contact() {
                   placeholder="Raccontaci di cosa hai bisogno..."
                 ></textarea>
               </div>
-              
+
               <button
                 type="submit"
                 disabled={status.state === 'loading'}
                 className="w-full py-4 bg-gradient-to-r from-rose-400 to-purple-400 text-white font-semibold rounded-xl hover:from-rose-500 hover:to-purple-500 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {status.state === 'loading' ? (
-                   <>
+                  <>
                     <span>Invio in corso...</span>
                     <Icon name="spinner" className="w-5 h-5 animate-spin" />
-                   </>
+                  </>
                 ) : (
-                    <span>Invia Messaggio</span>
+                  <span>Invia Messaggio</span>
                 )}
               </button>
-              
+
               {status.message && (
                 <div className={`mt-4 text-center ${status.state === 'success' ? 'text-green-400' : 'text-amber-400'}`}>
-                    {status.message}
+                  {status.message}
                 </div>
               )}
             </form>

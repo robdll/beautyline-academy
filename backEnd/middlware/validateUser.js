@@ -1,7 +1,7 @@
-const { entrySchema } = require("../validaty/entries.schema");
+const { userSchema } = require("../validaty/user.schema");
 
-const validateEntry = (req, res, next) => {
-    const result = entrySchema.safeParse(req.body);
+const validateUser = (req, res, next) => {
+    const result = userSchema.safeParse(req.body);
 
     if (!result.success) {
         return res.status(400).json({
@@ -18,4 +18,4 @@ const validateEntry = (req, res, next) => {
 };
 
 
-module.exports = validateEntry;
+module.exports = validateUser;

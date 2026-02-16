@@ -1,5 +1,5 @@
-import { SERVICES } from "../constants/constants";
-import UploadImages from "./UploadImages";
+import { SERVICES } from "../../utils/constants";
+import UploadImages from "../common/UploadImages";
 
 export default function ServiceCenter() {
 

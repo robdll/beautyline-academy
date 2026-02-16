@@ -1,5 +1,5 @@
-import UploadImages from "./UploadImages";
-import { COURSES } from "../constants/constants";
+import UploadImages from "../common/UploadImages";
+import { COURSES } from "../../utils/constants";
 
 export default function EducationSection() {
   return (
@@ -11,7 +11,7 @@ export default function EducationSection() {
             <p className="text-lg text-stone-600 mb-8 leading-relaxed">
               Alla Beauty Line Academy, crediamo che la formazione sia la base per il successo. I nostri corsi sono sviluppati da rinomati professionisti dell'industria della bellezza, garantendo che riceviate la formazione più aggiornata e pertinente sul mercato.
             </p>
-            
+
             <div className="space-y-6 mb-8">
               {COURSES.map((item, index) => (
                 <div key={index} className="flex gap-4">
@@ -40,7 +40,7 @@ export default function EducationSection() {
             <div className="relative">
               <div className="absolute -top-6 -right-6 w-72 h-72 bg-purple-300 rounded-full opacity-30 blur-3xl"></div>
               <div className="relative bg-white rounded-3xl p-8 shadow-2xl border border-purple-100">
-                <UploadImages publicId={"coursePicture_zd7hnj"} width={600} height={390} className="mx-auto rounded-3xl"/>
+                <UploadImages publicId={"coursePicture_zd7hnj"} width={600} height={390} className="mx-auto rounded-3xl" />
                 <div className="text-center mt-4">
                   <p className="text-rose-400 font-semibold">Più di 500 professionisti formati</p>
                 </div>

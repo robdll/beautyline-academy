@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
+
 @theme {
   --font-display: "Playfair Display", serif;
   --font-body: "Montserrat", sans-serif;
@@ -21,6 +22,7 @@
   html {
     scroll-behavior: smooth;
   }
+
   body {
     font-family: var(--font-body);
     color: var(--color-stone-800);
@@ -33,6 +35,7 @@
     transition-duration: 300ms;
     transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
+
   .btn-primary:hover {
     transform: translateY(-0.125rem);
     --tw-shadow: 0 10px 15px -3px rgb(159 18 57 / 0.2), 0 4px 6px -4px rgb(159 18 57 / 0.2);
@@ -40,11 +43,13 @@
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
     --tw-shadow-color: rgb(159 18 57 / 0.2);
   }
+
   .card-hover {
     transition-property: all;
     transition-duration: 300ms;
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
+
   .card-hover:hover {
     transform: translateY(-0.5rem);
   }

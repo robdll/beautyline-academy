@@ -1,26 +1,19 @@
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import ServiceCenter from './components/ServiceCenter';
-import EducationSection from './components/EducationSection';
-import TechnologySection from './components/TechnologySection';
-import CosmeticsSection from './components/CosmeticsSection';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Auth from './pages/Auth';
+import Products from './pages/Products';
+import Courses from './pages/Courses';
 
 function App() {
   return (
-    <div className="min-h-screen bg-stone-50 text-stone-800 font-body">
-      <Navbar />
-      <main>
-        <Hero />
-        <ServiceCenter />
-        <EducationSection />
-        <TechnologySection />
-        <CosmeticsSection />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/produtos" element={<Products />} />
+        <Route path="/cursos" element={<Courses />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

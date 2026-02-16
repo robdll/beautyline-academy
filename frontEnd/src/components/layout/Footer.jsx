@@ -1,5 +1,5 @@
-import { FOOTER_LINKS } from "../constants/constants";
-import UploadImages from "./UploadImages";
+import { FOOTER_LINKS } from "../../utils/constants";
+import UploadImages from "../common/UploadImages";
 
 export default function Footer() {
   return (
@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <UploadImages publicId={"logoBeauty_rtip32"} width={50} height={50}/>
+              <UploadImages publicId={"logoBeauty_rtip32"} width={50} height={50} />
               <span className="font-display text-xl font-semibold">Beauty Line Academy</span>
             </div>
             <p className="text-stone-400 leading-relaxed max-w-md">
@@ -16,16 +16,16 @@ export default function Footer() {
             </p>
             <div className="flex gap-4 mt-6">
               <a href="https://www.facebook.com/beautylineacademy/" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-400 transition-colors">
-                <UploadImages publicId={"facebookLogo_dvbiam"} width={25} height={25}/>
+                <UploadImages publicId={"facebookLogo_dvbiam"} width={25} height={25} />
               </a>
               <a href="https://www.instagram.com/beautylineacademymonza/" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] transition-colors">
-                <UploadImages publicId={"instagramLogo_tjrjdt"} width={25} height={25}/>
+                <UploadImages publicId={"instagramLogo_tjrjdt"} width={25} height={25} />
               </a>
               <a href="https://www.tiktok.com/@beautylineacademymonza" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-colors">
-                <UploadImages publicId={"tiktokLogo_akws8o"} width={25} height={25}/>
+                <UploadImages publicId={"tiktokLogo_akws8o"} width={25} height={25} />
               </a>
               <a href="https://www.youtube.com/channel/UCvFeks3fQ1sFk9ZhxDcPDog" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-red-400 transition-colors">
-                <UploadImages publicId={"youtubeLogo_vg9i8g"} width={25} height={25}/>
+                <UploadImages publicId={"youtubeLogo_vg9i8g"} width={25} height={25} />
               </a>
             </div>
           </div>
@@ -35,12 +35,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {FOOTER_LINKS.map((item) => (
                 <li key={item.name}>
-                    <a 
-                        href={item.path} 
-                        className="text-stone-400 hover:text-rose-400 transition-colors"
-                    >
+                  <a
+                    href={item.path}
+                    className="text-stone-400 hover:text-rose-400 transition-colors"
+                  >
                     {item.name}
-                    </a>
+                  </a>
                 </li>
               ))}
             </ul>
