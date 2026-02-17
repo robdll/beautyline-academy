@@ -1,8 +1,10 @@
 const User = require("../model/userDB.model");
+const bcrypt = require("bcrypt");
+
 
 const getUsers = async (req, res) => {
     try {
-        const users = await User.find();
+        const users = await User.find().select('-password');
 
         if (users.length === 0) {
             return res.status(200).json([]);
@@ -19,15 +21,22 @@ const getUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id).select('-password');
 
         if (!user) {
             return res.status(404).send({ message: "User not found" });
         }
 
+
         res.status(200).json(user);
 
+
     } catch (err) {
+
+        if(err.name === 'CastError'){
+            res.status(400).json({msg: "Invalid object ID"})
+        }
+
         console.error(err);
         res.status(500).json({ message: "Error fetching user" });
     }
@@ -38,18 +47,22 @@ const createUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
-        const newUser = new User(
-            { name, email, password },
-            {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = new User({
+            name,
+            email,
+            password: hashedPassword
+        });
+       
 
-                new: true,
-                runValidators: true,
-                context: "query"
-
-            });
+        const savedUser = await newUser.save();
+        const userResponse = await User.findById(savedUser._id)
+        .select('-password');
 
 
-        const result = await newUser.save();
+        res.status(201).json(userResponse);
+
+    } catch (err) {
 
         if (err.name === "ValidationError") {
             return res.status(400).json({
@@ -64,10 +77,6 @@ const createUser = async (req, res) => {
             });
         }
 
-
-        res.status(201).send(result);
-
-    } catch (err) {
         console.error(err);
         return res.status(500).json({ message: "Error creating user" });
     }
@@ -78,26 +87,49 @@ const updateUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
+        const updateData = {};
+        if (name) updateData.name = name;
+        if (email) updateData.email = email;
+
+        if (password) {
+            updateData.password = await bcrypt.hash(password, 10);
+        }
 
         const result = await User.findByIdAndUpdate(
             req.params.id,
-            { name, email, password },
+            updateData,
             {
                 new: true,
                 runValidators: true,
-                context: "query"
+                context: "query",
             }
-        );
+
+        ).select('-password');
+
+
 
         if (!result) {
-            return res.status(404).send({ message: "User not updated" });
+            return res.status(404).send({ message: "User not found" });
         }
 
         res.status(200).json(result);
 
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Error updating user" });
+
+        if (err.name === "ValidationError") {
+            return res.status(400).json({
+                message: "Invalid data",
+                details: err.errors
+            });
+        }
+    
+        if (err.code === 11000) {
+            return res.status(409).json({
+                message: "Email already exists"
+            });
+        }
+    
+        return res.status(500).json({ message: "Internal error" });
     }
 }
 
@@ -108,12 +140,26 @@ const deleteUser = async (req, res) => {
         const result = await User.findByIdAndDelete(req.params.id);
 
         if (!result) {
-            return res.status(404).send({ message: "User not deleted" });
+            return res.status(404).send({ message: "User not found" });
         }
 
         res.status(200).send("User deleted successfully");
 
     } catch (err) {
+
+        if (err.name === "ValidationError") {
+            return res.status(400).json({
+                message: "Invalid user data",
+                details: err.errors
+            });
+        }
+
+        if (err.code === 11000 || err.code === 11001) {
+            return res.status(409).json({
+                message: "Email already exists"
+            });
+        }
+
         console.error(err);
         res.status(500).json({ message: "Error deleting user" });
     }
