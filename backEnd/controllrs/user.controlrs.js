@@ -85,7 +85,6 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
-
         const updateData = {};
         if (name) updateData.name = name;
         if (email) updateData.email = email;
