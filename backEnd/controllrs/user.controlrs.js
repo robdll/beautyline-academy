@@ -59,7 +59,6 @@ const createUser = async (req, res) => {
         const userResponse = await User.findById(savedUser._id)
         .select('-password');
 
-
         res.status(201).json(userResponse);
 
     } catch (err) {
