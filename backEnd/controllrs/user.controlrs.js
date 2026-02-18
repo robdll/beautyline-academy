@@ -41,7 +41,9 @@ const getUserById = async (req, res) => {
       }
 
       res.status(500).json({ message: "Error fetching user" });
+  }
 }
+
 
 
 const createUser = async (req, res) => {
