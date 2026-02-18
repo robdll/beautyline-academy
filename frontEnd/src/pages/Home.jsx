@@ -4,6 +4,8 @@ import ServiceCenter from '../components/ServiceCenter';
 import EducationSection from '../components/EducationSection';
 import TechnologySection from '../components/TechnologySection';
 import CosmeticsSection from '../components/CosmeticsSection';
+import AboutUs from '../components/AboutUs';
+import GoogleReviews from '../components/GoogleReviews';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 
@@ -13,10 +15,12 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <ServiceCenter />
+        <ServiceCenter id="centroAssistenza" />
         <EducationSection />
-        <TechnologySection />
-        <CosmeticsSection />
+        <TechnologySection id="tecnologia" />
+        <CosmeticsSection id="prodotti" />
+        <AboutUs id="aboutUs" />
+        <GoogleReviews />
         <Contact />
       </main>
       <Footer />

@@ -3,7 +3,7 @@ import UploadImages from "./UploadImages";
 
 export default function CosmeticsSection() {
   return (
-    <section id="prodotti" className="py-24 bg-gradient-to-br from-purple-50 via-white to-purple-50">
+    <section id="prodotti" className="py-24 bg-gradient-to-br from-purple-500 via-white to-purple-500">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="order-2 lg:order-1">
@@ -54,8 +54,7 @@ export default function CosmeticsSection() {
 
           <div className="order-1 lg:order-2">
             <div className="relative">
-              <div className="absolute -top-6 -right-6 w-72 h-72 bg-stone-300 rounded-full opacity-20 blur-3xl"></div>
-              <div className="relative bg-white rounded-3xl p-8 shadow-2xl border border-stone-200">
+              <div className="bg-white rounded-3xl p-8 shadow-2xl border border-stone-200">
                 <UploadImages publicId={"cosmeticsPicture_b1vclx"} width={500} height={500} className="mx-auto"/>
                 <div className="text-center mt-4">
                   <p className="text-stone-600 font-semibold">Qualità professionale per tutti</p>
