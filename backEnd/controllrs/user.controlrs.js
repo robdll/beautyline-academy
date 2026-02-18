@@ -71,7 +71,7 @@ const createUser = async (req, res) => {
             });
         }
 
-        if (DUPLICATED_EMAIL_CODE) {
+        if (err.code === DUPLICATED_EMAIL_CODE) {
             return res.status(409).json({
                 message: "Email already exists"
             });
@@ -122,7 +122,7 @@ const updateUser = async (req, res) => {
             });
         }
     
-        if (DUPLICATED_EMAIL_CODE) {
+        if (err.code === DUPLICATED_EMAIL_CODE) {
             return res.status(409).json({
                 message: "Email already exists"
             });
@@ -153,7 +153,7 @@ const deleteUser = async (req, res) => {
             });
         }
 
-        if (DUPLICATED_EMAIL_CODE) {
+        if (err.code === DUPLICATED_EMAIL_CODE) {
             return res.status(409).json({
                 message: "Email already exists"
             });
