@@ -121,6 +121,10 @@ const updateUser = async (req, res) => {
                 details: err.errors
             });
         }
+
+        if (err.name === "CastError") {
+    return res.status(400).json({ message: "Invalid user ID" });
+}
     
         if (err.code === DUPLICATED_EMAIL_CODE) {
             return res.status(409).json({
