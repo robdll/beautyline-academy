@@ -34,13 +34,13 @@ const getUserById = async (req, res) => {
 
     } catch (err) {
 
-        if(err.name === 'CastError'){
-            res.status(400).json({msg: "Invalid object ID"})
-        }
+      console.error(err);
 
-        console.error(err);
-        res.status(500).json({ message: "Error fetching user" });
-    }
+      if (err.name === "CastError") {
+        return res.status(400).json({ message: "Invalid user ID" });
+      }
+
+      res.status(500).json({ message: "Error fetching user" });
 }
 
 
