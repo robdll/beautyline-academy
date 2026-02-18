@@ -1,7 +1,7 @@
 const User = require("../model/userDB.model");
 const bcrypt = require("bcrypt");
 
-let DUPLICATED_EMAIL_CODE = 11000;
+const DUPLICATED_EMAIL_CODE = 11000;
 
 const getUsers = async (req, res) => {
     try {
@@ -123,8 +123,8 @@ const updateUser = async (req, res) => {
         }
 
         if (err.name === "CastError") {
-    return res.status(400).json({ message: "Invalid user ID" });
-}
+          return res.status(400).json({ message: "Invalid user ID" });
+        }
     
         if (err.code === DUPLICATED_EMAIL_CODE) {
             return res.status(409).json({
@@ -150,18 +150,11 @@ const deleteUser = async (req, res) => {
 
     } catch (err) {
 
-        if (err.name === "ValidationError") {
-            return res.status(400).json({
-                message: "Invalid user data",
-                details: err.errors
-            });
-        }
 
-        if (err.code === DUPLICATED_EMAIL_CODE) {
-            return res.status(409).json({
-                message: "Email already exists"
-            });
+        if (err.name === "CastError") {
+         return res.status(400).json({ message: "Invalid user ID" });
         }
+        
 
         console.error(err);
         res.status(500).json({ message: "Error deleting user" });
