@@ -1,6 +1,7 @@
 const User = require("../model/userDB.model");
 const bcrypt = require("bcrypt");
 
+let DUPLICATED_EMAIL_CODE = 11000;
 
 const getUsers = async (req, res) => {
     try {
@@ -70,7 +71,7 @@ const createUser = async (req, res) => {
             });
         }
 
-        if (err.code === 11000 || err.code === 11001) {
+        if (DUPLICATED_EMAIL_CODE) {
             return res.status(409).json({
                 message: "Email already exists"
             });
@@ -121,7 +122,7 @@ const updateUser = async (req, res) => {
             });
         }
     
-        if (err.code === 11000) {
+        if (DUPLICATED_EMAIL_CODE) {
             return res.status(409).json({
                 message: "Email already exists"
             });
@@ -152,7 +153,7 @@ const deleteUser = async (req, res) => {
             });
         }
 
-        if (err.code === 11000 || err.code === 11001) {
+        if (DUPLICATED_EMAIL_CODE) {
             return res.status(409).json({
                 message: "Email already exists"
             });
