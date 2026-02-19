@@ -108,7 +108,6 @@ const updateUser = async (req, res) => {
         ).select('-password');
 
 
-
         if (!result) {
             return res.status(404).send({ message: "User not found" });
         }
