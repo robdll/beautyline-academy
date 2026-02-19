@@ -1,6 +1,4 @@
-import React from 'react';
-
-export const Icon = ({ name, className = "", ...props }) => {
+export default function Icon ({ name, className = "", ...props }) {
   if (name === 'spinner') {
     return (
       <svg className={`animate-spin ${className}`} fill="none" viewBox="0 0 24 24" {...props}>

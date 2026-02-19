@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import UploadImages from "./UploadImages";
-import { Icon } from "./Icons";
+import Icon from "./Icons";
 
 export default function Contact() {
   const [formData, setFormData] = useState({

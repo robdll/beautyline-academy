@@ -15,7 +15,8 @@
     "@cloudinary/url-gen": "^1.22.0",
     "dotenv": "^17.3.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.13.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
