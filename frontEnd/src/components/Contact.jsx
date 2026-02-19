@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import UploadImages from "./UploadImages";
-import { Icon } from "./Icons";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -59,7 +58,7 @@ export default function Contact() {
           <div>
             <span className="text-rose-300 font-medium tracking-widest uppercase">Contattaci</span>
             <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">Mettiti in Contatto</h2>
-            <p className="text-lg text-stone-300 mb-8 leading-relaxed">
+            <p className="text-lg text-white/80 mb-8 leading-relaxed">
               Siamo pronti ad aiutarti a trasformare la tua carriera nel settore della bellezza. Contattaci e scopri come possiamo soddisfare le tue esigenze.
             </p>
 
@@ -70,7 +69,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="font-semibold">Indirizzo</p>
-                  <a href="https://www.google.com/maps/place/Via+Michelangelo+Buonarroti,+24,+20900+Monza+MB,+It%C3%A1lia/@45.5790895,9.2798606,17z/data=!3m1!4b1!4m6!3m5!1s0x4786b9bc7e7462bd:0x8d45f9702ffa1e0e!8m2!3d45.5790895!4d9.2824355!16s%2Fg%2F11q2xkz74q?entry=ttu&g_ep=EgoyMDI2MDIxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" className="text-rose-400">Via M. Buonarroti, 24, 20900 Monza MB</a>
+                  <a href="https://www.google.com/maps/place/Via+Michelangelo+Buonarroti,+24,+20900+Monza+MB,+It%C3%A1lia/@45.5790895,9.2798606,17z/data=!3m1!4b1!4m6!3m5!1s0x4786b9bc7e7462bd:0x8d45f9702ffa1e0e!8m2!3d45.5790895!4d9.2824355!16s%2Fg%2F11q2xkz74q?entry=ttu&g_ep=EgoyMDI2MDIxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" className="text-white/80 hover:text-white/60 transition-colors">Via M. Buonarroti, 24, 20900 Monza MB</a>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -79,7 +78,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="font-semibold">Telefono</p>
-                  <a href="https://api.whatsapp.com/send/?phone=393382535226&text&type=phone_number&app_absent=0" target="_blank" className="text-rose-400">+39 338 253 5226</a>
+                  <a href="https://api.whatsapp.com/send/?phone=393382535226&text&type=phone_number&app_absent=0" target="_blank" className="text-white/80 hover:text-white/60 transition-colors">+39 338 253 5226</a>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -88,7 +87,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="font-semibold">Email</p>
-                  <a href="mailto:info@beautylineprofessional.com" target="_blank" className="text-rose-400">info@beautylineprofessional.com</a>
+                  <a href="mailto:info@beautylineprofessional.com" target="_blank" className="text-white/80 hover:text-white/60 transition-colors">info@beautylineprofessional.com</a>
                 </div>
               </div>
             </div>
@@ -98,7 +97,7 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10">
               <div className="grid sm:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label htmlFor="first_name" className="block text-sm font-medium text-stone-300 mb-2">Nome</label>
+                  <label htmlFor="first_name" className="block text-sm font-medium text-white mb-2">Nome</label>
                   <input
                     type="text"
                     id="first_name"
@@ -106,12 +105,12 @@ export default function Contact() {
                     value={formData.first_name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
                     placeholder="Il tuo nome"
                   />
                 </div>
                 <div>
-                  <label htmlFor="last_name" className="block text-sm font-medium text-stone-300 mb-2">Cognome</label>
+                  <label htmlFor="last_name" className="block text-sm font-medium text-white mb-2">Cognome</label>
                   <input
                     type="text"
                     id="last_name"
@@ -119,13 +118,13 @@ export default function Contact() {
                     value={formData.last_name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
                     placeholder="Il tuo cognome"
                   />
                 </div>
               </div>
               <div className="mb-6">
-                <label htmlFor="email" className="block text-sm font-medium text-stone-300 mb-2">Email</label>
+                <label htmlFor="email" className="block text-sm font-medium text-white mb-2">Email</label>
                 <input
                   type="email"
                   id="email"
@@ -133,12 +132,12 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
                   placeholder="tua@email.com"
                 />
               </div>
               <div className="mb-6">
-                <label htmlFor="phone" className="block text-sm font-medium text-stone-300 mb-2">Telefono</label>
+                <label htmlFor="phone" className="block text-sm font-medium text-white mb-2">Telefono</label>
                 <input
                   type="tel"
                   id="phone"
@@ -146,12 +145,12 @@ export default function Contact() {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all"
                   placeholder="+39 000 000 0000"
                 />
               </div>
               <div className="mb-8">
-                <label htmlFor="message" className="block text-sm font-medium text-stone-300 mb-2">Come possiamo aiutarti?</label>
+                <label htmlFor="message" className="block text-sm font-medium text-white mb-2">Come possiamo aiutarti?</label>
                 <textarea
                   id="message"
                   name="message"
@@ -159,7 +158,7 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all resize-none"
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:border-transparent transition-all resize-none"
                   placeholder="Raccontaci di cosa hai bisogno..."
                 ></textarea>
               </div>
@@ -167,7 +166,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status.state === 'loading'}
-                className="w-full py-4 bg-gradient-to-r from-rose-400 to-rose-300 text-white font-semibold rounded-xl hover:from-rose-500 hover:to-rose-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 bg-white/40 text-white font-semibold rounded-xl cursor-pointer hover:bg-white hover:text-purple-600 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center"
               >
                 {status.state === 'loading' ? (
                    <>
