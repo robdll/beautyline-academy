@@ -5,7 +5,7 @@ export default function AboutUs() {
     return (
         <section id="chi-siamo" className="relative py-24 overflow-hidden min-h-[600px] flex items-center">
             <div className="absolute inset-0 z-0">
-                <UploadImages publicId={"chisiamo-bg_cgvwwc"} className="w-full h-full object-cover" width={1920} height={1080}/>
+                <UploadImages publicId={"chisiamo-bg_cgvwwc"} className="w-full h-full object-cover" width={1920} height={1080} alt="" ariaHidden={true}/>
                 <div className="absolute inset-0 bg-purple-900/60 backdrop-blur-[2px]"></div>
             </div>
 
@@ -26,11 +26,9 @@ export default function AboutUs() {
                             </p>
                         </div>
                     </div>
-
-
-                    <div className="flex justify-center">
+                    <div className="relative flex justify-center">
                          <div className="absolute -inset-4 bg-purple-400/20 blur-2xl rounded-full"></div>
-                         <UploadImages publicId={"aboutUs_qccfpk"} className="relative rounded-2xl shadow-2xl border-4 border-white transform hover:scale-105 transition-transform duration-500" width={600} height={600}/>
+                         <UploadImages publicId={"aboutUs_qccfpk"} alt="Team Beauty Line Academy durante una sessione di formazione professionale" className="relative rounded-2xl shadow-2xl border-4 border-white transform hover:scale-105 transition-transform duration-500" width={600} height={600}/>
                     </div>
                 </div>
             </div>
