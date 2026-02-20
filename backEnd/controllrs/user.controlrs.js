@@ -2,11 +2,10 @@ const User = require("../model/userDB.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-let DUPLICATED_EMAIL_CODE = 11000;
+const DUPLICATED_EMAIL_CODE = 11000;
 
 const getUsers = async (req, res) => {
     try {
-
         const users = await User.find().select('-password');
 
         if (users.length === 0) {
@@ -36,18 +35,19 @@ const getUserById = async (req, res) => {
 
     } catch (err) {
 
-        if(err.name === 'CastError'){
-            res.status(400).json({msg: "Invalid object ID"})
-        }
+      console.error(err);
 
-        console.error(err);
-        res.status(500).json({ message: "Error fetching user" });
-    }
+      if (err.name === "CastError") {
+        return res.status(400).json({ message: "Invalid user ID" });
+      }
+
+      res.status(500).json({ message: "Error fetching user" });
+  }
 }
 
 
-const createUser = async (req, res) => {
 
+const createUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
@@ -62,7 +62,6 @@ const createUser = async (req, res) => {
         const savedUser = await newUser.save();
         const userResponse = await User.findById(savedUser._id)
         .select('-password');
-
 
         res.status(201).json(userResponse);
 
@@ -90,7 +89,6 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
-
         const updateData = {};
         if (name) updateData.name = name;
         if (email) updateData.email = email;
@@ -111,7 +109,6 @@ const updateUser = async (req, res) => {
         ).select('-password');
 
 
-
         if (!result) {
             return res.status(404).send({ message: "User not found" });
         }
@@ -126,8 +123,12 @@ const updateUser = async (req, res) => {
                 details: err.errors
             });
         }
+
+        if (err.name === "CastError") {
+          return res.status(400).json({ message: "Invalid user ID" });
+        }
     
-        if (err.code === 11000) {
+        if (err.code === DUPLICATED_EMAIL_CODE) {
             return res.status(409).json({
                 message: "Email already exists"
             });
@@ -151,18 +152,11 @@ const deleteUser = async (req, res) => {
 
     } catch (err) {
 
-        if (err.name === "ValidationError") {
-            return res.status(400).json({
-                message: "Invalid user data",
-                details: err.errors
-            });
-        }
 
-        if (err.code === 11000 || err.code === 11001) {
-            return res.status(409).json({
-                message: "Email already exists"
-            });
+        if (err.name === "CastError") {
+         return res.status(400).json({ message: "Invalid user ID" });
         }
+        
 
         console.error(err);
         res.status(500).json({ message: "Error deleting user" });
