@@ -167,10 +167,6 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        if (!email || !password) {
-            return res.status(400).json({ message: "Email and password are required" });
-        }
-
         const user = await User.findOne({ email });
 
         if (!user) {
@@ -189,11 +185,18 @@ const login = async (req, res) => {
             name: user.name
         };
 
-        const secret = process.env.JWT_SECRET || "defaultsecret";
+        const secret = process.env.JWT_SECRET;
+
+        if (!secret) {
+            console.error("JWT_SECRET environment variable is not defined");
+            return res.status(500).json({ message: "Internal authentication error" });
+        }
+
         const token = jwt.sign(payload, secret, { expiresIn: "1h" });
 
         res.status(200).json({ token });
     } catch (err) {
+        console.error(err);
         res.status(500).json({ message: "Error during login" });
     }
 }
