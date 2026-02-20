@@ -4,7 +4,7 @@ import UploadImages from "./UploadImages";
 export default function ServiceCenter() {
 
   return (
-    <section id="centroAssistenza" className="py-12 md:py-24 bg-white">
+    <section id="centroAssistenza" className="py-12 md:py-24 bg-stone-50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="font-display text-4xl md:text-5xl text-purple-400 font-bold">I Nostri Pilastri</h2>
@@ -21,7 +21,7 @@ export default function ServiceCenter() {
             const cardContent = (
               <>
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-purple-900/40 transition-colors duration-500 z-10"></div>
-                <UploadImages publicId={service.image} width={700} height={780} className="mx-auto" />
+                <UploadImages publicId={service.image} width={700} height={780} className="mx-auto w-full h-full" />
                 <div className="absolute inset-0 flex items-center justify-center z-20 p-4">
                   <h3 className="font-display text-2xl md:text-3xl font-bold text-white text-center drop-shadow-md group-hover:scale-105 transition-transform duration-300">
                     {service.title}
