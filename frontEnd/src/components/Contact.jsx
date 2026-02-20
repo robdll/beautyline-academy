@@ -166,7 +166,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status.state === 'loading'}
-                className="w-full py-4 bg-white/40 text-white font-semibold rounded-xl cursor-pointer hover:bg-white hover:text-purple-600 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center"
+                className="w-full py-4 bg-white text-purple-600 rounded-full font-semibold hover:bg-purple-200 transition-colors cursor-pointer"
               >
                 {status.state === 'loading' ? (
                    <>
