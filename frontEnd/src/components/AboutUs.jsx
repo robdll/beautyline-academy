@@ -9,7 +9,6 @@ export default function AboutUs() {
                 <div className="absolute inset-0 bg-purple-900/60 backdrop-blur-[2px]"></div>
             </div>
 
-
             <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20 text-left">
