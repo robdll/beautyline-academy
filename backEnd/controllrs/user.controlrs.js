@@ -1,5 +1,6 @@
 const User = require("../model/userDB.model");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const DUPLICATED_EMAIL_CODE = 11000;
 
@@ -162,10 +163,49 @@ const deleteUser = async (req, res) => {
     }
 }
 
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+
+        const payload = {
+            id: user._id,
+            email: user.email,
+            name: user.name
+        };
+
+        const secret = process.env.JWT_SECRET;
+
+        if (!secret) {
+            console.error("JWT_SECRET environment variable is not defined");
+            return res.status(500).json({ message: "Internal authentication error" });
+        }
+
+        const token = jwt.sign(payload, secret, { expiresIn: "1h" });
+
+        res.status(200).json({ token });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Error during login" });
+    }
+}
+
 module.exports = {
     getUsers,
     getUserById,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    login
 };
