@@ -52,6 +52,8 @@ const courseSchema = new mongoose.Schema({
 
     image: String
 
+    
+
 }, { timestamps: true });
 
 module.exports = mongoose.model("Course", courseSchema);
