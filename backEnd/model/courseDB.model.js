@@ -1,4 +1,4 @@
-
+// models/Course.js
 const mongoose = require("mongoose");
 
 const courseSchema = new mongoose.Schema({
@@ -43,10 +43,12 @@ const courseSchema = new mongoose.Schema({
         default: true
     },
 
+
     trail: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Trail"
     },
+
 
     image: String
 
