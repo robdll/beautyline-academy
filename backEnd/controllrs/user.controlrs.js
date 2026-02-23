@@ -158,6 +158,11 @@ const deleteUser = async (req, res) => {
         }
         
 
+        if (err.name === "CastError") {
+            return res.status(400).json({
+                message: "Invalid user ID"
+            });
+        }
         console.error(err);
         res.status(500).json({ message: "Error deleting user" });
     }
