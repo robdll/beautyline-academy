@@ -18,7 +18,6 @@ const getEquipments = async (req, res) => {
     }
 }
 
-
 const getEquipmentById = async (req, res) => {
     try {
         const equipment = await Equipment.findById(req.params.id);
@@ -39,7 +38,6 @@ const getEquipmentById = async (req, res) => {
         res.status(500).json({ message: "Error fetching equipment" });
     }
 }
-
 
 const createEquipment = async (req, res) => {
     try {
@@ -88,7 +86,6 @@ const createEquipment = async (req, res) => {
         return res.status(500).json({ message: "Error creating equipment" });
     }
 }
-
 
 const updateEquipment = async (req, res) => {
     try {
@@ -150,7 +147,6 @@ const updateEquipment = async (req, res) => {
     }
 }
 
-
 const deleteEquipment = async (req, res) => {
     try {
         const result = await Equipment.findByIdAndDelete(req.params.id);
@@ -170,7 +166,6 @@ const deleteEquipment = async (req, res) => {
         res.status(500).json({ message: "Error deleting equipment" });
     }
 }
-
 
 module.exports = {
     getEquipments,
