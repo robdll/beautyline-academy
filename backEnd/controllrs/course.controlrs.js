@@ -1,8 +1,6 @@
 const Course = require("../model/courseDB.model");
 
-
 const DUPLICATED_COURSE_CODE = 11000;
-
 
 const getCourses = async (req, res) => {
     try {
@@ -19,7 +17,6 @@ const getCourses = async (req, res) => {
         res.status(500).json({ message: "Error fetching courses" });
     }
 }
-
 
 const getCourseById = async (req, res) => {
     try {
@@ -41,7 +38,6 @@ const getCourseById = async (req, res) => {
         res.status(500).json({ message: "Error fetching course" });
     }
 }
-
 
 const createCourse = async (req, res) => {
     try {
@@ -67,7 +63,6 @@ const createCourse = async (req, res) => {
         return res.status(500).json({ message: "Error creating course" });
     }
 }
-
 
 const updateCourse = async (req, res) => {
     try {
@@ -109,7 +104,6 @@ const updateCourse = async (req, res) => {
     }
 }
 
-
 const deleteCourse = async (req, res) => {
     try {
         const result = await Course.findByIdAndDelete(req.params.id);
@@ -129,7 +123,6 @@ const deleteCourse = async (req, res) => {
         res.status(500).json({ message: "Error deleting course" });
     }
 }
-
 
 module.exports = {
     getCourses,
