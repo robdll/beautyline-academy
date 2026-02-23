@@ -89,6 +89,18 @@ describe("Course Controllers", () => {
             expect(res.status).toHaveBeenCalledWith(400);
             expect(res.json).toHaveBeenCalledWith({ message: "Invalid course ID" });
         });
+
+        it("should return 500 if an unexpected error occurs", async () => {
+            req.params.id = "validId";
+            const error = new Error("Unexpected error");
+            // Ensure this is not treated as a CastError by the controller
+            error.name = "SomeOtherError";
+            Course.findById.mockRejectedValue(error);
+
+            await getCourseById(req, res);
+
+            expect(res.status).toHaveBeenCalledWith(500);
+        });
     });
 
     describe("createCourse", () => {
