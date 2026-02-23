@@ -1,3 +1,4 @@
+
 const Product = require("../model/products.model");
 
 const DUPLICATED_PRODUCT_CODE = 11000;
@@ -17,7 +18,6 @@ const getProducts = async (req, res) => {
         res.status(500).json({ message: "Error fetching products" });
     }
 }
-
 
 const getProductById = async (req, res) => {
     try {
@@ -39,7 +39,6 @@ const getProductById = async (req, res) => {
         res.status(500).json({ message: "Error fetching product" });
     }
 }
-
 
 const createProduct = async (req, res) => {
     try {
@@ -91,7 +90,6 @@ const createProduct = async (req, res) => {
     }
 }
 
-
 const updateProduct = async (req, res) => {
     try {
         const result = await Product.findByIdAndUpdate(
@@ -132,7 +130,6 @@ const updateProduct = async (req, res) => {
     }
 }
 
-
 const deleteProduct = async (req, res) => {
     try {
         const result = await Product.findByIdAndDelete(req.params.id);
@@ -152,7 +149,6 @@ const deleteProduct = async (req, res) => {
         res.status(500).json({ message: "Error deleting product" });
     }
 }
-
 
 module.exports = {
     getProducts,
