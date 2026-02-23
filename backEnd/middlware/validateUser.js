@@ -6,7 +6,7 @@ const validateUser = (req, res, next) => {
     if (!result.success) {
         return res.status(400).json({
             message: "User data is invalid",
-            errors: result.error.errors.map(err => ({
+            errors: result.error.issues.map(err => ({
                 field: err.path[0],
                 message: err.message
             }))
