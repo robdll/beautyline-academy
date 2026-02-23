@@ -254,6 +254,19 @@ describe("Course Controllers", () => {
             expect(res.send).toHaveBeenCalledWith({ message: "Course not found" });
         });
 
+        it("should return 500 for unexpected errors on delete", async () => {
+            req.params.id = "validId";
+            const error = new Error("Unexpected error");
+            // Ensure this is treated as a generic error (non-CastError)
+            error.name = "SomeOtherError";
+            Course.findByIdAndDelete.mockRejectedValue(error);
+
+            await deleteCourse(req, res);
+
+            expect(res.status).toHaveBeenCalledWith(500);
+            expect(res.send).toHaveBeenCalledWith({ message: "Error deleting course" });
+        });
+
         it("should return 400 for invalid course ID format", async () => {
             req.params.id = "invalid-id";
             const error = new Error("Cast to ObjectId failed");
