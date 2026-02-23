@@ -149,6 +149,19 @@ describe("Course Controllers", () => {
             expect(res.status).toHaveBeenCalledWith(409);
             expect(res.json).toHaveBeenCalledWith({ message: "Course title already exists" });
         });
+
+        it("should return 500 for unhandled errors", async () => {
+            const error = new Error("Unexpected database error");
+            // No ValidationError name or duplicate key code to trigger generic error path
+            Course.mockImplementation(() => ({
+                save: jest.fn().mockRejectedValue(error)
+            }));
+
+            await createCourse(req, res);
+
+            expect(res.status).toHaveBeenCalledWith(500);
+            expect(res.json).toHaveBeenCalledWith({ message: "Error creating course" });
+        });
     });
 
     describe("updateCourse", () => {
