@@ -52,7 +52,14 @@ const courseSchema = new mongoose.Schema({
             message: "endDate must be greater than or equal to startDate"
         }
     },
-    capacity: Number,
+    capacity: {
+        type: Number,
+        min: [1, "Capacity must be at least 1"],
+        validate: {
+            validator: Number.isInteger,
+            message: "Capacity must be an integer"
+        }
+    },
 
     materialsIncluded: {
         type: Boolean,
