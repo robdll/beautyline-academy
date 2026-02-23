@@ -186,6 +186,51 @@ describe("Course Controllers", () => {
             expect(res.status).toHaveBeenCalledWith(404);
             expect(res.send).toHaveBeenCalledWith({ message: "Course not found" });
         });
+
+        it("should return 400 for Validation Error on update", async () => {
+            const error = new Error();
+            error.name = "ValidationError";
+            error.errors = { title: "Required" };
+
+            req.params.id = "validId";
+            req.body = { title: "" };
+            Course.findByIdAndUpdate.mockRejectedValue(error);
+
+            await updateCourse(req, res);
+
+            expect(res.status).toHaveBeenCalledWith(400);
+            expect(res.json).toHaveBeenCalledWith(
+                expect.objectContaining({ message: "Invalid course data" })
+            );
+        });
+
+        it("should return 400 for invalid course ID (CastError) on update", async () => {
+            const error = new Error();
+            error.name = "CastError";
+
+            req.params.id = "invalidId";
+            req.body = { title: "Some Title" };
+            Course.findByIdAndUpdate.mockRejectedValue(error);
+
+            await updateCourse(req, res);
+
+            expect(res.status).toHaveBeenCalledWith(400);
+            expect(res.json).toHaveBeenCalledWith({ message: "Invalid course ID" });
+        });
+
+        it("should return 409 for duplicate title on update", async () => {
+            const error = new Error();
+            error.code = 11000;
+
+            req.params.id = "validId";
+            req.body = { title: "Existing Title" };
+            Course.findByIdAndUpdate.mockRejectedValue(error);
+
+            await updateCourse(req, res);
+
+            expect(res.status).toHaveBeenCalledWith(409);
+            expect(res.json).toHaveBeenCalledWith({ message: "Course title already exists" });
+        });
     });
 
     describe("deleteCourse", () => {
