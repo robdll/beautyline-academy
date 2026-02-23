@@ -1,4 +1,5 @@
-
+// NOTE: This file defines the Equipment model. For consistency with the schema
+// and controller naming, this file should be renamed to 'equipment.model.js'.
 const mongoose = require("mongoose");
 
 const equipmentSchema = new mongoose.Schema({
