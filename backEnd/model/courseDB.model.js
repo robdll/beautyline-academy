@@ -35,9 +35,23 @@ const courseSchema = new mongoose.Schema({
     },
 
 
-    startDate: Date,
-    endDate: Date,
+    startDate: {
+        type: Date
+    },
 
+    endDate: {
+        type: Date,
+        validate: {
+            validator: function (value) {
+                // Allow missing endDate; enforce only when both dates are present
+                if (!value || !this.startDate) {
+                    return true;
+                }
+                return value >= this.startDate;
+            },
+            message: "endDate must be greater than or equal to startDate"
+        }
+    },
     capacity: Number,
 
     materialsIncluded: {
