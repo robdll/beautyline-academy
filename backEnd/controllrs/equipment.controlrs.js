@@ -1,4 +1,4 @@
-const Equipment = require("../model/equipament.model");
+const Equipment = require("../model/equipment.model");
 
 const DUPLICATED_EQUIPMENT_CODE = 11000;
 
