@@ -24,7 +24,10 @@ const productSchema = new mongoose.Schema({
 
     tags: [String],
 
-    stock: Number,
+    stock: {
+        type: Number,
+        min: 0
+    },
 
     brand: {
         type: String,
