@@ -253,5 +253,17 @@ describe("Course Controllers", () => {
             expect(res.status).toHaveBeenCalledWith(404);
             expect(res.send).toHaveBeenCalledWith({ message: "Course not found" });
         });
+
+        it("should return 400 for invalid course ID format", async () => {
+            req.params.id = "invalid-id";
+            const error = new Error("Cast to ObjectId failed");
+            error.name = "CastError";
+            Course.findByIdAndDelete.mockRejectedValue(error);
+
+            await deleteCourse(req, res);
+
+            expect(res.status).toHaveBeenCalledWith(400);
+            expect(res.json).toHaveBeenCalledWith({ message: "Invalid course ID" });
+        });
     });
 });
