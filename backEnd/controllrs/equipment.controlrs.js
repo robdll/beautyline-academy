@@ -159,7 +159,7 @@ const deleteEquipment = async (req, res) => {
             return res.status(404).send({ message: "Equipment not found" });
         }
 
-        res.status(200).send("Equipment deleted successfully");
+        res.status(200).json({ message: "Equipment deleted successfully" });
 
     } catch (err) {
         if (err.name === "CastError") {
