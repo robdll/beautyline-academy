@@ -92,9 +92,29 @@ const createEquipment = async (req, res) => {
 
 const updateEquipment = async (req, res) => {
     try {
+        const allowedFields = [
+            "name",
+            "description",
+            "category",
+            "salePrice",
+            "rentalPrice",
+            "availableForSale",
+            "availableForRental",
+            "stock",
+            "image"
+        ];
+
+        const updateData = {};
+
+        allowedFields.forEach((field) => {
+            if (Object.prototype.hasOwnProperty.call(req.body, field)) {
+                updateData[field] = req.body[field];
+            }
+        });
+
         const result = await Equipment.findByIdAndUpdate(
             req.params.id,
-            req.body,
+            updateData,
             {
                 new: true,
                 runValidators: true,
