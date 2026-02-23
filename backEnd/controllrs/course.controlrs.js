@@ -45,34 +45,7 @@ const getCourseById = async (req, res) => {
 
 const createCourse = async (req, res) => {
     try {
-        const {
-            title,
-            description,
-            category,
-            level,
-            price,
-            startDate,
-            endDate,
-            capacity,
-            materialsIncluded,
-            trail,
-            image
-        } = req.body;
-
-        const newCourse = new Course({
-            title,
-            description,
-            category,
-            level,
-            price,
-            startDate,
-            endDate,
-            capacity,
-            materialsIncluded,
-            trail,
-            image
-        });
-
+        const newCourse = new Course(req.body);
         const savedCourse = await newCourse.save();
         res.status(201).json(savedCourse);
 
