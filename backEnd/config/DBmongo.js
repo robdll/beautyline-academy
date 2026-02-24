@@ -8,18 +8,8 @@ const connectDB = async () => {
         console.log(`MongoDB Connected: ${conn.connection.host}`);
 
     } catch (error) {
-<<<<<<< Updated upstream
-        if (error.name === 'ValidationError') {
-            console.error(`Validation Error: ${error.message}`);
-            if (process.env.NODE_ENV !== 'test') process.exit(1);
-            throw error;
-        }
-
-        if (error.name === 'MongooseError' || (mongoose.Error && error instanceof mongoose.Error)) {
-=======
 
         if (mongoose?.Error?.MongooseError && error instanceof mongoose.Error.MongooseError) {
->>>>>>> Stashed changes
             console.error(`Mongoose Error: ${error.message}`);
             if (process.env.NODE_ENV !== 'test') process.exit(1);
             throw error;
