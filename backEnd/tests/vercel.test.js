@@ -29,7 +29,7 @@ describe('Beautyline Academy - Full Suite Integration Tests', () => {
             const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => { });
             delete process.env.JWT_SECRET;
             const response = await request(app)
-                .get('/user')
+                .get('/api/user')
                 .set('Authorization', 'Bearer dummy');
             expect(response.status).toBe(500);
             process.env.JWT_SECRET = originalSecret;
@@ -40,7 +40,7 @@ describe('Beautyline Academy - Full Suite Integration Tests', () => {
     describe('User Validation (Zod)', () => {
         test('Should return 400 for invalid email (Bug 3 validation)', async () => {
             const response = await request(app)
-                .post('/user')
+                .post('/api/user')
                 .send({ ...testUser, email: "invalid-email" });
 
             expect(response.status).toBe(400);
@@ -52,7 +52,7 @@ describe('Beautyline Academy - Full Suite Integration Tests', () => {
     describe('User CRUD & Auth Flow', () => {
         test('Step 1: Create a new user', async () => {
             const response = await request(app)
-                .post('/user')
+                .post('/api/user')
                 .send(testUser);
 
             expect(response.status).toBe(201);
@@ -63,7 +63,7 @@ describe('Beautyline Academy - Full Suite Integration Tests', () => {
 
         test('Step 2: Login with the new user', async () => {
             const response = await request(app)
-                .post('/login')
+                .post('/api/login')
                 .send({
                     email: testUser.email,
                     password: testUser.password
@@ -76,7 +76,7 @@ describe('Beautyline Academy - Full Suite Integration Tests', () => {
 
         test('Step 3: Access protected route /user', async () => {
             const response = await request(app)
-                .get('/user')
+                .get('/api/user')
                 .set('Authorization', `Bearer ${authToken}`);
 
             expect(response.status).toBe(200);
@@ -84,7 +84,7 @@ describe('Beautyline Academy - Full Suite Integration Tests', () => {
         });
 
         test('Step 4: Protect route without token', async () => {
-            const response = await request(app).get('/user');
+            const response = await request(app).get('/api/user');
             expect(response.status).toBe(401);
         });
     });
