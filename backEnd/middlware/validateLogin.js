@@ -1,11 +1,11 @@
-const { userSchema } = require("../validaty/user.schema");
+const { loginSchema } = require("../validaty/login.schema");
 
-const validateUser = (req, res, next) => {
-    const result = userSchema.safeParse(req.body);
+const validateLogin = (req, res, next) => {
+    const result = loginSchema.safeParse(req.body);
 
     if (!result.success) {
         return res.status(400).json({
-            message: "User data is invalid",
+            message: "Login data is invalid",
             errors: result.error.issues.map(err => ({
                 field: err.path[0],
                 message: err.message
@@ -17,4 +17,5 @@ const validateUser = (req, res, next) => {
     next();
 };
 
-module.exports = validateUser;
+module.exports = validateLogin;
+

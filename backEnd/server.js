@@ -7,17 +7,16 @@ const connectDB = require("./config/DBmongo");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-
 app.use(cors())
 app.use(express.json());
 app.use(morgan("common"));
-app.use("/", Router);
+app.use("/api", Router);
 
 
+require("dotenv").config();
+connectDB();
 
 if (require.main === module) {
-  require("dotenv").config();
-  connectDB();
   app.listen(PORT, () => {
     console.log("Server running in port ", PORT)
   })

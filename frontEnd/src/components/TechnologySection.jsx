@@ -1,5 +1,6 @@
 import { MACHINE_TYPES } from "../constants/constants";
 import UploadImages from "./UploadImages";
+import { ShoppingCart, RefreshCw } from "lucide-react";
 
 export default function TechnologySection() {
   return (
@@ -27,7 +28,7 @@ export default function TechnologySection() {
             <div className="grid sm:grid-cols-2 gap-6 mb-8">
               <div className="bg-purple-50 rounded-2xl p-6 border border-purple-100">
                 <div className="w-12 h-12 rounded-xl bg-purple-600 flex items-center justify-center mb-4">
-                  <UploadImages publicId={"shoppingcart_ruu2eq"} width={30} height={30} className="mx-auto"/>
+                  <ShoppingCart className="w-8 h-8 text-white" aria-hidden="true" />
                 </div>
                 <h4 className="font-semibold text-stone-800 mb-2">Vendita</h4>
                 <p className="text-stone-600 text-sm">Acquista attrezzature con condizioni speciali e supporto tecnico completo.</p>
@@ -35,7 +36,7 @@ export default function TechnologySection() {
 
               <div className="bg-purple-50 rounded-2xl p-6 border border-purple-100">
                 <div className="w-12 h-12 rounded-xl bg-purple-600 flex items-center justify-center mb-4">
-                  <UploadImages publicId={"refresh_gm5cis"} width={30} height={30} className="mx-auto"/>
+                  <RefreshCw className="w-8 h-8 text-white" aria-hidden="true" />
                 </div>
                 <h4 className="font-semibold text-stone-800 mb-2">Noleggio</h4>
                 <p className="text-stone-600 text-sm">Flessibilità per il tuo business con opzioni di noleggio macchinari.</p>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import UploadImages from "./UploadImages";
+import { Mail, Phone, MapPin, LoaderCircle } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -65,7 +65,7 @@ export default function Contact() {
             <div className="space-y-6 mb-8">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-xl bg-rose-400/20 flex items-center justify-center">
-                  <UploadImages publicId={"iconlocation_q2877n"} width={40} height={40}/>
+                  <MapPin className="w-8 h-8 text-white" aria-hidden="true" />
                 </div>
                 <div>
                   <p className="font-semibold">Indirizzo</p>
@@ -74,7 +74,7 @@ export default function Contact() {
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-xl bg-amber-400/20 flex items-center justify-center">
-                  <UploadImages publicId={"iconphone_bttgkh"} width={40} height={40}/>
+                  <Phone className="w-8 h-8 text-white" aria-hidden="true" />
                 </div>
                 <div>
                   <p className="font-semibold">Telefono</p>
@@ -83,7 +83,7 @@ export default function Contact() {
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-xl bg-stone-300/20 flex items-center justify-center">
-                  <UploadImages publicId={"iconemail_htjndo"} width={40} height={40}/>
+                  <Mail className="w-8 h-8 text-white" aria-hidden="true" />
                 </div>
                 <div>
                   <p className="font-semibold">Email</p>
@@ -171,7 +171,7 @@ export default function Contact() {
                 {status.state === 'loading' ? (
                    <>
                     <span>Invio in corso...</span>
-                    <Icon name="spinner" className="w-5 h-5 animate-spin" />
+                    <LoaderCircle className="w-5 h-5 animate-spin" aria-hidden="true"/>
                    </>
                 ) : (
                     <span>Invia Messaggio</span>

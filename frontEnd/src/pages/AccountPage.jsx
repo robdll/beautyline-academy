@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useAuthStore } from '../store/authStore';
 import { ScrollRestoration, Navigate } from 'react-router-dom';
+import { LogOut, PencilLine  } from 'lucide-react';
 
 export default function AccountPage() {
   const { user, isLoggedIn, logout, updateUser } = useAuthStore();
@@ -46,7 +47,7 @@ export default function AccountPage() {
                         onClick={() => setIsEditing(true)}
                         className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-purple-600 bg-purple-50 rounded-full hover:bg-purple-100 transition-all border border-purple-100"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                        <PencilLine className="w-4 h-4" aria-hidden="true" />
                         Modifica
                       </button>
                     )}
@@ -116,7 +117,7 @@ export default function AccountPage() {
                   onClick={logout}
                   className="group flex items-center gap-2 px-6 py-3 bg-red-50 text-red-600 rounded-xl font-medium hover:bg-red-400 hover:text-white transition-all shadow-sm"
                 >
-                  <svg className="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                  <LogOut className="w-5 h-5 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
                   Disconnetti
                 </button>
               </div>

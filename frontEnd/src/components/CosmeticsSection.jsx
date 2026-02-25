@@ -1,5 +1,6 @@
 import { COSMETICS } from "../constants/constants";
 import UploadImages from "./UploadImages";
+import { Droplets } from "lucide-react";
 
 export default function CosmeticsSection() {
   return (
@@ -15,7 +16,7 @@ export default function CosmeticsSection() {
             <div className="bg-white rounded-3xl p-8 shadow-xl border border-purple-200 mb-8">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-600 to-purple-400 flex items-center justify-center">
-                  <span className="text-2xl">🧴</span>
+                  <Droplets className="w-8 h-8 text-white" aria-hidden="true" />
                 </div>
                 <div>
                   <h4 className="font-display text-2xl font-bold text-stone-800">Skin Renew</h4>
