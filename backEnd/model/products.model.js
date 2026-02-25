@@ -10,7 +10,11 @@ const productSchema = new mongoose.Schema({
         lowercase: true
     },
 
-    description: String,
+    description: {
+        type: String,
+        trim: true,
+        lowercase: true
+    }
 
     price: {
         type: Number,
@@ -18,9 +22,17 @@ const productSchema = new mongoose.Schema({
         min: 0
     },
 
-    category: String,
-    subCategory: String,
-    subSubCategory: String,
+    category: {
+        type: String,
+        trim: true,
+        lowercase: true
+    }
+
+    subCategory: {
+        type: String,
+        trim: true,
+        lowercase: true
+    }
 
     tags: [String],
 
