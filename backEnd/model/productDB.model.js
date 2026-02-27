@@ -1,6 +1,4 @@
-
 const mongoose = require("mongoose");
-
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -24,6 +22,11 @@ const productSchema = new mongoose.Schema({
         lowercase: true
     },
     subCategory: {
+        type: String,
+        trim: true,
+        lowercase: true
+    },
+    subSubCategory: {
         type: String,
         trim: true,
         lowercase: true

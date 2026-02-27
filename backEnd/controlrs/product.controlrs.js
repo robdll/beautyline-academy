@@ -1,5 +1,5 @@
 
-const Product = require("../model/products.model");
+const Product = require("../model/productDB.model");
 
 const DUPLICATED_PRODUCT_CODE = 11000;
 
@@ -10,7 +10,7 @@ const getProducts = async (req, res) => {
             return res.status(200).json([]);
         }
         res.status(200).json(products);
-        
+
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Error fetching products" });
@@ -60,7 +60,7 @@ const createProduct = async (req, res) => {
         });
         const savedProduct = await newProduct.save();
         res.status(201).json(savedProduct);
-        
+
     } catch (err) {
         if (err.name === "ValidationError") {
             return res.status(400).json({
