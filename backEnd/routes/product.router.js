@@ -6,7 +6,7 @@ const {
     createProduct,
     updateProduct,
     deleteProduct
-} = require("../controllrs/product.controlrs");
+} = require("../controlrs/product.controlrs");
 const auth = require("../middlware/auth");
 router.get("/product", getProducts);
 router.get("/product/:id", getProductById);
