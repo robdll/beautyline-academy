@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuthStore } from '../store/authStore';
-import { useNavigate, useSearchParams, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { LoaderCircle } from 'lucide-react';
 
 export default function AuthForm() {
   const [searchParams] = useSearchParams();
@@ -9,6 +10,8 @@ export default function AuthForm() {
   
   const { login, register } = useAuthStore();
   const navigate = useNavigate();
+
+  const [status, setStatus] = useState({ state: 'idle', message: '' });
 
   const [formData, setFormData] = useState({
     name: '',
@@ -27,28 +30,47 @@ export default function AuthForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setStatus({ state: 'submitting', message: '' });
 
-    if (isLogin) {
-      if (!formData.email || !formData.password) {
-        setError('Compila tutti i campi per accedere.');
-        return;
+    try {
+      if (isLogin) {
+        if (!formData.email || !formData.password) {
+          setError('Compila tutti i campi per accedere.');
+          setStatus({ state: 'idle', message: '' });
+          return;
+        }
+        const result = await login(formData.email, formData.password);
+        if (result.success) {
+          navigate('/');
+        } else {
+          setError(result.message);
+          setStatus({ state: 'idle', message: '' });
+        }
+      } else {
+        if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
+          setError('Compila tutti i campi per registrarti.');
+          setStatus({ state: 'idle', message: '' });
+          return;
+        }
+        if (formData.password !== formData.confirmPassword) {
+          setError('Le password non coincidono.');
+          setStatus({ state: 'idle', message: '' });
+          return;
+        }
+        const result = await register(formData.name, formData.email, formData.password);
+        if (result.success) {
+          navigate('/');
+        } else {
+          setError(result.message);
+          setStatus({ state: 'idle', message: '' });
+        }
       }
-      login(formData.email, formData.password);
-      navigate('/');
-    } else {
-      if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
-        setError('Compila tutti i campi per registrarti.');
-        return;
-      }
-      if (formData.password !== formData.confirmPassword) {
-        setError('Le password non coincidono.');
-        return;
-      }
-      register(formData.name, formData.email, formData.password);
-      navigate('/');
+    } catch {
+      setError('Si è verificato um errore imprevisto.');
+      setStatus({ state: 'idle', message: '' });
     }
   };
 
@@ -121,8 +143,19 @@ export default function AuthForm() {
             </div>
           )}
 
-          <button type="submit" className="w-full py-4 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-colors shadow-lg shadow-purple-200">
-            {isLogin ? 'Accedi' : 'Registrati'}
+          <button 
+            type="submit" 
+            disabled={status.state === 'submitting'}
+            className="w-full py-4 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-colors shadow-lg shadow-purple-200"
+          >
+            {status.state === 'submitting' ? (
+              <div className="flex items-center justify-center">
+                <span className="mr-2">Connettendo...</span>
+                <LoaderCircle className="w-5 h-5 animate-spin" aria-hidden="true"/>
+              </div>
+            ) : (
+              isLogin ? 'Accedi' : 'Registrati'
+            )}
           </button>
         </form>
       </div>

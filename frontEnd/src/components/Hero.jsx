@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { HERO_SLIDES } from '../constants/constants';
 import UploadImages from './UploadImages';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -75,7 +76,7 @@ export default function Hero() {
         className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all opacity-0 group-hover:opacity-100 duration-300 backdrop-blur-sm"
         aria-label="Previous slide"
       >
-        <UploadImages publicId={"leftArrow_faao9i"} width={32} height={32} className={"w-8 h-8"} ariaHidden={true} alt={""}/>
+        <ChevronLeft className="w-8 h-8" aria-hidden="true" />
       </button>
 
       <button 
@@ -83,7 +84,7 @@ export default function Hero() {
         className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all opacity-0 group-hover:opacity-100 duration-300 backdrop-blur-sm"
         aria-label="Next slide"
       >
-        <UploadImages publicId={"rightArrow_xzpqgm"} width={32} height={32} className={"w-8 h-8"} ariaHidden={true} alt={""}/>
+        <ChevronRight className="w-8 h-8" aria-hidden="true" />
       </button>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">

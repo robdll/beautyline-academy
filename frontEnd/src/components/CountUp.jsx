@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import UploadImages from "./UploadImages";
 
-export default function CountUp({ end, duration = 2000, publicId, title }) {
+export default function CountUp({ end, duration = 2000, icon: Icon, title }) {
     const [count, setCount] = useState(0);
     const countRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -52,7 +51,7 @@ export default function CountUp({ end, duration = 2000, publicId, title }) {
 
     return (
         <div className="flex flex-col gap-10">
-            <UploadImages publicId={publicId} width={80} height={80} className="mx-auto"/>
+            {Icon && <Icon className="mx-auto w-16 h-16 text-white" aria-hidden="true" />}
             <span ref={countRef} className="text-4xl md:text-4xl text-white font-bold">
                 +{count}
             </span>

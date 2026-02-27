@@ -1,5 +1,5 @@
 import { FOOTER_LINKS } from "../constants/constants";
-import UploadImages from "./UploadImages";
+import { FaFacebook, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -8,24 +8,24 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <UploadImages publicId={"logoBeauty_rtip32"} width={50} height={50}/>
+              <img src="logo-circle.png" alt="logo-beauty-line" className="w-13 h-13"/>
               <span className="font-display text-xl font-semibold text-white">Beauty Line Academy</span>
             </div>
             <p className="text-stone-300 leading-relaxed max-w-md">
               Trasformiamo vite attraverso la formazione estetica. Il tuo viaggio verso il successo professionale inizia qui.
             </p>
             <div className="flex gap-4 mt-6">
-              <a href="https://www.facebook.com/beautylineacademy/" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-400 transition-colors">
-                <UploadImages publicId={"facebookLogo_dvbiam"} width={25} height={25}/>
+              <a href="https://www.facebook.com/beautylineacademy/" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-400 transition-colors" aria-label="Visita la nostra pagina Facebook">
+                <FaFacebook className="w-6 h-6 text-white" aria-hidden="true"/>
               </a>
-              <a href="https://www.instagram.com/beautylineacademymonza/" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] transition-colors">
-                <UploadImages publicId={"instagramLogo_tjrjdt"} width={25} height={25}/>
+              <a href="https://www.instagram.com/beautylineacademymonza/" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] transition-colors" aria-label="Seguici su Instagram">
+                <FaInstagram className="w-6 h-6 text-white" aria-hidden="true"/>
               </a>
-              <a href="https://www.tiktok.com/@beautylineacademymonza" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-colors">
-                <UploadImages publicId={"tiktokLogo_akws8o"} width={25} height={25}/>
+              <a href="https://www.tiktok.com/@beautylineacademymonza" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-black transition-colors" aria-label="Seguici su TikTok">
+                <FaTiktok className="w-5 h-5 text-white" aria-hidden="true"/>
               </a>
-              <a href="https://www.youtube.com/channel/UCvFeks3fQ1sFk9ZhxDcPDog" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-red-400 transition-colors">
-                <UploadImages publicId={"youtubeLogo_vg9i8g"} width={25} height={25}/>
+              <a href="https://www.youtube.com/channel/UCvFeks3fQ1sFk9ZhxDcPDog" target="_blank" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-red-400 transition-colors" aria-label="Visita il nostro canale YouTube">
+                <FaYoutube className="w-6 h-6 text-white" aria-hidden="true"/>
               </a>
             </div>
           </div>

@@ -1,7 +1,7 @@
-const { userSchema } = require("../validaty/user.schema");
+const { updateUserSchema } = require("../validaty/user.schema");
 
-const validateUser = (req, res, next) => {
-    const result = userSchema.safeParse(req.body);
+const validateUpdate = (req, res, next) => {
+    const result = updateUserSchema.safeParse(req.body);
 
     if (!result.success) {
         return res.status(400).json({
@@ -17,4 +17,4 @@ const validateUser = (req, res, next) => {
     next();
 };
 
-module.exports = validateUser;
+module.exports = validateUpdate;

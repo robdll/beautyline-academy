@@ -1,5 +1,6 @@
 import UploadImages from "./UploadImages";
 import { COURSES } from "../constants/constants";
+import { HandFist, Eye, Sparkles } from "lucide-react";
 
 export default function EducationSection() {
   return (
@@ -16,7 +17,7 @@ export default function EducationSection() {
               {COURSES.map((item, index) => (
                 <div key={index} className="flex gap-4">
                   <div className="w-14 h-14 rounded-xl bg-purple-100 flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">{item.emoji}</span>
+                    {index === 0 ? <HandFist className="w-6 h-6 text-purple-600" aria-hidden="true" /> : index === 1 ? <Eye className="w-6 h-6 text-purple-600" aria-hidden="true" /> : index === 2 ? <Sparkles className="w-6 h-6 text-purple-600" aria-hidden="true" /> : null}
                   </div>
                   <div>
                     <h4 className="font-semibold text-stone-800 text-lg">{item.title}</h4>
