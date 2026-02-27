@@ -9,7 +9,6 @@ const getEquipments = async (req, res) => {
         if (equipments.length === 0) {
             return res.status(200).json([]);
         }
-
         res.status(200).json(equipments);
 
     } catch (err) {
@@ -17,7 +16,6 @@ const getEquipments = async (req, res) => {
         res.status(500).json({ message: "Error fetching equipments" });
     }
 }
-
 const getEquipmentById = async (req, res) => {
     try {
         const equipment = await Equipment.findById(req.params.id);
@@ -25,20 +23,16 @@ const getEquipmentById = async (req, res) => {
         if (!equipment) {
             return res.status(404).send({ message: "Equipment not found" });
         }
-
         res.status(200).json(equipment);
 
     } catch (err) {
         console.error(err);
-
         if (err.name === "CastError") {
             return res.status(400).json({ message: "Invalid equipment ID" });
         }
-
         res.status(500).json({ message: "Error fetching equipment" });
     }
 }
-
 const createEquipment = async (req, res) => {
     try {
         const {
@@ -64,7 +58,6 @@ const createEquipment = async (req, res) => {
             stock,
             image
         });
-
         const savedEquipment = await newEquipment.save();
         res.status(201).json(savedEquipment);
 
@@ -75,18 +68,15 @@ const createEquipment = async (req, res) => {
                 details: err.errors
             });
         }
-
         if (err.code === DUPLICATED_EQUIPMENT_CODE) {
             return res.status(409).json({
                 message: "Equipment name already exists"
             });
         }
-
         console.error(err);
         return res.status(500).json({ message: "Error creating equipment" });
     }
 }
-
 const updateEquipment = async (req, res) => {
     try {
         const allowedFields = [
@@ -108,7 +98,6 @@ const updateEquipment = async (req, res) => {
                 updateData[field] = req.body[field];
             }
         });
-
         const result = await Equipment.findByIdAndUpdate(
             req.params.id,
             updateData,
@@ -118,11 +107,9 @@ const updateEquipment = async (req, res) => {
                 context: "query",
             }
         );
-
         if (!result) {
             return res.status(404).send({ message: "Equipment not found" });
         }
-
         res.status(200).json(result);
 
     } catch (err) {
@@ -132,41 +119,33 @@ const updateEquipment = async (req, res) => {
                 details: err.errors
             });
         }
-
         if (err.name === "CastError") {
             return res.status(400).json({ message: "Invalid equipment ID" });
         }
-
         if (err.code === DUPLICATED_EQUIPMENT_CODE) {
             return res.status(409).json({
                 message: "Name already exists"
             });
         }
-
         return res.status(500).json({ message: "Internal error" });
     }
 }
-
 const deleteEquipment = async (req, res) => {
     try {
         const result = await Equipment.findByIdAndDelete(req.params.id);
-
         if (!result) {
             return res.status(404).send({ message: "Equipment not found" });
         }
-
         res.status(200).json({ message: "Equipment deleted successfully" });
 
     } catch (err) {
         if (err.name === "CastError") {
             return res.status(400).json({ message: "Invalid equipment ID" });
         }
-
         console.error(err);
         res.status(500).json({ message: "Error deleting equipment" });
     }
 }
-
 module.exports = {
     getEquipments,
     getEquipmentById,
