@@ -11,13 +11,12 @@ const getProducts = async (req, res) => {
             return res.status(200).json([]);
         }
         res.status(200).json(products);
-
+        
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Error fetching products" });
     }
 }
-
 const getProductById = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
@@ -36,7 +35,6 @@ const getProductById = async (req, res) => {
         res.status(500).json({ message: "Error fetching product" });
     }
 }
-
 const createProduct = async (req, res) => {
     try {
         const {
@@ -64,10 +62,9 @@ const createProduct = async (req, res) => {
             brand,
             image
         });
-
         const savedProduct = await newProduct.save();
         res.status(201).json(savedProduct);
-
+        
     } catch (err) {
         if (err.name === "ValidationError") {
             return res.status(400).json({
@@ -75,18 +72,15 @@ const createProduct = async (req, res) => {
                 details: err.errors
             });
         }
-
         if (err.code === DUPLICATED_PRODUCT_CODE) {
             return res.status(409).json({
                 message: "Product name already exists"
             });
         }
-
         console.error(err);
         return res.status(500).json({ message: "Error creating product" });
     }
 }
-
 const updateProduct = async (req, res) => {
     try {
         const result = await Product.findByIdAndUpdate(
@@ -112,11 +106,9 @@ const updateProduct = async (req, res) => {
                 details: err.errors
             });
         }
-
         if (err.name === "CastError") {
             return res.status(400).json({ message: "Invalid product ID" });
         }
-
         if (err.code === DUPLICATED_PRODUCT_CODE) {
             return res.status(409).json({
                 message: "Product name already exists"
@@ -125,7 +117,6 @@ const updateProduct = async (req, res) => {
         return res.status(500).json({ message: "Internal error" });
     }
 }
-
 const deleteProduct = async (req, res) => {
     try {
         const result = await Product.findByIdAndDelete(req.params.id);
@@ -143,7 +134,6 @@ const deleteProduct = async (req, res) => {
         res.status(500).json({ message: "Error deleting product" });
     }
 }
-
 module.exports = {
     getProducts,
     getProductById,
