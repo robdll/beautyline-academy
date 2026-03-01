@@ -24,6 +24,7 @@ app.use(morgan("common"));
 app.use("/api", userRouter);
 app.use("/api", productRouter);
 
+
 if (process.env.NODE_ENV !== 'test') {
   connectDB();
 }
