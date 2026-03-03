@@ -11,12 +11,22 @@ async function createAdmin() {
         }
         await mongoose.connect(process.env.MONGODB_URI);
         console.log('Connected to MongoDB');
-        const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com';
+        const adminEmail = process.env.ADMIN_EMAIL;
         const adminName = process.env.ADMIN_NAME || 'Admin';
-        const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+        const adminPassword = process.env.ADMIN_PASSWORD;
+
+        if (!adminEmail || !adminPassword) {
+            throw new Error('ADMIN_EMAIL and ADMIN_PASSWORD must be defined in .env');
+        }
+
+        const weakPasswords = ['admin123', 'password', '123456'];
+        if (weakPasswords.includes(adminPassword.toLowerCase())) {
+            throw new Error('ADMIN_PASSWORD is too weak. Please use a stronger password.');
+        }
+
         const existingAdmin = await User.findOne({ email: adminEmail });
         if (existingAdmin) {
-            console.log('User with this email already exists.');
+            console.log(`User with email ${adminEmail} already exists.`);
             return;
         }
         const hashedPassword = bcrypt.hashSync(adminPassword, 10);
