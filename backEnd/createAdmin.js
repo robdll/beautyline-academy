@@ -3,14 +3,14 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('./model/userDB.model');
+const connectDB = require('./config/DBmongo');
 
 async function createAdmin() {
     try {
-        if (!process.env.MONGODB_URI) {
-            throw new Error('MONGODB_URI is not defined in .env');
+        if (mongoose.connection.readyState === 0) {
+            await connectDB();
         }
-        await mongoose.connect(process.env.MONGODB_URI);
-        console.log('Connected to MongoDB');
+
         const adminEmail = process.env.ADMIN_EMAIL;
         const adminName = process.env.ADMIN_NAME || 'Admin';
         const adminPassword = process.env.ADMIN_PASSWORD;
@@ -27,24 +27,33 @@ async function createAdmin() {
         const existingAdmin = await User.findOne({ email: adminEmail });
         if (existingAdmin) {
             console.log(`User with email ${adminEmail} already exists.`);
-            return;
+            return existingAdmin;
         }
         const hashedPassword = bcrypt.hashSync(adminPassword, 10);
-        await User.create({
+        const newAdmin = await User.create({
             name: adminName,
             email: adminEmail,
             password: hashedPassword,
             role: 'admin'
         });
         console.log('Admin created successfully!');
+        return newAdmin;
     } catch (error) {
         console.error('Error creating admin:', error.message);
+        throw error;
     } finally {
-        if (mongoose.connection.readyState !== 0) {
-            await mongoose.connection.close();
-            console.log('MongoDB connection closed.');
+        if (require.main === module) {
+            if (mongoose.connection.readyState !== 0) {
+                await mongoose.connection.close();
+                console.log('MongoDB connection closed.');
+            }
+            process.exit();
         }
-        process.exit();
     }
 }
-createAdmin();
+
+if (require.main === module) {
+    createAdmin();
+}
+
+module.exports = createAdmin;

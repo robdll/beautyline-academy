@@ -3,6 +3,7 @@ const app = require('../server');
 const dbHandler = require('./dbHandler');
 const User = require('../model/userDB.model');
 const bcrypt = require('bcrypt');
+const createAdmin = require('../createAdmin');
 
 describe('Administrative Functionality Tests', () => {
     let regularUser = {
@@ -74,11 +75,32 @@ describe('Administrative Functionality Tests', () => {
         });
     });
     describe('Admin Script Validation', () => {
-        test('createAdmin script logic check', async () => {
-            const admin = await User.findOne({ role: 'admin' });
-            expect(admin).toBeDefined();
-            expect(admin.email).toBe(adminUser.email);
-            expect(admin.role).toBe('admin');
+        test('createAdmin should provision a new admin successfully', async () => {
+            const testEmail = 'provisioned@example.com';
+            await User.deleteOne({ email: testEmail });
+
+            const originalEnv = {
+                ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+                ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
+                ADMIN_NAME: process.env.ADMIN_NAME
+            };
+
+            process.env.ADMIN_EMAIL = testEmail;
+            process.env.ADMIN_PASSWORD = 'SecureAdminPassword123!';
+            process.env.ADMIN_NAME = 'Provisioned Admin';
+
+            try {
+                await createAdmin();
+
+                const admin = await User.findOne({ email: testEmail });
+                expect(admin).toBeDefined();
+                expect(admin.email).toBe(testEmail);
+                expect(admin.role).toBe('admin');
+                expect(admin.name).toBe('Provisioned Admin'.toLowerCase());
+            } finally {
+                // Restore original env vars
+                Object.assign(process.env, originalEnv);
+            }
         });
     });
 });
