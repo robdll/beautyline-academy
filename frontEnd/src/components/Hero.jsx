@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { HERO_SLIDES } from '../constants/constants';
+import { HERO_SLIDES } from '../constants/data.constants';
 import UploadImages from './UploadImages';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -45,12 +45,11 @@ export default function Hero() {
         {HERO_SLIDES.map((slide, index) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
           >
             <div className="absolute inset-0 bg-black/40 z-10"></div>
-            <UploadImages publicId={slide.image} width={dimensions.width} height={dimensions.height} className="w-full h-full object-cover" alt={slide.alt}/>
+            <UploadImages publicId={slide.image} width={dimensions.width} height={dimensions.height} className="w-full h-full object-cover" alt={slide.alt} />
           </div>
         ))}
       </div>
@@ -70,8 +69,8 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      
-      <button 
+
+      <button
         onClick={prevSlide}
         className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all opacity-0 group-hover:opacity-100 duration-300 backdrop-blur-sm"
         aria-label="Previous slide"
@@ -79,7 +78,7 @@ export default function Hero() {
         <ChevronLeft className="w-8 h-8" aria-hidden="true" />
       </button>
 
-      <button 
+      <button
         onClick={nextSlide}
         className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all opacity-0 group-hover:opacity-100 duration-300 backdrop-blur-sm"
         aria-label="Next slide"
@@ -92,9 +91,8 @@ export default function Hero() {
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all shadow-sm ${
-              index === currentSlide ? 'bg-purple-600 scale-125' : 'bg-white/50 hover:bg-white'
-            }`}
+            className={`w-3 h-3 rounded-full transition-all shadow-sm ${index === currentSlide ? 'bg-purple-600 scale-125' : 'bg-white/50 hover:bg-white'
+              }`}
           />
         ))}
       </div>

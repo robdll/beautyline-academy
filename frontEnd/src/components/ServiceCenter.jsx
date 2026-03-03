@@ -1,4 +1,4 @@
-import { SERVICES } from "../constants/constants";
+import { SERVICES } from "../constants/data.constants";
 import UploadImages from "./UploadImages";
 
 export default function ServiceCenter() {
