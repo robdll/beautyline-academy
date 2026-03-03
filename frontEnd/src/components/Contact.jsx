@@ -1,55 +1,13 @@
-import { useState } from 'react';
 import { Mail, Phone, MapPin, LoaderCircle } from 'lucide-react';
+import { useContactForm } from '../hooks/useContactForm';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
-  const [status, setStatus] = useState({ state: 'idle', message: '' });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus({ state: 'loading', message: '' });
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      if (!response.ok) {
-        const errorText = await response.text().catch(() => '');
-        throw new Error(errorText || 'Errore durante l\'invio del messaggio.');
-      }
-      setStatus({
-        state: 'success',
-        message: '✓ Messaggio inviato con successo! Ti contatteremo a breve.',
-      });
-      setFormData({
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone: '',
-        message: ''
-      });
-    } catch (error) {
-      console.error("Submission error:", error);
-      setStatus({
-        state: 'error',
-        message: 'Si è verificato un errore durante l\'invio del messaggio. Per favore riprova.',
-      });
-    }
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const {
+    formData,
+    status,
+    handleChange,
+    handleSubmit
+  } = useContactForm();
 
   return (
     <section id="contatti" className="py-24 bg-purple-600 text-white">
@@ -59,7 +17,7 @@ export default function Contact() {
             <span className="text-rose-300 font-medium tracking-widest uppercase">Contattaci</span>
             <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">Mettiti in Contatto</h2>
             <p className="text-lg text-white/80 mb-8 leading-relaxed">
-              Siamo pronti ad aiutarti a trasformare la tua carriera nel settore della bellezza. Contattaci e scopri come possiamo soddisfare le tue esigenze.
+              Siamo pronti ad aiutarti a trasformare la tua carreira nel settore della bellezza. Contattaci e scopri come possiamo soddisfare le tue esigenze.
             </p>
 
             <div className="space-y-6 mb-8">
@@ -162,25 +120,25 @@ export default function Contact() {
                   placeholder="Raccontaci di cosa hai bisogno..."
                 ></textarea>
               </div>
-              
+
               <button
                 type="submit"
                 disabled={status.state === 'loading'}
                 className="w-full py-4 bg-white border-2 text-purple-600 rounded-full font-semibold hover:bg-purple-300 hover:text-white border-white transition-colors cursor-pointer"
               >
                 {status.state === 'loading' ? (
-                   <>
+                  <div className="flex items-center justify-center gap-2">
                     <span>Invio in corso...</span>
-                    <LoaderCircle className="w-5 h-5 animate-spin" aria-hidden="true"/>
-                   </>
+                    <LoaderCircle className="w-5 h-5 animate-spin" aria-hidden="true" />
+                  </div>
                 ) : (
-                    <span>Invia Messaggio</span>
+                  <span>Invia Messaggio</span>
                 )}
               </button>
-              
+
               {status.message && (
                 <div className={`mt-4 text-center ${status.state === 'success' ? 'text-green-400' : 'text-amber-400'}`}>
-                    {status.message}
+                  {status.message}
                 </div>
               )}
             </form>

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { STORAGE_KEYS } from '../constants/storage.constants';
 
 export const useCartStore = create(
   persist(
@@ -50,7 +51,7 @@ export const useCartStore = create(
       },
     }),
     {
-      name: 'beautyline-cart-storage',
+      name: STORAGE_KEYS.CART,
     }
   )
 );
