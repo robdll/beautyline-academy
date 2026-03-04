@@ -1,8 +1,11 @@
-import { MACHINE_TYPES } from "../constants/constants";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../constants/routes.constants";
+import { MACHINE_TYPES } from "../constants/data.constants";
 import UploadImages from "./UploadImages";
 import { ShoppingCart, RefreshCw } from "lucide-react";
 
 export default function TechnologySection() {
+  const navigate = useNavigate();
   return (
     <section id="tecnologia" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
@@ -11,7 +14,7 @@ export default function TechnologySection() {
             <div className="relative">
               <div className="absolute -top-6 -left-6 w-72 h-72 bg-purple-300 rounded-full opacity-30 blur-3xl"></div>
               <div className="relative bg-gradient-to-br from-purple-50 to-white rounded-3xl p-8 shadow-2xl border border-purple-100">
-                <UploadImages publicId={"equipmentPicture_roziae"} width={550} height={550} className="mx-auto"/>
+                <UploadImages publicId={"equipmentPicture_roziae"} width={550} height={550} className="mx-auto" />
                 <div className="text-center mt-4">
                   <p className="text-amber-500 font-semibold">Attrezzature di ultima generazione</p>
                 </div>
@@ -52,10 +55,16 @@ export default function TechnologySection() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <button className="px-8 py-3 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition-colors cursor-pointer">
+              <button
+                className="px-8 py-3 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition-colors cursor-pointer"
+                onClick={() => navigate(ROUTES.EQUIPMENT)}
+              >
                 Acquista Attrezzatura
               </button>
-              <button className="px-8 py-3 border-2 border-purple-600 text-purple-600 rounded-full font-semibold hover:bg-purple-100 transition-colors cursor-pointer">
+              <button
+                className="px-8 py-3 border-2 border-purple-600 text-purple-600 rounded-full font-semibold hover:bg-purple-100 transition-colors cursor-pointer"
+                onClick={() => navigate(ROUTES.PRODUCTS)}
+              >
                 Noleggia Macchinario
               </button>
             </div>

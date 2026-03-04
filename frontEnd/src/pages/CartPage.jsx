@@ -2,16 +2,16 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CartCard from "../components/CartCard";
-import { useCartStore } from "../store/cartStore";
+import { useCart } from "../hooks/useCart";
+import { formatCurrency } from "../utils/format";
+import { ROUTES } from "../constants/routes.constants";
 import { ArrowLeft, ShoppingBag } from "lucide-react";
 import { ScrollRestoration } from 'react-router-dom';
 
 export default function CartPage() {
-  const { items } = useCartStore();
-
-  const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const { items, totalPrice } = useCart();
   const shipping = 0;
-  const total = subtotal + shipping;
+  const total = totalPrice + shipping;
 
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col">
@@ -20,7 +20,7 @@ export default function CartPage() {
       <main className="flex-grow pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-4 mb-10">
-            <Link to="/" className="p-2 hover:bg-white rounded-full transition-colors text-stone-600">
+            <Link to={ROUTES.HOME} className="p-2 hover:bg-white rounded-full transition-colors text-stone-600">
               <ArrowLeft className="w-6 h-6" />
             </Link>
             <h1 className="text-4xl font-serif text-stone-900">Il Tuo Carrello</h1>
@@ -33,8 +33,8 @@ export default function CartPage() {
               </div>
               <h2 className="text-2xl font-serif text-stone-900 mb-4">Il tuo carrello è vuoto</h2>
               <p className="text-stone-600 mb-8">Sembra che tu non abbia ordinato nulla ancora. Scopri i nostri eccellenti prodotti!</p>
-              <Link 
-                to="/" 
+              <Link
+                to={ROUTES.HOME}
                 className="inline-block px-8 py-4 bg-purple-600 text-white rounded-full font-bold hover:bg-purple-700 transition-colors shadow-lg shadow-purple-200"
               >
                 Torna allo shop
@@ -51,11 +51,11 @@ export default function CartPage() {
               <div className="lg:col-span-1">
                 <div className="bg-white rounded-3xl p-8 shadow-sm border border-stone-100 sticky top-32">
                   <h2 className="text-2xl font-serif text-stone-900 mb-6">Riepilogo Ordine</h2>
-                  
+
                   <div className="space-y-4 mb-8">
                     <div className="flex justify-between text-stone-600">
                       <span>Subtotale</span>
-                      <span className="font-medium text-stone-900">€{subtotal.toFixed(2)}</span>
+                      <span className="font-medium text-stone-900">{formatCurrency(totalPrice)}</span>
                     </div>
                     <div className="flex justify-between text-stone-600">
                       <span>Spedizione</span>
@@ -63,7 +63,7 @@ export default function CartPage() {
                     </div>
                     <div className="border-t border-stone-100 pt-4 flex justify-between">
                       <span className="text-lg font-bold text-stone-900">Totale</span>
-                      <span className="text-2xl font-bold text-purple-600">€{total.toFixed(2)}</span>
+                      <span className="text-2xl font-bold text-purple-600">{formatCurrency(total)}</span>
                     </div>
                   </div>
 

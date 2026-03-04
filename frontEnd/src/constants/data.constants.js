@@ -1,10 +1,4 @@
-export const FOOTER_LINKS = [
-    { name: 'I Nostri Pilastri', path: '/#centroAssistenza' },
-    { name: 'Formazione', path: '/#istruzione' },
-    { name: 'Tecnologia', path: '/#tecnologia' },
-    { name: 'Prodotti', path: '/prodotti' },
-    { name: 'Contatti', path: '/#contatti' }
-];
+import { ROUTES } from './routes.constants';
 
 export const HERO_SLIDES = [
     {
@@ -26,28 +20,28 @@ export const HERO_SLIDES = [
 
 export const SERVICES = [
     {
-      id: 1,
-      title: "Corsi",
-      image: "courseNails_vd4fgi",
-      link: "/corsi"
+        id: 1,
+        title: "Corsi",
+        image: "courseNails_vd4fgi",
+        link: ROUTES.COURSES
     },
     {
-      id: 2,
-      title: "Percorsi Master",
-      image: "Paths_xmgp8c",
-      link: "/master"
+        id: 2,
+        title: "Percorsi Master",
+        image: "Paths_xmgp8c",
+        link: "/master"
     },
     {
-      id: 3,
-      title: "Prodotti",
-      image: "products_yclkv1",
-      link: "/prodotti"
+        id: 3,
+        title: "Prodotti",
+        image: "products_yclkv1",
+        link: ROUTES.PRODUCTS
     },
     {
-      id: 4,
-      title: "Attrezzature",
-      image: "equipment_zowchz",
-      link: "/attrezzature"
+        id: 4,
+        title: "Attrezzature",
+        image: "equipment_zowchz",
+        link: ROUTES.EQUIPMENT
     }
 ];
 
@@ -98,7 +92,7 @@ export const MOCK_PRODUCTS = [
     {
         id: 2,
         title: "Crema Nutriente",
-        description: "Un trattamento intensivo per pelli secche e stanche. Ricca di nutrienti essenziali, ripristina la barriera naturale della pelle donando elasticità e un aspetto vellutato.",
+        description: "Un tratamento intensivo per pelli secche e stanche. Ricca di nutrienti essenziali, ripristina la barriera naturale della pelle donando elasticità e un aspetto vellutato.",
         price: 45.00,
         publicId: "crema-nutri_bvv4bu"
     },

@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
-import { MOCK_PRODUCTS } from "../constants/constants";
+import { MOCK_PRODUCTS } from "../constants/data.constants";
 import { ScrollRestoration } from 'react-router-dom';
 
 export default function ProductsPage() {
@@ -22,7 +22,7 @@ export default function ProductsPage() {
             <main className="max-w-7xl mx-auto mb-12 px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                     {MOCK_PRODUCTS.map((product) => (
-                        <ProductCard 
+                        <ProductCard
                             key={product.id}
                             id={product.id}
                             title={product.title}

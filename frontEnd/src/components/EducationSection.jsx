@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../constants/routes.constants";
 import UploadImages from "./UploadImages";
-import { COURSES } from "../constants/constants";
+import { COURSES } from "../constants/data.constants";
 import { HandFist, Eye, Sparkles } from "lucide-react";
 
 export default function EducationSection() {
+  const navigate = useNavigate();
   return (
     <section id="istruzione" className="py-24 bg-gradient-to-br from-purple-100 via-white to-pink-100">
       <div className="max-w-7xl mx-auto px-6">
@@ -12,7 +15,7 @@ export default function EducationSection() {
             <p className="text-lg text-stone-600 mb-8 leading-relaxed">
               Alla Beauty Line Academy, crediamo che la formazione sia la base per il successo. I nostri corsi sono sviluppati da rinomati professionisti dell'industria della bellezza, garantendo che riceviate la formazione più aggiornata e pertinente sul mercato.
             </p>
-            
+
             <div className="space-y-6 mb-8">
               {COURSES.map((item, index) => (
                 <div key={index} className="flex gap-4">
@@ -28,7 +31,10 @@ export default function EducationSection() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <button className="px-8 py-3 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition-colors cursor-pointer">
+              <button
+                className="px-8 py-3 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition-colors cursor-pointer"
+                onClick={() => navigate(ROUTES.COURSES)}
+              >
                 Acquista Corso
               </button>
               <button className="px-8 py-3 border-2 border-purple-600 text-purple-600 rounded-full font-semibold hover:bg-purple-100 transition-colors cursor-pointer">
@@ -41,7 +47,7 @@ export default function EducationSection() {
             <div className="relative">
               <div className="absolute -top-6 -right-6 w-72 h-72 bg-purple-300 rounded-full opacity-30 blur-3xl"></div>
               <div className="relative bg-white rounded-3xl p-8 shadow-2xl border border-purple-100">
-                <UploadImages publicId={"coursePicture_zd7hnj"} width={600} height={390} className="mx-auto rounded-3xl"/>
+                <UploadImages publicId={"coursePicture_zd7hnj"} width={600} height={390} className="mx-auto rounded-3xl" />
                 <div className="text-center mt-4">
                   <p className="text-rose-400 font-semibold">Più di 500 professionisti formati</p>
                 </div>

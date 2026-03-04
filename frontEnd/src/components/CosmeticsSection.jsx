@@ -1,7 +1,8 @@
-import { COSMETICS } from "../constants/constants";
+import { COSMETICS } from "../constants/data.constants";
 import UploadImages from "./UploadImages";
 import { Droplets } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../constants/routes.constants";
 
 export default function CosmeticsSection() {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ export default function CosmeticsSection() {
 
             <div className="flex flex-wrap gap-3">
               <button className="px-8 py-3 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition-colors cursor-pointer"
-              onClick={() => navigate("/prodotti")}
+                onClick={() => navigate(ROUTES.PRODUCTS)}
               >
                 Acquista Prodotti
               </button>
@@ -60,7 +61,7 @@ export default function CosmeticsSection() {
           <div className="order-1 lg:order-2">
             <div className="relative">
               <div className="bg-white rounded-3xl p-8 shadow-2xl border border-stone-200">
-                <UploadImages publicId={"cosmeticsPicture_b1vclx"} width={500} height={500} className="mx-auto"/>
+                <UploadImages publicId={"cosmeticsPicture_b1vclx"} width={500} height={500} className="mx-auto" />
                 <div className="text-center mt-4">
                   <p className="text-stone-600 font-semibold">Qualità professionale per tutti</p>
                 </div>

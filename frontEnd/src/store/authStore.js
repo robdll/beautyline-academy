@@ -1,8 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-
-const API_ORIGIN = (import.meta.env.VITE_API_URL || 'http://localhost:3000').replace(/\/$/, "");
-const API_URL = `${API_ORIGIN}/api`;
+import { authApi } from '../api/auth.api';
+import { STORAGE_KEYS } from '../constants/storage.constants';
 
 export const useAuthStore = create(
   persist(
@@ -13,20 +12,9 @@ export const useAuthStore = create(
 
       login: async (email, password) => {
         try {
-          const response = await fetch(`${API_URL}/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-          });
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.message || 'Errore durante il login');
-          }
-
-          set({ 
-            isLoggedIn: true, 
+          const data = await authApi.login(email, password);
+          set({
+            isLoggedIn: true,
             token: data.token,
             user: data.user
           });
@@ -38,19 +26,8 @@ export const useAuthStore = create(
 
       register: async (name, email, password) => {
         try {
-          const response = await fetch(`${API_URL}/user`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password }),
-          });
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.message || 'Errore durante la registrazione');
-          }
-
-          set({ 
+          const data = await authApi.register({ name, email, password });
+          set({
             isLoggedIn: Boolean(data.token),
             token: data.token || null,
             user: data.user || data
@@ -63,33 +40,19 @@ export const useAuthStore = create(
 
       logout: () => {
         set({ isLoggedIn: false, user: null, token: null });
-        localStorage.removeItem('auth-storage');
+        localStorage.removeItem(STORAGE_KEYS.AUTH);
       },
 
       updateUser: async (name, email) => {
-        const { user, token } = get();
+        const { user } = get();
         const userId = user?._id || user?.id;
 
-        if (!userId || !token) {
+        if (!userId) {
           return { success: false, message: 'Non sei autenticato o manca ID utente.' };
         }
 
         try {
-          const response = await fetch(`${API_URL}/user/${userId}`, {
-            method: 'PUT',
-            headers: { 
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ name, email }),
-          });
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.message || 'Errore durante l\'aggiornamento del profilo');
-          }
-
+          const data = await authApi.updateUser(userId, { name, email });
           set(() => ({ user: data }));
           return { success: true, message: 'Profilo aggiornato con successo' };
         } catch (err) {
@@ -98,7 +61,7 @@ export const useAuthStore = create(
       }
     }),
     {
-      name: 'auth-storage',
+      name: STORAGE_KEYS.AUTH,
     }
   )
 );
