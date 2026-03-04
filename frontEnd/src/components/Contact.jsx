@@ -17,7 +17,7 @@ export default function Contact() {
             <span className="text-rose-300 font-medium tracking-widest uppercase">Contattaci</span>
             <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">Mettiti in Contatto</h2>
             <p className="text-lg text-white/80 mb-8 leading-relaxed">
-              Siamo pronti ad aiutarti a trasformare la tua carreira nel settore della bellezza. Contattaci e scopri come possiamo soddisfare le tue esigenze.
+              Siamo pronti ad aiutarti a trasformare la tua carriera nel settore della bellezza. Contattaci e scopri come possiamo soddisfare le tue esigenze.
             </p>
 
             <div className="space-y-6 mb-8">
