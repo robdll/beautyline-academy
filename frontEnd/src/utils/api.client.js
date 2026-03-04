@@ -32,13 +32,29 @@ async function apiClient(endpoint, { body, ...customConfig } = {}) {
     }
 
     const response = await fetch(`${API_URL}${endpoint}`, config);
-    const data = await response.json();
+    const contentType = response.headers.get('content-type') || '';
+    const text = await response.text();
 
-    if (!response.ok) {
-        throw new Error(data.message || 'Qualcosa è andato storto');
+    let data = null;
+
+    if (text && contentType.includes('application/json')) {
+        try {
+            data = JSON.parse(text);
+        } catch (e) {
+            console.error('Error parsing JSON response', e);
+        }
     }
 
-    return data;
+    if (!response.ok) {
+        const message =
+            (data && data.message) ||
+            text ||
+            'Qualcosa è andato storto';
+
+        throw new Error(message);
+    }
+
+    return data !== null ? data : text;
 }
 
 export default apiClient;
