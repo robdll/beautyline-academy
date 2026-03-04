@@ -2,6 +2,7 @@ import { COSMETICS } from "../constants/data.constants";
 import UploadImages from "./UploadImages";
 import { Droplets } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../constants/routes.constants";
 
 export default function CosmeticsSection() {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ export default function CosmeticsSection() {
 
             <div className="flex flex-wrap gap-3">
               <button className="px-8 py-3 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition-colors cursor-pointer"
-                onClick={() => navigate("/prodotti")}
+                onClick={() => navigate(ROUTES.PRODUCTS)}
               >
                 Acquista Prodotti
               </button>

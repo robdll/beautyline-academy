@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../constants/routes.constants";
 import UploadImages from "./UploadImages";
 import { COURSES } from "../constants/data.constants";
 import { HandFist, Eye, Sparkles } from "lucide-react";
 
 export default function EducationSection() {
+  const navigate = useNavigate();
   return (
     <section id="istruzione" className="py-24 bg-gradient-to-br from-purple-100 via-white to-pink-100">
       <div className="max-w-7xl mx-auto px-6">
@@ -28,7 +31,10 @@ export default function EducationSection() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <button className="px-8 py-3 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition-colors cursor-pointer">
+              <button
+                className="px-8 py-3 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition-colors cursor-pointer"
+                onClick={() => navigate(ROUTES.COURSES)}
+              >
                 Acquista Corso
               </button>
               <button className="px-8 py-3 border-2 border-purple-600 text-purple-600 rounded-full font-semibold hover:bg-purple-100 transition-colors cursor-pointer">

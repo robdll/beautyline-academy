@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../constants/routes.constants";
 import { MACHINE_TYPES } from "../constants/data.constants";
 import UploadImages from "./UploadImages";
 import { ShoppingCart, RefreshCw } from "lucide-react";
 
 export default function TechnologySection() {
+  const navigate = useNavigate();
   return (
     <section id="tecnologia" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
@@ -52,10 +55,16 @@ export default function TechnologySection() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <button className="px-8 py-3 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition-colors cursor-pointer">
+              <button
+                className="px-8 py-3 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition-colors cursor-pointer"
+                onClick={() => navigate(ROUTES.EQUIPMENT)}
+              >
                 Acquista Attrezzatura
               </button>
-              <button className="px-8 py-3 border-2 border-purple-600 text-purple-600 rounded-full font-semibold hover:bg-purple-100 transition-colors cursor-pointer">
+              <button
+                className="px-8 py-3 border-2 border-purple-600 text-purple-600 rounded-full font-semibold hover:bg-purple-100 transition-colors cursor-pointer"
+                onClick={() => navigate(ROUTES.PRODUCTS)}
+              >
                 Noleggia Macchinario
               </button>
             </div>
