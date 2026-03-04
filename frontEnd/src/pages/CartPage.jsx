@@ -34,7 +34,7 @@ export default function CartPage() {
               <h2 className="text-2xl font-serif text-stone-900 mb-4">Il tuo carrello è vuoto</h2>
               <p className="text-stone-600 mb-8">Sembra che tu non abbia ordinato nulla ancora. Scopri i nostri eccellenti prodotti!</p>
               <Link
-                to="/"
+                to={ROUTES.HOME}
                 className="inline-block px-8 py-4 bg-purple-600 text-white rounded-full font-bold hover:bg-purple-700 transition-colors shadow-lg shadow-purple-200"
               >
                 Torna allo shop
