@@ -66,7 +66,7 @@ export default function AccountPage() {
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 bg-white rounded-xl border border-stone-200 focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none transition-all shadow-sm"
+                          className="w-full px-4 py-3 bg-white rounded-xl border border-stone-200 focus:ring-2 focus:ring-purple-600 focus:border-transparent outline-none transition-all shadow-sm"
                         />
                       </div>
                       <div>
@@ -76,7 +76,7 @@ export default function AccountPage() {
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 bg-white rounded-xl border border-stone-200 focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none transition-all shadow-sm"
+                          className="w-full px-4 py-3 bg-white rounded-xl border border-stone-200 focus:ring-2 focus:ring-purple-600 focus:border-transparent outline-none transition-all shadow-sm"
                         />
                       </div>
                     </div>

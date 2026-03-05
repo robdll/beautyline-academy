@@ -13,7 +13,7 @@ export default function AboutUs() {
                     <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20 text-left">
                         <span className="text-purple-300 font-bold tracking-widest uppercase text-sm">Storia e Passione</span>
                         <h2 className="text-4xl md:text-5xl font-bold text-white mt-2 mb-6">Chi Siamo</h2>
-                        <div className="w-20 h-1.5 bg-purple-400 mb-8 rounded-full"></div>
+                        <div className="w-20 h-1.5 bg-purple-600 mb-8 rounded-full"></div>
                        
                         <div className="space-y-6 text-stone-100">
                             <p className="text-xl font-semibold text-white leading-tight">

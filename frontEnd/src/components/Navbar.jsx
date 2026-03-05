@@ -22,11 +22,11 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          <Link to={ROUTES.COURSES} className="text-stone-600 text-center hover:text-purple-400 transition-colors font-medium">Corsi</Link>
-          <Link to="/#chi-siamo" className="text-stone-600 text-center hover:text-purple-400 transition-colors font-medium">Chi Siamo</Link>
-          <Link to={ROUTES.EQUIPMENT} className="text-stone-600 text-center hover:text-purple-400 transition-colors font-medium">Noleggio</Link>
-          <Link to={ROUTES.PRODUCTS} className="text-stone-600 text-center hover:text-purple-400 transition-colors font-medium">Prodotti</Link>
-          <Link to="/#contatti" className="text-stone-600 text-center hover:text-purple-400 transition-colors font-medium">Contatti</Link>
+          <Link to={ROUTES.COURSES} className="text-stone-600 text-center hover:text-purple-600 transition-colors font-medium">Corsi</Link>
+          <Link to="/#chi-siamo" className="text-stone-600 text-center hover:text-purple-600 transition-colors font-medium">Chi Siamo</Link>
+          <Link to={ROUTES.EQUIPMENT} className="text-stone-600 text-center hover:text-purple-600 transition-colors font-medium">Noleggio</Link>
+          <Link to={ROUTES.PRODUCTS} className="text-stone-600 text-center hover:text-purple-600 transition-colors font-medium">Prodotti</Link>
+          <Link to="/#contatti" className="text-stone-600 text-center hover:text-purple-600 transition-colors font-medium">Contatti</Link>
 
           <div className="flex items-center gap-6 border-l border-stone-200 pl-6">
             <Link to={ROUTES.CART} className="relative p-2 text-stone-600 hover:text-purple-600 transition-colors" aria-label="Carrello">

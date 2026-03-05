@@ -4,6 +4,9 @@
 @theme {
   --font-display: "Playfair Display", serif;
   --font-body: "Montserrat", sans-serif;
+  --color-brand: #8D62AA;
+  --color-brand-light: #a67fc4;
+  --color-brand-dark: #724a8a;
   --color-purple-50: #fbf9fd;
   --color-purple-100: #f5f0fa;
   --color-purple-200: #e9e2f5;

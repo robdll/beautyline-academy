@@ -36,7 +36,7 @@ export default function AuthForm() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-purple-600 focus:border-transparent outline-none transition-all"
                 placeholder="Mario Rossi"
               />
             </div>
@@ -49,7 +49,7 @@ export default function AuthForm() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-purple-600 focus:border-transparent outline-none transition-all"
               placeholder="tuonome@email.com"
             />
           </div>
@@ -61,7 +61,7 @@ export default function AuthForm() {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-purple-600 focus:border-transparent outline-none transition-all"
               placeholder="••••••••"
             />
           </div>
@@ -74,7 +74,7 @@ export default function AuthForm() {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-purple-600 focus:border-transparent outline-none transition-all"
                 placeholder="••••••••"
               />
             </div>
