@@ -77,30 +77,17 @@ describe('Administrative Functionality Tests', () => {
     describe('Admin Script Validation', () => {
         test('createAdmin should provision a new admin successfully', async () => {
             const testEmail = 'provisioned@example.com';
+            const testPassword = 'SecureAdminPassword123!';
+            const testName = 'Provisioned Admin';
             await User.deleteOne({ email: testEmail });
 
-            const originalEnv = {
-                ADMIN_EMAIL: process.env.ADMIN_EMAIL,
-                ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
-                ADMIN_NAME: process.env.ADMIN_NAME
-            };
+            await createAdmin(testEmail, testName, testPassword);
 
-            process.env.ADMIN_EMAIL = testEmail;
-            process.env.ADMIN_PASSWORD = 'SecureAdminPassword123!';
-            process.env.ADMIN_NAME = 'Provisioned Admin';
-
-            try {
-                await createAdmin();
-
-                const admin = await User.findOne({ email: testEmail });
-                expect(admin).toBeDefined();
-                expect(admin.email).toBe(testEmail);
-                expect(admin.role).toBe('admin');
-                expect(admin.name).toBe('Provisioned Admin'.toLowerCase());
-            } finally {
-                // Restore original env vars
-                Object.assign(process.env, originalEnv);
-            }
+            const admin = await User.findOne({ email: testEmail });
+            expect(admin).toBeDefined();
+            expect(admin.email).toBe(testEmail);
+            expect(admin.role).toBe('admin');
+            expect(admin.name).toBe(testName.toLowerCase());
         });
     });
 });

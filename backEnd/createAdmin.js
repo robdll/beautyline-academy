@@ -5,23 +5,23 @@ const bcrypt = require('bcrypt');
 const User = require('./model/userDB.model');
 const connectDB = require('./config/DBmongo');
 
-async function createAdmin() {
+async function createAdmin(email, name, password) {
     try {
         if (mongoose.connection.readyState === 0) {
             await connectDB();
         }
 
-        const adminEmail = process.env.ADMIN_EMAIL;
-        const adminName = process.env.ADMIN_NAME || 'Admin';
-        const adminPassword = process.env.ADMIN_PASSWORD;
+        const adminEmail = email || process.env.ADMIN_EMAIL;
+        const adminName = name || process.env.ADMIN_NAME || 'Admin';
+        const adminPassword = password || process.env.ADMIN_PASSWORD;
 
         if (!adminEmail || !adminPassword) {
-            throw new Error('ADMIN_EMAIL and ADMIN_PASSWORD must be defined in .env');
+            throw new Error('Admin email and password must be provided as arguments or defined in .env');
         }
 
         const weakPasswords = ['admin123', 'password', '123456'];
         if (weakPasswords.includes(adminPassword.toLowerCase())) {
-            throw new Error('ADMIN_PASSWORD is too weak. Please use a stronger password.');
+            throw new Error('Admin password is too weak. Please use a stronger password.');
         }
 
         const existingAdmin = await User.findOne({ email: adminEmail });
@@ -53,7 +53,16 @@ async function createAdmin() {
 }
 
 if (require.main === module) {
-    createAdmin();
+    const args = process.argv.slice(2);
+    const email = args[0];
+    const password = args[1];
+    const name = args[2];
+
+    if (!email || !password) {
+        console.log('Usage: node createAdmin.js <email> <password> [name]');
+        process.exit(1);
+    }
+    createAdmin(email, name, password);
 }
 
 module.exports = createAdmin;
