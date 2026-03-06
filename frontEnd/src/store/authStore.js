@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { authApi } from '../api/auth.api';
 import { STORAGE_KEYS } from '../constants/storage.constants';
+import { useCartStore } from './cartStore';
 
 export const useAuthStore = create(
   persist(
@@ -41,6 +42,7 @@ export const useAuthStore = create(
       logout: () => {
         set({ isLoggedIn: false, user: null, token: null });
         localStorage.removeItem(STORAGE_KEYS.AUTH);
+        useCartStore.getState().clearCart();
       },
 
       updateUser: async (name, email) => {
