@@ -1,14 +1,11 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { ScrollRestoration, Navigate } from 'react-router-dom';
+import { ScrollRestoration } from 'react-router-dom';
 import { LogOut, PencilLine, LoaderCircle } from 'lucide-react';
 import { useAccount } from '../hooks/useAccount';
-import { ROUTES } from '../constants/routes.constants';
-
 export default function AccountPage() {
   const {
     user,
-    isLoggedIn,
     isEditing,
     isLoading,
     error,
@@ -19,10 +16,6 @@ export default function AccountPage() {
     startEdit,
     logout
   } = useAccount();
-
-  if (!isLoggedIn) {
-    return <Navigate to={`${ROUTES.AUTH}?mode=login`} />;
-  }
 
   return (
     <div className="min-h-screen bg-stone-50 pt-32 flex flex-col">
