@@ -11,12 +11,12 @@ async function createAdmin(email, name, password) {
             await connectDB();
         }
 
-        const adminEmail = email || process.env.ADMIN_EMAIL;
-        const adminName = name || process.env.ADMIN_NAME || 'Admin';
-        const adminPassword = password || process.env.ADMIN_PASSWORD;
+        const adminEmail = email;
+        const adminName = name || 'Admin';
+        const adminPassword = password;
 
         if (!adminEmail || !adminPassword) {
-            throw new Error('Admin email and password must be provided as arguments or defined in .env');
+            throw new Error('Admin email and password must be provided as arguments');
         }
 
         const weakPasswords = ['admin123', 'password', '123456'];
