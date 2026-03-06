@@ -6,7 +6,8 @@ describe('Product CRUD Integration Tests', () => {
     let testUser = {
         name: "Product Tester",
         email: `tester_${Date.now()}@example.com`,
-        password: "password123"
+        password: "password123",
+        role: "admin"
     };
     let authToken = "";
     let testProduct = {
@@ -24,7 +25,12 @@ describe('Product CRUD Integration Tests', () => {
 
     beforeAll(async () => {
         await dbHandler.connect();
-        await request(app).post('/api/user').send(testUser);
+        const bcrypt = require('bcrypt');
+        const User = require('../model/userDB.model');
+
+        const hashedPassword = await bcrypt.hash(testUser.password, 10);
+        await User.create({ ...testUser, password: hashedPassword });
+
         const loginRes = await request(app).post('/api/login').send({
             email: testUser.email,
             password: testUser.password
