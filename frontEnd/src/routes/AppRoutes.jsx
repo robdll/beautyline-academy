@@ -7,6 +7,7 @@ import CoursesPage from '../pages/CoursesPage';
 import ProductsPage from '../pages/ProductsPage';
 import EquipmentPage from '../pages/EquipmentPage';
 import PathsPage from '../pages/PathsPage';
+import ProtectedRoute from '../components/ProtectedRoute';
 import { ROUTES } from '../constants/routes.constants';
 
 export const router = createBrowserRouter([
@@ -20,7 +21,11 @@ export const router = createBrowserRouter([
     },
     {
         path: ROUTES.ACCOUNT,
-        element: <AccountPage />,
+        element: (
+            <ProtectedRoute>
+                <AccountPage />
+            </ProtectedRoute>
+        ),
     },
     {
         path: ROUTES.COURSES,
@@ -32,7 +37,11 @@ export const router = createBrowserRouter([
     },
     {
         path: ROUTES.CART,
-        element: <CartPage />,
+        element: (
+            <ProtectedRoute>
+                <CartPage />
+            </ProtectedRoute>
+        ),
     },
     {
         path: ROUTES.EQUIPMENT,

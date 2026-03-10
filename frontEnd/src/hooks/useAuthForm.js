@@ -64,7 +64,8 @@ export const useAuthForm = () => {
             }
 
             if (result.success) {
-                navigate(ROUTES.HOME);
+                const redirectTo = searchParams.get('redirect') || ROUTES.HOME;
+                navigate(redirectTo);
             } else {
                 setError(result.message);
                 setStatus({ state: 'idle', message: '' });
