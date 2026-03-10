@@ -1,5 +1,7 @@
 require("dotenv").config();
 const express = require("express");
+const swaggerUI = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json")
 const cors = require("cors");
 const userRouter = require("./routes/user.router");
 const productRouter = require("./routes/product.router");
@@ -20,6 +22,7 @@ app.use(cors({
   optionsSuccessStatus: 200
 }));
 app.use(express.json());
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use(morgan("common"));
 app.use("/api", userRouter);
 app.use("/api", productRouter);
