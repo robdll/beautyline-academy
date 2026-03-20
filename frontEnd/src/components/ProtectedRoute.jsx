@@ -3,15 +3,15 @@ import { useAuthStore } from '../store/authStore';
 import { ROUTES } from '../constants/routes.constants';
 
 const ProtectedRoute = ({ children }) => {
-    const { isLoggedIn } = useAuthStore();
-    const location = useLocation();
+  const { isLoggedIn } = useAuthStore();
+  const location = useLocation();
 
-    if (!isLoggedIn) {
+  if (!isLoggedIn) {
 
-        return <Navigate to={`${ROUTES.AUTH}?mode=login&redirect=${encodeURIComponent(location.pathname)}`} replace />;
-    }
+    return <Navigate to={`${ROUTES.AUTH}?mode=login&redirect=${encodeURIComponent(location.pathname)}`} replace />;
+  }
 
-    return children;
+  return children;
 };
 
 export default ProtectedRoute;
