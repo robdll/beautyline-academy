@@ -15,7 +15,8 @@ const ProductCard = ({ id, title, description, price, publicId }) => {
 
   const handleAddToCart = () => {
     if (!isLoggedIn) {
-      navigate(`${ROUTES.AUTH}?mode=login&redirect=${encodeURIComponent(location.pathname)}`);
+      const fullPath = `${location.pathname}${location.search}${location.hash}`;
+      navigate(`${ROUTES.AUTH}?mode=login&redirect=${encodeURIComponent(fullPath)}`);
       return;
     }
     addItem({ id, title, price, publicId });
