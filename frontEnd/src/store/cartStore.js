@@ -44,6 +44,7 @@ export const useCartStore = create(
 
       clearCart: () => {
         set({ items: [] });
+        localStorage.removeItem(STORAGE_KEYS.CART);
       },
 
       getTotalItems: () => {

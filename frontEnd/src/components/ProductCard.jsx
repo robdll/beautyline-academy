@@ -1,13 +1,24 @@
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import UploadImages from "./UploadImages";
 import { useCart } from "../hooks/useCart";
+import { useAuthStore } from "../store/authStore";
 import { formatCurrency } from "../utils/format";
+import { ROUTES } from "../constants/routes.constants";
 
 const ProductCard = ({ id, title, description, price, publicId }) => {
   const [isAdded, setIsAdded] = useState(false);
   const { addItem } = useCart();
+  const { isLoggedIn } = useAuthStore();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleAddToCart = () => {
+    if (!isLoggedIn) {
+      const fullPath = `${location.pathname}${location.search}${location.hash}`;
+      navigate(`${ROUTES.AUTH}?mode=login&redirect=${encodeURIComponent(fullPath)}`);
+      return;
+    }
     addItem({ id, title, price, publicId });
     setIsAdded(true);
     setTimeout(() => {
