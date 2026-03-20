@@ -35,14 +35,14 @@ const getUserById = async (req, res) => {
 
     } catch (err) {
 
-      console.error(err);
+        console.error(err);
 
-      if (err.name === "CastError") {
-        return res.status(400).json({ message: "ID utente non valido" });
-      }
+        if (err.name === "CastError") {
+            return res.status(400).json({ message: "ID utente non valido" });
+        }
 
-      res.status(500).json({ message: "Errore durante il recupero dell'utente" });
-  }
+        res.status(500).json({ message: "Errore durante il recupero dell'utente" });
+    }
 }
 
 
@@ -57,11 +57,11 @@ const createUser = async (req, res) => {
             email,
             password: hashedPassword
         });
-       
+
 
         const savedUser = await newUser.save();
         const userResponse = await User.findById(savedUser._id)
-        .select('-password');
+            .select('-password');
 
         res.status(201).json(userResponse);
 
@@ -125,15 +125,15 @@ const updateUser = async (req, res) => {
         }
 
         if (err.name === "CastError") {
-          return res.status(400).json({ message: "ID utente non valido" });
+            return res.status(400).json({ message: "ID utente non valido" });
         }
-    
+
         if (err.code === DUPLICATED_EMAIL_CODE) {
             return res.status(409).json({
                 message: "Email già registrata"
             });
         }
-    
+
         return res.status(500).json({ message: "Errore interno del server" });
     }
 }
@@ -180,7 +180,8 @@ const login = async (req, res) => {
         const payload = {
             id: user._id,
             email: user.email,
-            name: user.name
+            name: user.name,
+            role: user.role
         };
 
         const secret = process.env.JWT_SECRET;
@@ -192,16 +193,16 @@ const login = async (req, res) => {
 
         const token = jwt.sign(payload, secret, { expiresIn: "1h" });
 
-        res.status(200).json({ 
+        res.status(200).json({
             token,
             user: {
                 id: user._id,
                 email: user.email,
-                name: user.name
+                name: user.name,
+                role: user.role
             }
         });
     } catch (err) {
-        console.error(err);
         console.error(err);
         res.status(500).json({ message: "Errore durante il login" });
     }
