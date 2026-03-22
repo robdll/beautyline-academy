@@ -509,7 +509,21 @@
                         "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
                     },
                     "user": {
-                        "$ref": "#/components/schemas/User"
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "example": "665f7c4b9a3e2c001a9d8a22"
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "igor machado"
+                            },
+                            "email": {
+                                "type": "string",
+                                "example": "igor@email.com"
+                            }
+                        }
                     }
                 }
             },
