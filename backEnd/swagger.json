@@ -62,7 +62,7 @@
                 }
             }
         },
-        "/api/users": {
+        "/api/user": {
             "get": {
                 "tags": [
                     "Users"
@@ -130,7 +130,7 @@
                 }
             }
         },
-        "/api/users/{id}": {
+        "/api/user/{id}": {
             "get": {
                 "tags": [
                     "Users"
