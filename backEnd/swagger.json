@@ -5,12 +5,7 @@
         "version": "1.0.0",
         "description": "REST API for user authentication and product management"
     },
-    "servers": [
-        {
-            "url": "http://localhost:3000",
-            "description": "Local development server"
-        }
-    ],
+
     "tags": [
         {
             "name": "Auth",
