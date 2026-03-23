@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuthStore } from '../store/authStore';
-import { USE_FETCH_CONSTANTS } from '../constants/hooks.constants';
+import { ACCOUNT_CONSTANTS } from '../constants/hooks.constants';
 
 export const useAccount = () => {
     const { user, isLoggedIn, logout, updateUser } = useAuthStore();
@@ -36,10 +36,10 @@ export const useAccount = () => {
             if (result && result.success) {
                 setIsEditing(false);
             } else {
-                setError(result?.message || USE_FETCH_CONSTANTS.USE_FETCH_ERROR);
+                setError(result?.message || ACCOUNT_CONSTANTS.ACCOUNT_UPDATE_ERROR);
             }
-        } catch (err) {
-            setError(USE_FETCH_CONSTANTS.USE_FETCH_ERROR);
+        } catch {
+            setError(ACCOUNT_CONSTANTS.ACCOUNT_UPDATE_ERROR);
         } finally {
             setIsLoading(false);
         }
