@@ -10,7 +10,21 @@ export const useProducts = () => {
         const fetchProducts = async () => {
             try {
                 const data = await getProducts();
-                setProducts(data);
+
+                if (!Array.isArray(data)) {
+                    throw new Error('Expected products response to be an array');
+                }
+
+                const normalizedProducts = data.map((product) => ({
+                    // Preserve all existing fields first
+                    ...product,
+                    // Then normalize into the shape expected by the UI
+                    id: product.id ?? product._id,
+                    title: product.title ?? product.name ?? '',
+                    publicId: product.publicId ?? product.image ?? '',
+                }));
+
+                setProducts(normalizedProducts);
             } catch (error) {
                 setError(error);
             } finally {
