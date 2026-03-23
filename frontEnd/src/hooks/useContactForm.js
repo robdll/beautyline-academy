@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { contactApi } from '../api/contact.api';
+import { USE_FETCH_CONSTANTS } from '../constants/hooks.constants';
 
 export const useContactForm = () => {
     const [formData, setFormData] = useState({
@@ -24,7 +25,7 @@ export const useContactForm = () => {
 
             setStatus({
                 state: 'success',
-                message: '✓ Messaggio inviato con successo! Ti contatteremo a breve.',
+                message: USE_FETCH_CONSTANTS.USE_FETCH_SUCCESS,
             });
 
             setFormData({
@@ -35,7 +36,7 @@ export const useContactForm = () => {
                 message: ''
             });
         } catch (error) {
-            console.error("Submission error:", error);
+            console.error(USE_FETCH_CONSTANTS.USE_FETCH_ERROR, error);
             setStatus({
                 state: 'error',
                 message: USE_FETCH_CONSTANTS.USE_FETCH_ERROR,
