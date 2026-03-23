@@ -3,16 +3,17 @@ import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
 import { ScrollRestoration } from 'react-router-dom';
 import { useProducts } from "../hooks/useProducts";
+import { USE_FETCH_CONSTANTS } from "../constants/hooks.constants";
 
 export default function ProductsPage() {
     const { products, loading, error } = useProducts();
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div>{USE_FETCH_CONSTANTS.USE_FETCH_LOADING}</div>;
     }
 
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return <div>{USE_FETCH_CONSTANTS.USE_FETCH_ERROR}</div>;
     }
 
     return (
