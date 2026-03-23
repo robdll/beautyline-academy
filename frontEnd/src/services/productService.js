@@ -1,5 +1,7 @@
 import apiClient from "../utils/api.client";
 
-export const getProducts = async () => {
-    return await apiClient("/product");
+const PRODUCT_ENDPOINT = "/product";
+
+export const getProducts = () => {
+  return apiClient(PRODUCT_ENDPOINT);
 };
