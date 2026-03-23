@@ -36,7 +36,7 @@ export const useContactForm = () => {
                 message: ''
             });
         } catch (error) {
-            console.error(USE_FETCH_CONSTANTS.USE_FETCH_ERROR, error);
+            console.error('Contact form submission failed:', error);
             setStatus({
                 state: 'error',
                 message: USE_FETCH_CONSTANTS.USE_FETCH_ERROR,
