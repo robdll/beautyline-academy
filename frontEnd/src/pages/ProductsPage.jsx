@@ -2,27 +2,10 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
 import { ScrollRestoration } from 'react-router-dom';
-import { getProducts } from "../services/productService";
-import { useState, useEffect } from "react";
+import { useProducts } from "../hooks/useProducts";
 
 export default function ProductsPage() {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const data = await getProducts();
-                setProducts(data);
-            } catch (error) {
-                setError(error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchProducts();
-    }, []);
+    const { products, loading, error } = useProducts();
 
     if (loading) {
         return <div>Loading...</div>;
