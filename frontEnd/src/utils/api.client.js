@@ -2,6 +2,7 @@ import { STORAGE_KEYS } from '../constants/storage.constants';
 
 const API_ORIGIN = (import.meta.env.VITE_API_URL || 'http://localhost:3000').replace(/\/$/, "");
 const API_URL = `${API_ORIGIN}/api`;
+export const API_URL_PRODUCTS_GET = `${API_ORIGIN}/api/product`;
 
 async function apiClient(endpoint, { body, ...customConfig } = {}) {
     const headers = { 'Content-Type': 'application/json' };

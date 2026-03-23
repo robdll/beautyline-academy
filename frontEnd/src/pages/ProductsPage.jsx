@@ -1,10 +1,37 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
-import { MOCK_PRODUCTS } from "../constants/data.constants";
 import { ScrollRestoration } from 'react-router-dom';
+import { getProducts } from "../services/productService";
+import { useState, useEffect } from "react";
 
 export default function ProductsPage() {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const data = await getProducts();
+                setProducts(data);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProducts();
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-100">
             <ScrollRestoration />
@@ -21,7 +48,7 @@ export default function ProductsPage() {
             </header>
             <main className="max-w-7xl mx-auto mb-12 px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                    {MOCK_PRODUCTS.map((product) => (
+                    {products.map((product) => (
                         <ProductCard
                             key={product.id}
                             id={product.id}
