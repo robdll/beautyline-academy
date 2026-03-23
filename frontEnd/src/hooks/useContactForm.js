@@ -38,7 +38,7 @@ export const useContactForm = () => {
             console.error("Submission error:", error);
             setStatus({
                 state: 'error',
-                message: 'Si è verificato un errore durante l\'invio del messaggio. Per favore riprova.',
+                message: USE_FETCH_CONSTANTS.USE_FETCH_ERROR,
             });
         }
     };
