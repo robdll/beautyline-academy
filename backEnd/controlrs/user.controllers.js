@@ -12,12 +12,7 @@ const getUsers = async (req, res) => {
 
         if (users.length === 0) {
             return res.status(200).json([]);
-            logger.info(SUCCESS_MESSAGES.USER_FOUND, {
-                id: users._id,
-                name: users.name,
-                email: users.email,
-                role: users.role,
-            });
+            logger.info(SUCCESS_MESSAGES.USER_FOUND);
         }
 
         res.status(200).json(users);

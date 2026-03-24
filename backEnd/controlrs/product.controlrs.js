@@ -10,15 +10,7 @@ const getProducts = async (req, res) => {
         const products = await Product.find();
         if (products.length === 0) {
             return res.status(200).json([]);
-            logger.info(SUCCESS_MESSAGES.PRODUCT_FOUND, {
-                id: products._id,
-                name: products.name,
-                price: products.price,
-                category: products.category,
-                tags: products.tags,
-                stock: products.stock,
-                brand: products.brand
-            });
+            logger.info(SUCCESS_MESSAGES.PRODUCT_FOUND);
         }
         res.status(200).json(products);
         logger.info(SUCCESS_MESSAGES.PRODUCT_FOUND, {
