@@ -1,40 +1,43 @@
 const winston = require("winston");
 const DailyRotateFile = require("winston-daily-rotate-file");
 
+const { combine, timestamp, errors, json, colorize, printf } = winston.format;
+
+const jsonFormat = combine(
+    timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+    errors({ stack: true }),
+    json()
+);
+
+const devFormat = combine(
+    colorize(),
+    timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+    printf(({ timestamp, level, message, stack, ...meta }) => {
+        const metaStr = Object.keys(meta).length ? JSON.stringify(meta) : "";
+        return `${timestamp} [${level}]: ${message} ${metaStr} ${stack ? `\n${stack}` : ""}`;
+    })
+);
+
 const logger = winston.createLogger({
-    format: winston.format.combine(
-        winston.format.timestamp(),
-        winston.format.errors({ stack: true }),
-        winston.format.json(),
-    ),
-    defaultMeta: { service: "user-service" },
+    level: process.env.LOG_LEVEL || "info",
+    format: jsonFormat,
+    defaultMeta: { service: "user-service", environment: process.env.NODE_ENV || "development" },
     transports: [
         new DailyRotateFile({
-            filename: "logger/error-%DATE%.json",
+            filename: "logger/error-%DATE%.log",
             level: "error",
-            format: winston.format.json(),
             datePattern: "YYYY-MM-DD",
             zippedArchive: true,
             maxSize: "20m",
-            maxFiles: "7d",
+            maxFiles: "14d",
         }),
         new DailyRotateFile({
-            filename: "logger/combined-%DATE%.json",
+            filename: "logger/combined-%DATE%.log",
             level: "info",
-            format: winston.format.json(),
             datePattern: "YYYY-MM-DD",
             zippedArchive: true,
             maxSize: "20m",
-            maxFiles: "7d",
-        }),
-        new DailyRotateFile({
-            filename: "logger/success-%DATE%.json",
-            level: "info",
-            format: winston.format.json(),
-            datePattern: "YYYY-MM-DD",
-            zippedArchive: true,
-            maxSize: "20m",
-            maxFiles: "7d",
+            maxFiles: "14d",
         }),
     ],
 });
@@ -42,7 +45,7 @@ const logger = winston.createLogger({
 if (process.env.NODE_ENV !== "production") {
     logger.add(
         new winston.transports.Console({
-            format: winston.format.simple(),
+            format: devFormat,
         })
     );
 }
