@@ -1,5 +1,6 @@
 
 const Product = require("../model/productDB.model");
+const { ERROR_MESSAGES, SUCCESS_MESSAGES } = require("../constants/message.constants");
 
 const DUPLICATED_PRODUCT_CODE = 11000;
 
@@ -13,23 +14,23 @@ const getProducts = async (req, res) => {
 
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: "Error fetching products" });
+        res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
     }
 }
 const getProductById = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         if (!product) {
-            return res.status(404).send({ message: "Product not found" });
+            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND });
         }
         res.status(200).json(product);
 
     } catch (err) {
         if (err.name === "CastError") {
-            return res.status(400).json({ message: "Invalid product ID" });
+            return res.status(400).json({ message: ERROR_MESSAGES.INVALID_ID });
         }
         console.error(err);
-        res.status(500).json({ message: "Error fetching product" });
+        res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
     }
 }
 const createProduct = async (req, res) => {
@@ -64,17 +65,17 @@ const createProduct = async (req, res) => {
     } catch (err) {
         if (err.name === "ValidationError") {
             return res.status(400).json({
-                message: "Invalid product data",
+                message: ERROR_MESSAGES.INVALID_PRODUCT_DATA,
                 details: err.errors
             });
         }
         if (err.code === DUPLICATED_PRODUCT_CODE) {
             return res.status(409).json({
-                message: "Product name already exists"
+                message: ERROR_MESSAGES.DUPLICATED_PRODUCT
             });
         }
         console.error(err);
-        return res.status(500).json({ message: "Error creating product" });
+        return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
     }
 }
 const updateProduct = async (req, res) => {
@@ -89,43 +90,43 @@ const updateProduct = async (req, res) => {
             }
         );
         if (!result) {
-            return res.status(404).send({ message: "Product not found" });
+            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND });
         }
         res.status(200).json(result);
 
     } catch (err) {
         if (err.name === "ValidationError") {
             return res.status(400).json({
-                message: "Invalid data",
+                message: ERROR_MESSAGES.INVALID_PRODUCT_DATA,
                 details: err.errors
             });
         }
         if (err.name === "CastError") {
-            return res.status(400).json({ message: "Invalid product ID" });
+            return res.status(400).json({ message: ERROR_MESSAGES.INVALID_ID });
         }
         if (err.code === DUPLICATED_PRODUCT_CODE) {
             return res.status(409).json({
-                message: "Product name already exists"
+                message: ERROR_MESSAGES.DUPLICATED_PRODUCT
             });
         }
         console.error(err);
-        return res.status(500).json({ message: "Internal error" });
+        return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
     }
 }
 const deleteProduct = async (req, res) => {
     try {
         const result = await Product.findByIdAndDelete(req.params.id);
         if (!result) {
-            return res.status(404).send({ message: "Product not found" });
+            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND });
         }
-        res.status(200).send("Product deleted successfully");
+        res.status(200).send(SUCCESS_MESSAGES.PRODUCT_DELETED);
 
     } catch (err) {
         if (err.name === "CastError") {
-            return res.status(400).json({ message: "Invalid product ID" });
+            return res.status(400).json({ message: ERROR_MESSAGES.INVALID_ID });
         }
         console.error(err);
-        res.status(500).json({ message: "Error deleting product" });
+        res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
     }
 }
 module.exports = {
