@@ -2,8 +2,8 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const User = require('./model/userDB.model');
-const connectDB = require('./config/DBmongo');
+const User = require('../model/userDB.model');
+const connectDB = require('./DBmongo');
 
 async function createAdmin(email, name, password) {
     try {
