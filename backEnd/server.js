@@ -9,6 +9,7 @@ const morgan = require("morgan");
 const connectDB = require("./config/DBmongo");
 const app = express();
 const PORT = process.env.PORT || 3000;
+const logger = require("./config/logger");
 
 const allowedOrigins = [
   process.env.FRONTEND_URL?.replace(/\/$/, ""),
@@ -35,6 +36,7 @@ if (process.env.NODE_ENV !== 'test') {
 if (require.main === module) {
   app.listen(PORT, () => {
     console.log("Server running in port ", PORT)
+    logger.info("Server running in port ", PORT);
   })
 }
 module.exports = app;

@@ -2,6 +2,7 @@ const User = require("../model/userDB.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { ERROR_MESSAGES, SUCCESS_MESSAGES } = require("../constants/message.constants");
+const logger = require("../config/logger");
 
 const DUPLICATED_EMAIL_CODE = 11000;
 
@@ -11,12 +12,14 @@ const getUsers = async (req, res) => {
 
         if (users.length === 0) {
             return res.status(200).json([]);
+            logger.info(SUCCESS_MESSAGES.USER_FOUND);
         }
 
         res.status(200).json(users);
+        logger.info(SUCCESS_MESSAGES.USER_FOUND);
 
     } catch (err) {
-        console.error(err);
+        logger.error(err);
         res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
     }
 }
@@ -28,21 +31,24 @@ const getUserById = async (req, res) => {
 
         if (!user) {
             return res.status(404).send({ message: ERROR_MESSAGES.USER_NOT_FOUND });
+            logger.error(ERROR_MESSAGES.USER_NOT_FOUND);
         }
 
 
         res.status(200).json(user);
+        logger.info(SUCCESS_MESSAGES.USER_FOUND);
 
 
     } catch (err) {
-
-        console.error(err);
+        logger.error(err);
 
         if (err.name === "CastError") {
             return res.status(400).json({ message: ERROR_MESSAGES.INVALID_ID });
+            logger.error(ERROR_MESSAGES.INVALID_ID);
         }
 
         res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
+        logger.error(ERROR_MESSAGES.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -73,15 +79,17 @@ const createUser = async (req, res) => {
                 message: ERROR_MESSAGES.INVALID_USER_DATA,
                 details: err.errors
             });
+            logger.error(ERROR_MESSAGES.INVALID_USER_DATA);
         }
 
         if (err.code === DUPLICATED_EMAIL_CODE) {
             return res.status(409).json({
                 message: ERROR_MESSAGES.DUPLICATED_EMAIL
             });
+            logger.error(ERROR_MESSAGES.DUPLICATED_EMAIL);
         }
 
-        console.error(err);
+        logger.error(err);
         return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
     }
 }
@@ -112,17 +120,20 @@ const updateUser = async (req, res) => {
 
         if (!result) {
             return res.status(404).send({ message: ERROR_MESSAGES.USER_NOT_FOUND });
+            logger.error(ERROR_MESSAGES.USER_NOT_FOUND);
         }
 
         res.status(200).json(result);
+        logger.info(SUCCESS_MESSAGES.USER_UPDATED);
 
     } catch (err) {
 
         if (err.name === "ValidationError") {
             return res.status(400).json({
-                message: "Dati non validi",
+                message: ERROR_MESSAGES.INVALID_USER_DATA,
                 details: err.errors
             });
+            logger.error(ERROR_MESSAGES.INVALID_USER_DATA);
         }
 
         if (err.name === "CastError") {
@@ -133,8 +144,10 @@ const updateUser = async (req, res) => {
             return res.status(409).json({
                 message: ERROR_MESSAGES.DUPLICATED_EMAIL
             });
+            logger.error(ERROR_MESSAGES.DUPLICATED_EMAIL);
         }
 
+        logger.error(err);
         return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
     }
 }
@@ -147,17 +160,20 @@ const deleteUser = async (req, res) => {
 
         if (!result) {
             return res.status(404).send({ message: ERROR_MESSAGES.USER_NOT_FOUND });
+            logger.error(ERROR_MESSAGES.USER_NOT_FOUND);
         }
 
         res.status(200).send(SUCCESS_MESSAGES.USER_DELETED);
+        logger.info(SUCCESS_MESSAGES.USER_DELETED);
 
     } catch (err) {
         if (err.name === "CastError") {
             return res.status(400).json({
                 message: ERROR_MESSAGES.INVALID_ID
             });
+            logger.error(ERROR_MESSAGES.INVALID_ID);
         }
-        console.error(err);
+        logger.error(err);
         res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
     }
 }
@@ -170,12 +186,14 @@ const login = async (req, res) => {
 
         if (!user) {
             return res.status(401).json({ message: ERROR_MESSAGES.INVALID_CREDENTIALS });
+            logger.error(ERROR_MESSAGES.INVALID_CREDENTIALS);
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (!isPasswordValid) {
             return res.status(401).json({ message: ERROR_MESSAGES.INVALID_CREDENTIALS });
+            logger.error(ERROR_MESSAGES.INVALID_CREDENTIALS);
         }
 
         const payload = {
@@ -188,7 +206,7 @@ const login = async (req, res) => {
         const secret = process.env.JWT_SECRET;
 
         if (!secret) {
-            console.error("JWT_SECRET environment variable is not defined");
+            logger.error("JWT_SECRET environment variable is not defined");
             return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
         }
 
@@ -203,8 +221,10 @@ const login = async (req, res) => {
                 role: user.role
             }
         });
+        logger.info(SUCCESS_MESSAGES.USER_LOGGED_IN);
+
     } catch (err) {
-        console.error(err);
+        logger.error(err);
         res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
     }
 }
