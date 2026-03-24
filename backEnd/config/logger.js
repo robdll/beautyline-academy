@@ -1,4 +1,5 @@
 const winston = require("winston");
+const DailyRotateFile = require("winston-daily-rotate-file");
 
 const logger = winston.createLogger({
     format: winston.format.combine(
@@ -8,9 +9,33 @@ const logger = winston.createLogger({
     ),
     defaultMeta: { service: "user-service" },
     transports: [
-        new winston.transports.File({ filename: "logger/error.log", level: "error" }),
-        new winston.transports.File({ filename: "logger/combined.log", level: "info" }),
-        new winston.transports.File({ filename: "logger/success.log", level: "info" }),
+        new DailyRotateFile({
+            filename: "logger/error-%DATE%.json",
+            level: "error",
+            format: winston.format.json(),
+            datePattern: "YYYY-MM-DD",
+            zippedArchive: true,
+            maxSize: "20m",
+            maxFiles: "7d",
+        }),
+        new DailyRotateFile({
+            filename: "logger/combined-%DATE%.json",
+            level: "info",
+            format: winston.format.json(),
+            datePattern: "YYYY-MM-DD",
+            zippedArchive: true,
+            maxSize: "20m",
+            maxFiles: "7d",
+        }),
+        new DailyRotateFile({
+            filename: "logger/success-%DATE%.json",
+            level: "info",
+            format: winston.format.json(),
+            datePattern: "YYYY-MM-DD",
+            zippedArchive: true,
+            maxSize: "20m",
+            maxFiles: "7d",
+        }),
     ],
 });
 
