@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const dns = require('dns');
+const logger = require('../utils/logger');
 
 if (process.env.NODE_ENV !== 'production') {
     if (dns.setDefaultResultOrder) {
@@ -12,6 +13,7 @@ const connectDB = async (customUri) => {
         const options = {
             serverSelectionTimeoutMS: 5000,
             connectTimeoutMS: 10000,
+            logger: logger
         };
 
         if (process.env.NODE_ENV !== 'production') {
@@ -21,10 +23,10 @@ const connectDB = async (customUri) => {
         const uri = customUri || process.env.MONGODB_URI;
         const conn = await mongoose.connect(uri, options);
 
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
+        logger.info(`MongoDB Connected: ${conn.connection.host}`);
 
     } catch (error) {
-        console.error(`MongoDB Connection Error: ${error.message}`);
+        logger.error(`MongoDB Connection Error: ${error.message}`);
         if (!customUri) process.exit(1);
         throw error;
     }
