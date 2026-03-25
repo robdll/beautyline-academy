@@ -15,3 +15,9 @@ export const USE_FETCH_CONSTANTS = {
     USE_FETCH_LOADING: "Invio del messaggio in corso...",
     USE_FETCH_SUCCESS: "Messaggio inviato con successo"
 };
+
+export const ACCOUNT_CONSTANTS = {
+    ACCOUNT_UPDATE_ERROR: "Errore durante l'aggiornamento dell'account",
+    ACCOUNT_UPDATE_LOADING: "Aggiornamento dell'account in corso...",
+    ACCOUNT_UPDATE_SUCCESS: "Account aggiornato con successo"
+};
