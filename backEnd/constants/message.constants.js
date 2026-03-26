@@ -1,3 +1,5 @@
+export const DUPLICATED_EMAIL_CODE = 11000;
+
 export const ERROR_MESSAGES = {
     DUPLICATED_EMAIL: "Email already registered",
     INVALID_EMAIL: "Invalid email",

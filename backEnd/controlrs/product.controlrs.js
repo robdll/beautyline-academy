@@ -1,9 +1,7 @@
 
 const Product = require("../model/productDB.model");
-const { ERROR_MESSAGES, SUCCESS_MESSAGES } = require("../constants/message.constants");
+const { ERROR_MESSAGES, SUCCESS_MESSAGES, DUPLICATED_PRODUCT_CODE } = require("../constants/message.constants");
 const logger = require("../config/logger");
-
-const DUPLICATED_PRODUCT_CODE = 11000;
 
 const getProducts = async (req, res) => {
     try {

@@ -1,10 +1,8 @@
 const User = require("../model/userDB.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { ERROR_MESSAGES, SUCCESS_MESSAGES } = require("../constants/message.constants");
+const { ERROR_MESSAGES, SUCCESS_MESSAGES, DUPLICATED_EMAIL_CODE } = require("../constants/message.constants");
 const logger = require("../config/logger");
-
-const DUPLICATED_EMAIL_CODE = 11000;
 
 const getUsers = async (req, res) => {
     try {
