@@ -24,7 +24,6 @@ const getUsers = async (req, res) => {
     }
 }
 
-
 const getUserById = async (req, res) => {
     try {
         const user = await User.findById(req.params.id).select('-password');
@@ -34,7 +33,6 @@ const getUserById = async (req, res) => {
             return res.status(404).send({ message: ERROR_MESSAGES.USER_NOT_FOUND });
         }
 
-
         logger.info(SUCCESS_MESSAGES.USER_FOUND, {
             id: user._id,
             name: user.name,
@@ -42,7 +40,6 @@ const getUserById = async (req, res) => {
             role: user.role
         });
         res.status(200).json(user);
-
 
     } catch (err) {
         logger.error(err);
@@ -57,8 +54,6 @@ const getUserById = async (req, res) => {
     }
 }
 
-
-
 const createUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -69,7 +64,6 @@ const createUser = async (req, res) => {
             email,
             password: hashedPassword
         });
-
 
         const savedUser = await newUser.save();
         const userResponse = await User.findById(savedUser._id)
@@ -104,7 +98,6 @@ const createUser = async (req, res) => {
         return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
     }
 }
-
 
 const updateUser = async (req, res) => {
     try {
@@ -168,8 +161,6 @@ const updateUser = async (req, res) => {
         return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
     }
 }
-
-
 
 const deleteUser = async (req, res) => {
     try {
