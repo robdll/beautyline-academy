@@ -8,8 +8,8 @@ const getProducts = async (req, res) => {
     try {
         const products = await Product.find();
         if (products.length === 0) {
-            return res.status(200).json([]);
             logger.info(SUCCESS_MESSAGES.PRODUCT_FOUND);
+            return res.status(200).json([]);
         }
         res.status(200).json(products);
         productFound(products, SUCCESS_MESSAGES.PRODUCT_FOUND);
@@ -23,16 +23,16 @@ const getProductById = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         if (!product) {
-            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND, error: err.message });
             logger.error(ERROR_MESSAGES.PRODUCT_NOT_FOUND, { error: err.message });
+            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND, error: err.message });
         }
         res.status(200).json(product);
         productFound(product, SUCCESS_MESSAGES.PRODUCT_FOUND);
 
     } catch (err) {
         if (err.name === "CastError") {
-            return res.status(400).json({ message: ERROR_MESSAGES.INVALID_ID, error: err.message });
             logger.error(ERROR_MESSAGES.INVALID_ID, { error: err.message });
+            return res.status(400).json({ message: ERROR_MESSAGES.INVALID_ID, error: err.message });
         }
         logger.error(err);
         res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
@@ -71,18 +71,20 @@ const createProduct = async (req, res) => {
 
     } catch (err) {
         if (err.name === "ValidationError") {
+            logger.error(ERROR_MESSAGES.INVALID_PRODUCT_DATA, { error: err.message });
             return res.status(400).json({
                 message: ERROR_MESSAGES.INVALID_PRODUCT_DATA,
                 details: err.errors
             });
-            logger.error(ERROR_MESSAGES.INVALID_PRODUCT_DATA, { error: err.message });
         }
+
         if (err.code === DUPLICATED_PRODUCT_CODE) {
+            logger.error(ERROR_MESSAGES.DUPLICATED_PRODUCT, { error: err.message });
             return res.status(409).json({
                 message: ERROR_MESSAGES.DUPLICATED_PRODUCT
             });
-            logger.error(ERROR_MESSAGES.DUPLICATED_PRODUCT, { error: err.message });
         }
+
         logger.error(err);
         return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
     }
@@ -98,31 +100,35 @@ const updateProduct = async (req, res) => {
                 context: "query",
             }
         );
+
         if (!result) {
-            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND, error: err.message });
             logger.error(ERROR_MESSAGES.PRODUCT_NOT_FOUND, { error: err.message });
+            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND, error: err.message });
         }
         productUpdated(result, SUCCESS_MESSAGES.PRODUCT_UPDATED);
         res.status(200).json(result);
 
     } catch (err) {
         if (err.name === "ValidationError") {
+            logger.error(ERROR_MESSAGES.INVALID_PRODUCT_DATA, { error: err.message });
             return res.status(400).json({
                 message: ERROR_MESSAGES.INVALID_PRODUCT_DATA,
                 details: err.errors
             });
-            logger.error(ERROR_MESSAGES.INVALID_PRODUCT_DATA, { error: err.message });
         }
+
         if (err.name === "CastError") {
-            return res.status(400).json({ message: ERROR_MESSAGES.INVALID_ID, error: err.message });
             logger.error(ERROR_MESSAGES.INVALID_ID, { error: err.message });
+            return res.status(400).json({ message: ERROR_MESSAGES.INVALID_ID, error: err.message });
         }
+
         if (err.code === DUPLICATED_PRODUCT_CODE) {
+            logger.error(ERROR_MESSAGES.DUPLICATED_PRODUCT, { error: err.message });
             return res.status(409).json({
                 message: ERROR_MESSAGES.DUPLICATED_PRODUCT
             });
-            logger.error(ERROR_MESSAGES.DUPLICATED_PRODUCT, { error: err.message });
         }
+
         logger.error(err);
         return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
     }
@@ -131,19 +137,20 @@ const deleteProduct = async (req, res) => {
     try {
         const result = await Product.findByIdAndDelete(req.params.id);
         if (!result) {
-            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND, error: err.message });
             logger.error(ERROR_MESSAGES.PRODUCT_NOT_FOUND, { error: err.message });
+            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND, error: err.message });
         }
         productDeleted(result, SUCCESS_MESSAGES.PRODUCT_DELETED);
         res.status(200).send(SUCCESS_MESSAGES.PRODUCT_DELETED);
 
     } catch (err) {
         if (err.name === "CastError") {
-            return res.status(400).json({ message: ERROR_MESSAGES.INVALID_ID, error: err.message });
             logger.error(ERROR_MESSAGES.INVALID_ID, { error: err.message });
+            return res.status(400).json({ message: ERROR_MESSAGES.INVALID_ID, error: err.message });
         }
+
         logger.error(err);
-        res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
+        return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
     }
 }
 module.exports = {
