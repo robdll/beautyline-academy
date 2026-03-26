@@ -1,3 +1,17 @@
+
+// Priority levels in Winston
+
+// const levels = {
+//   error: 0,
+//   warn: 1,
+//   info: 2,
+//   http: 3,
+//   verbose: 4,
+//   debug: 5,
+//   silly: 6
+// };
+
+
 const winston = require("winston");
 const DailyRotateFile = require("winston-daily-rotate-file");
 
@@ -21,9 +35,9 @@ const devFormat = combine(
 const logger = winston.createLogger({
     level: process.env.LOG_LEVEL || "info",
     format: jsonFormat,
-    defaultMeta: { service: "user-service", environment: process.env.NODE_ENV || "development" },
+    defaultMeta: { service: "backend", environment: process.env.NODE_ENV || "development" },
     transports: [
-        new DailyRotateFile({
+        new DailyRotateFile({  //Priority 0
             filename: "logger/error-%DATE%.log",
             level: "error",
             datePattern: "YYYY-MM-DD",
@@ -31,7 +45,7 @@ const logger = winston.createLogger({
             maxSize: "20m",
             maxFiles: "14d",
         }),
-        new DailyRotateFile({
+        new DailyRotateFile({  // Priority 2
             filename: "logger/combined-%DATE%.log",
             level: "info",
             datePattern: "YYYY-MM-DD",
@@ -39,6 +53,15 @@ const logger = winston.createLogger({
             maxSize: "20m",
             maxFiles: "14d",
         }),
+        new DailyRotateFile({  // Priority 5
+            filename: "logger/debug-%DATE%.log",
+            level: "debug",
+            datePattern: "YYYY-MM-DD",
+            zippedArchive: true,
+            maxSize: "20m",
+            maxFiles: "14d",
+        }),
+
     ],
 });
 

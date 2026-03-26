@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const dns = require('dns');
-const logger = require('../utils/logger');
+const logger = require('./logger');
 
 if (process.env.NODE_ENV !== 'production') {
     if (dns.setDefaultResultOrder) {
@@ -13,7 +13,6 @@ const connectDB = async (customUri) => {
         const options = {
             serverSelectionTimeoutMS: 5000,
             connectTimeoutMS: 10000,
-            logger: logger
         };
 
         if (process.env.NODE_ENV !== 'production') {
