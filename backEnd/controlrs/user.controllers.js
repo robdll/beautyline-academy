@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { ERROR_MESSAGES, SUCCESS_MESSAGES, DUPLICATED_EMAIL_CODE } = require("../constants/message.constants");
 const logger = require("../config/logger");
-const { logUserCreated, logUserUpdated, logUserDeleted, logUserFound } = require("../utils/loggerSucces.utils");
+const { logUserCreated, logUserUpdated, userDeleted, logUserFound, userLogin } = require("../utils/loggerSucces.utils");
 
 const getUsers = async (req, res) => {
     try {
@@ -204,12 +204,7 @@ const login = async (req, res) => {
 
         const token = jwt.sign(payload, secret, { expiresIn: "1h" });
 
-        logger.info(SUCCESS_MESSAGES.USER_LOGGED_IN, {
-            id: user._id,
-            name: user.name,
-            email: user.email,
-            role: user.role
-        });
+        userLogin(user, SUCCESS_MESSAGES.USER_LOGGED_IN);
         res.status(200).json({
             token,
             user: {

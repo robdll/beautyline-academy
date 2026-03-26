@@ -2,6 +2,7 @@
 const Product = require("../model/productDB.model");
 const { ERROR_MESSAGES, SUCCESS_MESSAGES, DUPLICATED_PRODUCT_CODE } = require("../constants/message.constants");
 const logger = require("../config/logger");
+const { productCreated, productUpdated, productDeleted, productFound } = require("../utils/loggerSucces.utils");
 
 const getProducts = async (req, res) => {
     try {
@@ -11,15 +12,7 @@ const getProducts = async (req, res) => {
             logger.info(SUCCESS_MESSAGES.PRODUCT_FOUND);
         }
         res.status(200).json(products);
-        logger.info(SUCCESS_MESSAGES.PRODUCT_FOUND, {
-            id: products._id,
-            name: products.name,
-            price: products.price,
-            category: products.category,
-            tags: products.tags,
-            stock: products.stock,
-            brand: products.brand
-        });
+        productFound(products, SUCCESS_MESSAGES.PRODUCT_FOUND);
 
     } catch (err) {
         logger.error(err);
@@ -34,15 +27,7 @@ const getProductById = async (req, res) => {
             logger.error(ERROR_MESSAGES.PRODUCT_NOT_FOUND, { error: err.message });
         }
         res.status(200).json(product);
-        logger.info(SUCCESS_MESSAGES.PRODUCT_FOUND, {
-            id: product._id,
-            name: product.name,
-            price: product.price,
-            category: product.category,
-            tags: product.tags,
-            stock: product.stock,
-            brand: product.brand
-        });
+        productFound(product, SUCCESS_MESSAGES.PRODUCT_FOUND);
 
     } catch (err) {
         if (err.name === "CastError") {
@@ -53,6 +38,7 @@ const getProductById = async (req, res) => {
         res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
     }
 }
+
 const createProduct = async (req, res) => {
     try {
         const {
@@ -80,15 +66,7 @@ const createProduct = async (req, res) => {
             image
         });
         const savedProduct = await newProduct.save();
-        logger.info(SUCCESS_MESSAGES.PRODUCT_CREATED, {
-            id: savedProduct._id,
-            name: savedProduct.name,
-            price: savedProduct.price,
-            category: savedProduct.category,
-            tags: savedProduct.tags,
-            stock: savedProduct.stock,
-            brand: savedProduct.brand
-        });
+        productCreated(savedProduct, SUCCESS_MESSAGES.PRODUCT_CREATED);
         res.status(201).json(savedProduct);
 
     } catch (err) {
@@ -124,15 +102,7 @@ const updateProduct = async (req, res) => {
             return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND, error: err.message });
             logger.error(ERROR_MESSAGES.PRODUCT_NOT_FOUND, { error: err.message });
         }
-        logger.info(SUCCESS_MESSAGES.PRODUCT_UPDATED, {
-            id: result._id,
-            name: result.name,
-            price: result.price,
-            category: result.category,
-            tags: result.tags,
-            stock: result.stock,
-            brand: result.brand
-        });
+        productUpdated(result, SUCCESS_MESSAGES.PRODUCT_UPDATED);
         res.status(200).json(result);
 
     } catch (err) {
@@ -164,15 +134,7 @@ const deleteProduct = async (req, res) => {
             return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND, error: err.message });
             logger.error(ERROR_MESSAGES.PRODUCT_NOT_FOUND, { error: err.message });
         }
-        logger.info(SUCCESS_MESSAGES.PRODUCT_DELETED, {
-            id: result._id,
-            name: result.name,
-            price: result.price,
-            category: result.category,
-            tags: result.tags,
-            stock: result.stock,
-            brand: result.brand
-        });
+        productDeleted(result, SUCCESS_MESSAGES.PRODUCT_DELETED);
         res.status(200).send(SUCCESS_MESSAGES.PRODUCT_DELETED);
 
     } catch (err) {
