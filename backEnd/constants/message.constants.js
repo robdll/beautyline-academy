@@ -18,8 +18,3 @@ export const SUCCESS_MESSAGES = {
     USER_LOGGED_IN: "User logged in successfully",
     USER_FOUND: "User found successfully"
 }
-
-
-
-
-
