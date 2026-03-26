@@ -3,17 +3,18 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { ERROR_MESSAGES, SUCCESS_MESSAGES, DUPLICATED_EMAIL_CODE } = require("../constants/message.constants");
 const logger = require("../config/logger");
+const { logUserCreated, logUserUpdated, logUserDeleted, logUserFound } = require("../utils/loggerSucces.utils");
 
 const getUsers = async (req, res) => {
     try {
         const users = await User.find().select('-password');
 
         if (users.length === 0) {
-            logger.info(SUCCESS_MESSAGES.USER_FOUND);
+            logUserFound(users, SUCCESS_MESSAGES.USER_FOUND);
             return res.status(200).json([]);
         }
 
-        logger.info(SUCCESS_MESSAGES.USER_FOUND);
+        logUserFound(users, SUCCESS_MESSAGES.USER_FOUND);
         res.status(200).json(users);
 
     } catch (err) {
@@ -31,12 +32,7 @@ const getUserById = async (req, res) => {
             return res.status(404).send({ message: ERROR_MESSAGES.USER_NOT_FOUND });
         }
 
-        logger.info(SUCCESS_MESSAGES.USER_FOUND, {
-            id: user._id,
-            name: user.name,
-            email: user.email,
-            role: user.role
-        });
+        logUserFound(user, SUCCESS_MESSAGES.USER_FOUND);
         res.status(200).json(user);
 
     } catch (err) {
@@ -67,12 +63,7 @@ const createUser = async (req, res) => {
         const userResponse = await User.findById(savedUser._id)
             .select('-password');
 
-        logger.info(SUCCESS_MESSAGES.USER_CREATED, {
-            id: savedUser._id,
-            name: savedUser.name,
-            email: savedUser.email,
-            role: savedUser.role
-        });
+        logUserCreated(userResponse, SUCCESS_MESSAGES.USER_CREATED);
         res.status(201).json(userResponse);
 
     } catch (err) {
@@ -125,12 +116,7 @@ const updateUser = async (req, res) => {
             return res.status(404).send({ message: ERROR_MESSAGES.USER_NOT_FOUND });
         }
 
-        logger.info(SUCCESS_MESSAGES.USER_UPDATED, {
-            id: result._id,
-            name: result.name,
-            email: result.email,
-            role: result.role
-        });
+        logUserUpdated(result, SUCCESS_MESSAGES.USER_UPDATED);
         res.status(200).json(result);
 
     } catch (err) {
@@ -169,12 +155,7 @@ const deleteUser = async (req, res) => {
             return res.status(404).send({ message: ERROR_MESSAGES.USER_NOT_FOUND });
         }
 
-        logger.info(SUCCESS_MESSAGES.USER_DELETED, {
-            id: result._id,
-            name: result.name,
-            email: result.email,
-            role: result.role
-        });
+        userDeleted(result, SUCCESS_MESSAGES.USER_DELETED);
         res.status(200).send(SUCCESS_MESSAGES.USER_DELETED);
 
     } catch (err) {
