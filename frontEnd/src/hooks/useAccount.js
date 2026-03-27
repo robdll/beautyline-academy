@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuthStore } from '../store/authStore';
+import { ACCOUNT_CONSTANTS } from '../constants/hooks.constants';
 
 export const useAccount = () => {
     const { user, isLoggedIn, logout, updateUser } = useAuthStore();
@@ -35,10 +36,10 @@ export const useAccount = () => {
             if (result && result.success) {
                 setIsEditing(false);
             } else {
-                setError(result?.message || "Errore durante l'aggiornamento");
+                setError(result?.message || ACCOUNT_CONSTANTS.ACCOUNT_UPDATE_ERROR);
             }
-        } catch (err) {
-            setError("Si è verificato un errore imprevisto.");
+        } catch {
+            setError(ACCOUNT_CONSTANTS.ACCOUNT_UPDATE_ERROR);
         } finally {
             setIsLoading(false);
         }
