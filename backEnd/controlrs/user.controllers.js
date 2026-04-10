@@ -3,18 +3,18 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { ERROR_MESSAGES, SUCCESS_MESSAGES, DUPLICATED_EMAIL_CODE } = require("../constants/message.constants");
 const logger = require("../config/logger");
-const { logUserCreated, logUserUpdated, userDeleted, logUserFound, userLogin } = require("../utils/loggerSucces.utils");
+const { logUserCreated, logUserUpdated, userDeleted, logUserFound, logUsersFound, userLogin } = require("../utils/loggerSucces.utils");
 
 const getUsers = async (req, res) => {
     try {
         const users = await User.find().select('-password');
 
         if (users.length === 0) {
-            logUserFound(users, SUCCESS_MESSAGES.USER_FOUND);
+            logUsersFound(users, SUCCESS_MESSAGES.USER_FOUND);
             return res.status(200).json([]);
         }
 
-        logUserFound(users, SUCCESS_MESSAGES.USER_FOUND);
+        logUsersFound(users, SUCCESS_MESSAGES.USER_FOUND);
         res.status(200).json(users);
 
     } catch (err) {

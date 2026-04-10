@@ -2,7 +2,7 @@
 const Product = require("../model/productDB.model");
 const { ERROR_MESSAGES, SUCCESS_MESSAGES, DUPLICATED_PRODUCT_CODE } = require("../constants/message.constants");
 const logger = require("../config/logger");
-const { productCreated, productUpdated, productDeleted, productFound } = require("../utils/loggerSucces.utils");
+const { productCreated, productUpdated, productDeleted, productFound, productsFound } = require("../utils/loggerSucces.utils");
 
 const getProducts = async (req, res) => {
     try {
@@ -12,7 +12,7 @@ const getProducts = async (req, res) => {
             return res.status(200).json([]);
         }
         res.status(200).json(products);
-        productFound(products, SUCCESS_MESSAGES.PRODUCT_FOUND);
+        productsFound(products, SUCCESS_MESSAGES.PRODUCT_FOUND);
 
     } catch (err) {
         logger.error(err);
@@ -23,8 +23,8 @@ const getProductById = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         if (!product) {
-            logger.error(ERROR_MESSAGES.PRODUCT_NOT_FOUND, { error: err.message });
-            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND, error: err.message });
+            logger.error(ERROR_MESSAGES.PRODUCT_NOT_FOUND);
+            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND });
         }
         res.status(200).json(product);
         productFound(product, SUCCESS_MESSAGES.PRODUCT_FOUND);
@@ -102,8 +102,8 @@ const updateProduct = async (req, res) => {
         );
 
         if (!result) {
-            logger.error(ERROR_MESSAGES.PRODUCT_NOT_FOUND, { error: err.message });
-            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND, error: err.message });
+            logger.error(ERROR_MESSAGES.PRODUCT_NOT_FOUND);
+            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND });
         }
         productUpdated(result, SUCCESS_MESSAGES.PRODUCT_UPDATED);
         res.status(200).json(result);
@@ -137,8 +137,8 @@ const deleteProduct = async (req, res) => {
     try {
         const result = await Product.findByIdAndDelete(req.params.id);
         if (!result) {
-            logger.error(ERROR_MESSAGES.PRODUCT_NOT_FOUND, { error: err.message });
-            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND, error: err.message });
+            logger.error(ERROR_MESSAGES.PRODUCT_NOT_FOUND);
+            return res.status(404).send({ message: ERROR_MESSAGES.PRODUCT_NOT_FOUND });
         }
         productDeleted(result, SUCCESS_MESSAGES.PRODUCT_DELETED);
         res.status(200).send(SUCCESS_MESSAGES.PRODUCT_DELETED);

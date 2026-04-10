@@ -3,3 +3,4 @@
 .env
 logger/*.log
 logger/*.json
+logger/*.gz

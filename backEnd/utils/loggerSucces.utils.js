@@ -1,4 +1,6 @@
-export const logUserCreated = (user, msg) => {
+const logger = require("../config/logger");
+
+const logUserCreated = (user, msg) => {
     logger.info(msg, {
         id: user._id,
         name: user.name,
@@ -7,7 +9,7 @@ export const logUserCreated = (user, msg) => {
     });
 }
 
-export const logUserUpdated = (user, msg) => {
+const logUserUpdated = (user, msg) => {
     logger.info(msg, {
         id: user._id,
         name: user.name,
@@ -16,7 +18,7 @@ export const logUserUpdated = (user, msg) => {
     });
 }
 
-export const logUserDeleted = (user, msg) => {
+const logUserDeleted = (user, msg) => {
     logger.info(msg, {
         id: user._id,
         name: user.name,
@@ -25,7 +27,7 @@ export const logUserDeleted = (user, msg) => {
     });
 }
 
-export const logUserFound = (user, msg) => {
+const logUserFound = (user, msg) => {
     logger.info(msg, {
         id: user._id,
         name: user.name,
@@ -34,7 +36,14 @@ export const logUserFound = (user, msg) => {
     });
 }
 
-export const userDeleted = (user, msg) => {
+const logUsersFound = (users, msg) => {
+    logger.info(msg, {
+        count: users.length,
+        users: users.map(u => ({ id: u._id, name: u.name, email: u.email }))
+    });
+}
+
+const userDeleted = (user, msg) => {
     logger.info(msg, {
         id: user._id,
         name: user.name,
@@ -43,7 +52,7 @@ export const userDeleted = (user, msg) => {
     });
 }
 
-export const userLogin = (user, msg) => {
+const userLogin = (user, msg) => {
     logger.info(msg, {
         id: user._id,
         name: user.name,
@@ -52,7 +61,7 @@ export const userLogin = (user, msg) => {
     });
 }
 
-export const productCreated = (product, msg) => {
+const productCreated = (product, msg) => {
     logger.info(msg, {
         id: product._id,
         name: product.name,
@@ -64,7 +73,7 @@ export const productCreated = (product, msg) => {
     });
 }
 
-export const productUpdated = (product, msg) => {
+const productUpdated = (product, msg) => {
     logger.info(msg, {
         id: product._id,
         name: product.name,
@@ -76,7 +85,7 @@ export const productUpdated = (product, msg) => {
     });
 }
 
-export const productDeleted = (product, msg) => {
+const productDeleted = (product, msg) => {
     logger.info(msg, {
         id: product._id,
         name: product.name,
@@ -88,7 +97,7 @@ export const productDeleted = (product, msg) => {
     });
 }
 
-export const productFound = (product, msg) => {
+const productFound = (product, msg) => {
     logger.info(msg, {
         id: product._id,
         name: product.name,
@@ -99,3 +108,24 @@ export const productFound = (product, msg) => {
         description: product.description,
     });
 }
+const productsFound = (products, msg) => {
+    logger.info(msg, {
+        count: products.length,
+        products: products.map(p => ({ id: p._id, name: p.name, price: p.price }))
+    });
+}
+
+module.exports = {
+    logUserCreated,
+    logUserUpdated,
+    logUserDeleted,
+    logUserFound,
+    logUsersFound,
+    userDeleted,
+    userLogin,
+    productCreated,
+    productUpdated,
+    productDeleted,
+    productFound,
+    productsFound
+};
