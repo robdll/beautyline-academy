@@ -39,13 +39,12 @@ async function apiClient(endpoint, { body, ...customConfig } = {}) {
     try {
         response = await fetch(`${API_URL}${endpoint}`, config);
     } catch (e) {
-        // If the primary request fails (e.g. network error) and we're not already on local, fallback to local
         if (API_ORIGIN !== LOCAL_URL) {
             try {
                 console.warn(`Primary API failed, falling back to local: ${LOCAL_URL}/api${endpoint}`);
                 response = await fetch(`${LOCAL_URL}/api${endpoint}`, config);
             } catch (fallbackError) {
-                throw e; // Throw original error if fallback also fails
+                throw e; 
             }
         } else {
             throw e;
