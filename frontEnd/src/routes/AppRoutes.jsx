@@ -8,47 +8,58 @@ import ProductsPage from '../pages/ProductsPage';
 import EquipmentPage from '../pages/EquipmentPage';
 import PathsPage from '../pages/PathsPage';
 import ProtectedRoute from '../components/ProtectedRoute';
+import ErrorPage from '../pages/ErrorPage';
+import MainLayout from '../components/MainLayout';
 import { ROUTES } from '../constants/routes.constants';
 
 export const router = createBrowserRouter([
     {
-        path: ROUTES.HOME,
-        element: <Home />,
-    },
-    {
-        path: ROUTES.AUTH,
-        element: <AuthPage />,
-    },
-    {
-        path: ROUTES.ACCOUNT,
-        element: (
-            <ProtectedRoute>
-                <AccountPage />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: ROUTES.COURSES,
-        element: <CoursesPage />,
-    },
-    {
-        path: ROUTES.PRODUCTS,
-        element: <ProductsPage />,
-    },
-    {
-        path: ROUTES.CART,
-        element: (
-            <ProtectedRoute>
-                <CartPage />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: ROUTES.EQUIPMENT,
-        element: <EquipmentPage />,
-    },
-    {
-        path: ROUTES.PATHS,
-        element: <PathsPage />,
+        element: <MainLayout />,
+        children: [
+            {
+                path: ROUTES.HOME,
+                element: <Home />,
+            },
+            {
+                path: ROUTES.AUTH,
+                element: <AuthPage />,
+            },
+            {
+                path: ROUTES.ACCOUNT,
+                element: (
+                    <ProtectedRoute>
+                        <AccountPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: ROUTES.COURSES,
+                element: <CoursesPage />,
+            },
+            {
+                path: ROUTES.PRODUCTS,
+                element: <ProductsPage />,
+            },
+            {
+                path: ROUTES.CART,
+                element: (
+                    <ProtectedRoute>
+                        <CartPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: ROUTES.EQUIPMENT,
+                element: <EquipmentPage />,
+            },
+            {
+                path: ROUTES.PATHS,
+                element: <PathsPage />,
+            },
+            {
+                path: ROUTES.NOT_FOUND,
+                element: <ErrorPage />,
+            }
+        ]
     }
 ]);

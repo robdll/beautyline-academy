@@ -1,6 +1,9 @@
 import { STORAGE_KEYS } from '../constants/storage.constants';
 
-const API_ORIGIN = (import.meta.env.VITE_API_URL || 'http://localhost:3000').replace(/\/$/, "");
+const REMOTE_URL = 'https://beautyline-academy-kffv.onrender.com';
+const LOCAL_URL = 'http://localhost:3000';
+
+const API_ORIGIN = (import.meta.env.VITE_API_URL || REMOTE_URL).replace(/\/$/, "");
 const API_URL = `${API_ORIGIN}/api`;
 export const API_URL_PRODUCTS_GET = `${API_ORIGIN}/api/product`;
 
@@ -32,7 +35,23 @@ async function apiClient(endpoint, { body, ...customConfig } = {}) {
         config.body = JSON.stringify(body);
     }
 
-    const response = await fetch(`${API_URL}${endpoint}`, config);
+    let response;
+    try {
+        response = await fetch(`${API_URL}${endpoint}`, config);
+    } catch (e) {
+        // If the primary request fails (e.g. network error) and we're not already on local, fallback to local
+        if (API_ORIGIN !== LOCAL_URL) {
+            try {
+                console.warn(`Primary API failed, falling back to local: ${LOCAL_URL}/api${endpoint}`);
+                response = await fetch(`${LOCAL_URL}/api${endpoint}`, config);
+            } catch (fallbackError) {
+                throw e; // Throw original error if fallback also fails
+            }
+        } else {
+            throw e;
+        }
+    }
+
     const contentType = response.headers.get('content-type') || '';
     const text = await response.text();
 
