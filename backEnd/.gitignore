@@ -1,3 +1,6 @@
 /node_modules
 /.env
 .env
+logger/*.log
+logger/*.json
+logger/*.gz

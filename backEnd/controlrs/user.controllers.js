@@ -1,51 +1,52 @@
 const User = require("../model/userDB.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
-const DUPLICATED_EMAIL_CODE = 11000;
+const { ERROR_MESSAGES, SUCCESS_MESSAGES, DUPLICATED_EMAIL_CODE } = require("../constants/message.constants");
+const logger = require("../config/logger");
+const { logUserCreated, logUserUpdated, userDeleted, logUserFound, logUsersFound, userLogin } = require("../utils/loggerSucces.utils");
 
 const getUsers = async (req, res) => {
     try {
         const users = await User.find().select('-password');
 
         if (users.length === 0) {
+            logUsersFound(users, SUCCESS_MESSAGES.USER_FOUND);
             return res.status(200).json([]);
         }
 
+        logUsersFound(users, SUCCESS_MESSAGES.USER_FOUND);
         res.status(200).json(users);
 
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Errore durante il recupero degli utenti" });
+        logger.error(err);
+        res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
     }
 }
-
 
 const getUserById = async (req, res) => {
     try {
         const user = await User.findById(req.params.id).select('-password');
 
         if (!user) {
-            return res.status(404).send({ message: "Utente non trovato" });
+            logger.error(ERROR_MESSAGES.USER_NOT_FOUND);
+            return res.status(404).send({ message: ERROR_MESSAGES.USER_NOT_FOUND });
         }
 
-
+        logUserFound(user, SUCCESS_MESSAGES.USER_FOUND);
         res.status(200).json(user);
 
-
     } catch (err) {
-
-        console.error(err);
+        logger.error(err);
 
         if (err.name === "CastError") {
-            return res.status(400).json({ message: "ID utente non valido" });
+            logger.error(ERROR_MESSAGES.INVALID_ID, { error: err.message });
+            return res.status(400).json({ message: ERROR_MESSAGES.INVALID_ID, error: err.message });
         }
 
-        res.status(500).json({ message: "Errore durante il recupero dell'utente" });
+        logger.error(ERROR_MESSAGES.INTERNAL_SERVER_ERROR, { error: err.message });
+        res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
     }
 }
-
-
 
 const createUser = async (req, res) => {
     try {
@@ -58,33 +59,34 @@ const createUser = async (req, res) => {
             password: hashedPassword
         });
 
-
         const savedUser = await newUser.save();
         const userResponse = await User.findById(savedUser._id)
             .select('-password');
 
+        logUserCreated(userResponse, SUCCESS_MESSAGES.USER_CREATED);
         res.status(201).json(userResponse);
 
     } catch (err) {
 
         if (err.name === "ValidationError") {
+            logger.error(ERROR_MESSAGES.INVALID_USER_DATA, { error: err.message });
             return res.status(400).json({
-                message: "Dati utente non validi",
+                message: ERROR_MESSAGES.INVALID_USER_DATA,
                 details: err.errors
             });
         }
 
         if (err.code === DUPLICATED_EMAIL_CODE) {
+            logger.error(ERROR_MESSAGES.DUPLICATED_EMAIL, { error: err.message });
             return res.status(409).json({
-                message: "Email già registrata"
+                message: ERROR_MESSAGES.DUPLICATED_EMAIL
             });
         }
 
-        console.error(err);
-        return res.status(500).json({ message: "Errore durante la creazione dell'utente" });
+        logger.error(err);
+        return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
     }
 }
-
 
 const updateUser = async (req, res) => {
     try {
@@ -110,54 +112,61 @@ const updateUser = async (req, res) => {
 
 
         if (!result) {
-            return res.status(404).send({ message: "Utente non trovato" });
+            logger.error(ERROR_MESSAGES.USER_NOT_FOUND);
+            return res.status(404).send({ message: ERROR_MESSAGES.USER_NOT_FOUND });
         }
 
+        logUserUpdated(result, SUCCESS_MESSAGES.USER_UPDATED);
         res.status(200).json(result);
 
     } catch (err) {
 
         if (err.name === "ValidationError") {
+            logger.error(ERROR_MESSAGES.INVALID_USER_DATA, { error: err.message });
             return res.status(400).json({
-                message: "Dati non validi",
+                message: ERROR_MESSAGES.INVALID_USER_DATA,
                 details: err.errors
             });
         }
 
         if (err.name === "CastError") {
-            return res.status(400).json({ message: "ID utente non valido" });
+            logger.error(ERROR_MESSAGES.INVALID_ID, { error: err.message });
+            return res.status(400).json({ message: ERROR_MESSAGES.INVALID_ID, error: err.message });
         }
 
         if (err.code === DUPLICATED_EMAIL_CODE) {
+            logger.error(ERROR_MESSAGES.DUPLICATED_EMAIL, { error: err.message });
             return res.status(409).json({
-                message: "Email già registrata"
+                message: ERROR_MESSAGES.DUPLICATED_EMAIL
             });
         }
 
-        return res.status(500).json({ message: "Errore interno del server" });
+        logger.error(err);
+        return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
     }
 }
-
-
 
 const deleteUser = async (req, res) => {
     try {
         const result = await User.findByIdAndDelete(req.params.id);
 
         if (!result) {
-            return res.status(404).send({ message: "Utente non trovato" });
+            logger.error(ERROR_MESSAGES.USER_NOT_FOUND);
+            return res.status(404).send({ message: ERROR_MESSAGES.USER_NOT_FOUND });
         }
 
-        res.status(200).send("User deleted successfully");
+        userDeleted(result, SUCCESS_MESSAGES.USER_DELETED);
+        res.status(200).send(SUCCESS_MESSAGES.USER_DELETED);
 
     } catch (err) {
         if (err.name === "CastError") {
+            logger.error(ERROR_MESSAGES.INVALID_ID, { error: err.message });
             return res.status(400).json({
-                message: "ID utente non valido"
+                message: ERROR_MESSAGES.INVALID_ID
             });
         }
-        console.error(err);
-        res.status(500).json({ message: "Errore durante l'eliminazione dell'utente" });
+        logger.error(err);
+        res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
     }
 }
 
@@ -168,13 +177,15 @@ const login = async (req, res) => {
         const user = await User.findOne({ email });
 
         if (!user) {
-            return res.status(401).json({ message: "Credenziali non valide" });
+            logger.error(ERROR_MESSAGES.INVALID_CREDENTIALS);
+            return res.status(401).json({ message: ERROR_MESSAGES.INVALID_CREDENTIALS });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (!isPasswordValid) {
-            return res.status(401).json({ message: "Credenziali non valide" });
+            logger.error(ERROR_MESSAGES.INVALID_CREDENTIALS);
+            return res.status(401).json({ message: ERROR_MESSAGES.INVALID_CREDENTIALS });
         }
 
         const payload = {
@@ -187,12 +198,13 @@ const login = async (req, res) => {
         const secret = process.env.JWT_SECRET;
 
         if (!secret) {
-            console.error("JWT_SECRET environment variable is not defined");
-            return res.status(500).json({ message: "Errore di autenticazione interno" });
+            logger.error("JWT_SECRET environment variable is not defined");
+            return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
         }
 
         const token = jwt.sign(payload, secret, { expiresIn: "1h" });
 
+        userLogin(user, SUCCESS_MESSAGES.USER_LOGGED_IN);
         res.status(200).json({
             token,
             user: {
@@ -202,9 +214,10 @@ const login = async (req, res) => {
                 role: user.role
             }
         });
+
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Errore durante il login" });
+        logger.error(err);
+        res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR, error: err.message });
     }
 }
 

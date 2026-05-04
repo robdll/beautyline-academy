@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { ROUTES } from '../constants/routes.constants';
+import { USE_FETCH_CONSTANTS } from '../constants/hooks.constants';
 
 export const useAuthForm = () => {
     const [searchParams] = useSearchParams();
@@ -31,16 +32,16 @@ export const useAuthForm = () => {
     const validate = () => {
         if (isLogin) {
             if (!formData.email || !formData.password) {
-                setError('Compila tutti i campi per accedere.');
+                setError(USE_FETCH_CONSTANTS.USE_FETCH_ERROR);
                 return false;
             }
         } else {
             if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
-                setError('Compila tutti i campi per registrarti.');
+                setError(USE_FETCH_CONSTANTS.USE_FETCH_ERROR);
                 return false;
             }
             if (formData.password !== formData.confirmPassword) {
-                setError('Le password non coincidono.');
+                setError(USE_FETCH_CONSTANTS.USE_FETCH_ERROR);
                 return false;
             }
         }
@@ -71,7 +72,7 @@ export const useAuthForm = () => {
                 setStatus({ state: 'idle', message: '' });
             }
         } catch {
-            setError('Si è verificato un errore imprevisto.');
+            setError(USE_FETCH_CONSTANTS.USE_FETCH_ERROR);
             setStatus({ state: 'idle', message: '' });
         }
     };

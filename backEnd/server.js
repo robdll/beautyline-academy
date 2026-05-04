@@ -7,6 +7,7 @@ const userRouter = require("./routes/user.router");
 const productRouter = require("./routes/product.router");
 const morgan = require("morgan");
 const connectDB = require("./config/DBmongo");
+const requestLogger = require("./middlewares/requestLogger");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -22,6 +23,7 @@ app.use(cors({
   optionsSuccessStatus: 200
 }));
 app.use(express.json());
+app.use(requestLogger);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use(morgan("common"));
 app.use("/api", userRouter);
